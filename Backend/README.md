@@ -44,7 +44,7 @@ This is the cozy, dreamy backend API for Bloom Portfolio Studio. Built with love
 
 ```
 
-backend/ 🌷
+backend/ 
 
 ├── src/
 │   ├── models/

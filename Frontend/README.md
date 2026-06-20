@@ -62,8 +62,7 @@ Portfolio Builder Studio lets users:
 PortfolioBuilderStudio/
 
 
-frontend/ 🌸
-
+frontend/ 
 ├── public/
 │   ├── favicon.ico
 │   └── index.html
