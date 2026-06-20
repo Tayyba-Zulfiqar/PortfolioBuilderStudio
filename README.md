@@ -71,49 +71,28 @@ Welcome to Bloom Portfolio Studio — the dreamiest way to build and share your 
 
 ## 📁 Project Structure
 
-```
+bloom-portfolio-studio/
 
-🌸 bloom-portfolio-studio/
-
-├── 🌷 backend/                    # Node.js + Express API
-│   ├── src/
-│   │   ├── 🐰 models/             # MongoDB models
-│   │   ├── 🎀 controllers/        # Request handlers
-│   │   ├── 🧁 routes/             # API routes
-│   │   ├── 🛡️ middleware/         # Custom middleware
-│   │   ├── 📦 config/             # Configuration
-│   │   ├── 🪄 utils/              # Utilities
-│   │   └── ✅ validators/         # Validation schemas
-│   ├── 🌷 .env
-│   ├── 🧁 package.json
-│   ├── 🚂 server.js
-│   └── 📖 README.md
+├── backend 🌷
+│   ├── src
+│   │   ├── models
+│   │   ├── controllers
+│   │   ├── routes
+│   │   ├── middleware
+│   │   ├── config
+│   │   ├── utils
+│   │   └── validators
 │
-├── 🌸 frontend/                   # React + Tailwind UI
-│   ├── src/
-│   │   ├── 🎨 assets/             # Images, fonts
-│   │   ├── 🧩 components/         # Reusable components
-│   │   │   ├── 🎀 common/         # Button, Card, Input
-│   │   │   ├── 🌷 landing/        # Hero, Features
-│   │   │   ├── 🔐 auth/           # Signup, Login
-│   │   │   ├── 📝 dashboard/      # Editor, Preview
-│   │   │   ├── 🌍 explore/        # Search, Filters
-│   │   │   └── 📊 analytics/      # Stats, Charts
-│   │   ├── 📄 pages/              # Full pages
-│   │   ├── 🎨 templates/          # Portfolio templates
-│   │   ├── 🐻 store/              # Zustand stores
-│   │   ├── 🪝 hooks/              # Custom hooks
-│   │   ├── 📦 services/           # API services
-│   │   └── 🛠️ utils/              # Helpers, dummyData
-│   ├── 🧁 package.json
-│   ├── 🎨 tailwind.config.js
-│   └── 📖 README.md
-│
-├── 📝 README.md
-├── 🧁 .gitignore
-└── 🌷 LICENSE
-
-````
+├── frontend 🌸
+│   ├── src
+│   │   ├── assets
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── templates
+│   │   ├── store
+│   │   ├── hooks
+│   │   ├── services
+│   │   └── utils
 
 ---
 
