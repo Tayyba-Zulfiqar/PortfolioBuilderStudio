@@ -44,54 +44,23 @@ This is the cozy, dreamy backend API for Bloom Portfolio Studio. Built with love
 
 ```
 
-backend/
+backend/ 🌷
 
-├── src 🌸
-│   ├── models 🐰
-│   │   ├── User.js
-│   │   ├── Portfolio.js
-│   │   └── Analytics.js
-│   │
-│   ├── controllers 🎀
-│   │   ├── authController.js
-│   │   ├── portfolioController.js
-│   │   └── analyticsController.js
-│   │
-│   ├── routes 🧁
-│   │   ├── authRoutes.js
-│   │   ├── portfolioRoutes.js
-│   │   └── analyticsRoutes.js
-│   │
-│   ├── middleware 🛡️
-│   │   ├── auth.js
-│   │   ├── upload.js
-│   │   ├── errorHandler.js
-│   │   └── rateLimiter.js
-│   │
-│   ├── config 📦
-│   │   ├── database.js
-│   │   ├── cloudinary.js
-│   │   └── email.js
-│   │
-│   ├── utils 🪄
-│   │   ├── email.js
-│   │   ├── jwt.js
-│   │   ├── helpers.js
-│   │   └── constants.js
-│   │
-│   ├── validators ✅
-│   │   ├── authValidator.js
-│   │   └── portfolioValidator.js
-│   │
-│   └── seeders 🌱
-│       └── dummyPortfolios.js
+├── src/
+│   ├── models/
+│   ├── controllers/
+│   ├── routes/
+│   ├── middleware/
+│   ├── config/
+│   ├── utils/
+│   ├── validators/
+│   └── seeders/
 │
-├── .env 🌷
-├── .gitignore 🧁
-├── package.json 📝
-├── server.js 🚂
-└── README.md 📖
-
+├── server.js
+├── package.json
+├── .env
+├── .gitignore
+└── README.md
 ````
 
 ---

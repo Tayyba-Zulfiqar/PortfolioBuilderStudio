@@ -61,125 +61,44 @@ Portfolio Builder Studio lets users:
 
 PortfolioBuilderStudio/
 
-├── frontend 🌸
-│   ├── public
-│   │   ├── favicon.ico
-│   │   └── index.html
-│   │
-│   ├── src 🐰
-│   │   ├── assets 🎨
-│   │   │   └── images
-│   │   │       ├── templates
-│   │   │       └── avatars
-│   │   │
-│   │   ├── components 🧩
-│   │   │   ├── common 🎀
-│   │   │   │   ├── Button.jsx
-│   │   │   │   ├── Card.jsx
-│   │   │   │   ├── Input.jsx
-│   │   │   │   ├── Modal.jsx
-│   │   │   │   └── Toast.jsx
-│   │   │   │
-│   │   │   ├── landing 🌷
-│   │   │   │   ├── Hero.jsx
-│   │   │   │   ├── Features.jsx
-│   │   │   │   └── CTASection.jsx
-│   │   │   │
-│   │   │   ├── auth 🔐
-│   │   │   │   ├── SignupForm.jsx
-│   │   │   │   └── LoginForm.jsx
-│   │   │   │
-│   │   │   ├── dashboard 📝
-│   │   │   │   ├── DashboardLayout.jsx
-│   │   │   │   ├── EditorPanel.jsx
-│   │   │   │   ├── PreviewPanel.jsx
-│   │   │   │   ├── tabs
-│   │   │   │   │   ├── AboutTab.jsx
-│   │   │   │   │   ├── ProjectsTab.jsx
-│   │   │   │   │   ├── SkillsTab.jsx
-│   │   │   │   │   ├── ExperienceTab.jsx
-│   │   │   │   │   ├── EducationTab.jsx
-│   │   │   │   │   └── SettingsTab.jsx
-│   │   │   │   │
-│   │   │   │   └── forms
-│   │   │   │       ├── ProjectForm.jsx
-│   │   │   │       └── SkillForm.jsx
-│   │   │   │
-│   │   │   ├── explore 🌍
-│   │   │   │   ├── SearchBar.jsx
-│   │   │   │   ├── FilterButtons.jsx
-│   │   │   │   └── PortfolioCard.jsx
-│   │   │   │
-│   │   │   ├── portfolio 👩‍💼
-│   │   │   │   ├── PublicPortfolio.jsx
-│   │   │   │   ├── ShareButtons.jsx
-│   │   │   │   └── ViewCounter.jsx
-│   │   │   │
-│   │   │   └── analytics 📊
-│   │   │       ├── StatsCards.jsx
-│   │   │       └── ViewsChart.jsx
-│   │   │
-│   │   ├── pages 📄
-│   │   │   ├── LandingPage.jsx
-│   │   │   ├── SignupPage.jsx
-│   │   │   ├── LoginPage.jsx
-│   │   │   ├── DashboardPage.jsx
-│   │   │   ├── ExplorePage.jsx
-│   │   │   ├── PublicPortfolioPage.jsx
-│   │   │   ├── AnalyticsPage.jsx
-│   │   │   └── NotFoundPage.jsx
-│   │   │
-│   │   ├── templates 🎨
-│   │   │   ├── ModernTemplate.jsx
-│   │   │   ├── MinimalTemplate.jsx
-│   │   │   └── CreativeTemplate.jsx
-│   │   │
-│   │   ├── store 🐻
-│   │   │   ├── authStore.js
-│   │   │   ├── portfolioStore.js
-│   │   │   └── uiStore.js
-│   │   │
-│   │   ├── hooks 🪝
-│   │   │   ├── useAuth.js
-│   │   │   ├── usePortfolio.js
-│   │   │   └── useAutoSave.js
-│   │   │
-│   │   ├── services 📦
-│   │   │   ├── api.js
-│   │   │   ├── authService.js
-│   │   │   └── portfolioService.js
-│   │   │
-│   │   ├── utils 🛠️
-│   │   │   ├── constants.js
-│   │   │   ├── helpers.js
-│   │   │   └── dummyData.js
-│   │   │
-│   │   ├── styles 🎀
-│   │   │   ├── globals.css
-│   │   │   └── tailwind.css
-│   │   │
-│   │   ├── App.jsx
-│   │   ├── Router.jsx
-│   │   └── index.js
-│   │
-│   ├── package.json 🧁
-│   ├── tailwind.config.js 🎨
-│   ├── vite.config.js ⚡
-│   └── README.md 📝
+
+frontend/ 🌸
+
+├── public/
+│   ├── favicon.ico
+│   └── index.html
 │
-├── backend 🛠️
-│   ├── src
-│   │   ├── controllers
-│   │   ├── routes
-│   │   ├── models
-│   │   ├── middleware
-│   │   └── config
+├── src/
+│   ├── assets/
+│   │   └── images/
+│   │       ├── templates/
+│   │       └── avatars/
 │   │
-│   └── server.js
+│   ├── components/
+│   │   ├── common/
+│   │   ├── landing/
+│   │   ├── auth/
+│   │   ├── dashboard/
+│   │   ├── explore/
+│   │   ├── portfolio/
+│   │   └── analytics/
+│   │
+│   ├── pages/
+│   ├── templates/
+│   ├── store/
+│   ├── hooks/
+│   ├── services/
+│   ├── utils/
+│   ├── styles/
+│   │
+│   ├── App.jsx
+│   ├── Router.jsx
+│   └── main.jsx
 │
-├── package.json 🧁
-├── README.md 📄
-└── .gitignore 📦
+├── package.json
+├── vite.config.js
+├── tailwind.config.js
+└── README.md
 
 ````
 
