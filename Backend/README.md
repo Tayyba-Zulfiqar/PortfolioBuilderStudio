@@ -45,43 +45,52 @@ This is the cozy, dreamy backend API for Bloom Portfolio Studio. Built with love
 ```
 
 backend/
-├── 🌸 src/
-│   ├── 🐰 models/              # MongoDB models
-│   │   ├── User.js             # User schema with portfolio
-│   │   ├── Portfolio.js        # Portfolio schema
-│   │   └── Analytics.js        # Analytics schema
-│   ├── 🎀 controllers/         # Request handlers
-│   │   ├── authController.js   # Signup, Login, Verification
-│   │   ├── portfolioController.js # CRUD operations
-│   │   └── analyticsController.js # Stats & tracking
-│   ├── 🧁 routes/              # API routes
-│   │   ├── authRoutes.js       # /api/auth/*
-│   │   ├── portfolioRoutes.js  # /api/portfolio/*
-│   │   └── analyticsRoutes.js  # /api/analytics/*
-│   ├── 🛡️ middleware/          # Custom middleware
-│   │   ├── auth.js             # JWT verification
-│   │   ├── upload.js           # File upload handling
-│   │   ├── errorHandler.js     # Global error handler
-│   │   └── rateLimiter.js     # Rate limiting
-│   ├── 📦 config/              # Configuration
-│   │   ├── database.js         # MongoDB connection
-│   │   ├── cloudinary.js       # Cloudinary config
-│   │   └── email.js            # Nodemailer config
-│   ├── 🪄 utils/               # Utility functions
-│   │   ├── email.js            # Email templates
-│   │   ├── jwt.js              # JWT helpers
-│   │   ├── helpers.js          # Reusable helpers
-│   │   └── constants.js        # App constants
-│   ├── ✅ validators/           # Validation schemas
-│   │   ├── authValidator.js    # Signup/Login validation
-│   │   └── portfolioValidator.js # Portfolio validation
-│   └── 🌱 seeders/             # Dummy data
-│       └── dummyPortfolios.js  # Sample portfolios
-├── 🌷 .env                     # Environment variables
-├── 🧁 .gitignore               # Git ignore file
-├── 📝 package.json             # Dependencies
-├── 🚂 server.js                # Entry point
-└── 📖 README.md                # You are here! 🌸
+
+├── src 🌸
+│   ├── models 🐰
+│   │   ├── User.js
+│   │   ├── Portfolio.js
+│   │   └── Analytics.js
+│   │
+│   ├── controllers 🎀
+│   │   ├── authController.js
+│   │   ├── portfolioController.js
+│   │   └── analyticsController.js
+│   │
+│   ├── routes 🧁
+│   │   ├── authRoutes.js
+│   │   ├── portfolioRoutes.js
+│   │   └── analyticsRoutes.js
+│   │
+│   ├── middleware 🛡️
+│   │   ├── auth.js
+│   │   ├── upload.js
+│   │   ├── errorHandler.js
+│   │   └── rateLimiter.js
+│   │
+│   ├── config 📦
+│   │   ├── database.js
+│   │   ├── cloudinary.js
+│   │   └── email.js
+│   │
+│   ├── utils 🪄
+│   │   ├── email.js
+│   │   ├── jwt.js
+│   │   ├── helpers.js
+│   │   └── constants.js
+│   │
+│   ├── validators ✅
+│   │   ├── authValidator.js
+│   │   └── portfolioValidator.js
+│   │
+│   └── seeders 🌱
+│       └── dummyPortfolios.js
+│
+├── .env 🌷
+├── .gitignore 🧁
+├── package.json 📝
+├── server.js 🚂
+└── README.md 📖
 
 ````
 

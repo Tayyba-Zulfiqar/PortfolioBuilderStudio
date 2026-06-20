@@ -60,39 +60,40 @@ Portfolio Builder Studio lets users:
 ```
 
 PortfolioBuilderStudio/
-├── 🌸 frontend/
-│   ├── 🌸 public/
+
+├── frontend 🌸
+│   ├── public
 │   │   ├── favicon.ico
 │   │   └── index.html
 │   │
-│   ├── 🐰 src/
-│   │   ├── 🎨 assets/
-│   │   │   └── images/
-│   │   │       ├── templates/
-│   │   │       └── avatars/
+│   ├── src 🐰
+│   │   ├── assets 🎨
+│   │   │   └── images
+│   │   │       ├── templates
+│   │   │       └── avatars
 │   │   │
-│   │   ├── 🧩 components/
-│   │   │   ├── 🎀 common/
+│   │   ├── components 🧩
+│   │   │   ├── common 🎀
 │   │   │   │   ├── Button.jsx
 │   │   │   │   ├── Card.jsx
 │   │   │   │   ├── Input.jsx
 │   │   │   │   ├── Modal.jsx
 │   │   │   │   └── Toast.jsx
 │   │   │   │
-│   │   │   ├── 🌷 landing/
+│   │   │   ├── landing 🌷
 │   │   │   │   ├── Hero.jsx
 │   │   │   │   ├── Features.jsx
 │   │   │   │   └── CTASection.jsx
 │   │   │   │
-│   │   │   ├── 🔐 auth/
+│   │   │   ├── auth 🔐
 │   │   │   │   ├── SignupForm.jsx
 │   │   │   │   └── LoginForm.jsx
 │   │   │   │
-│   │   │   ├── 📝 dashboard/
+│   │   │   ├── dashboard 📝
 │   │   │   │   ├── DashboardLayout.jsx
 │   │   │   │   ├── EditorPanel.jsx
 │   │   │   │   ├── PreviewPanel.jsx
-│   │   │   │   ├── tabs/
+│   │   │   │   ├── tabs
 │   │   │   │   │   ├── AboutTab.jsx
 │   │   │   │   │   ├── ProjectsTab.jsx
 │   │   │   │   │   ├── SkillsTab.jsx
@@ -100,25 +101,25 @@ PortfolioBuilderStudio/
 │   │   │   │   │   ├── EducationTab.jsx
 │   │   │   │   │   └── SettingsTab.jsx
 │   │   │   │   │
-│   │   │   │   └── forms/
+│   │   │   │   └── forms
 │   │   │   │       ├── ProjectForm.jsx
 │   │   │   │       └── SkillForm.jsx
 │   │   │   │
-│   │   │   ├── 🌍 explore/
+│   │   │   ├── explore 🌍
 │   │   │   │   ├── SearchBar.jsx
 │   │   │   │   ├── FilterButtons.jsx
 │   │   │   │   └── PortfolioCard.jsx
 │   │   │   │
-│   │   │   ├── 👩‍💼 portfolio/
+│   │   │   ├── portfolio 👩‍💼
 │   │   │   │   ├── PublicPortfolio.jsx
 │   │   │   │   ├── ShareButtons.jsx
 │   │   │   │   └── ViewCounter.jsx
 │   │   │   │
-│   │   │   └── 📊 analytics/
+│   │   │   └── analytics 📊
 │   │   │       ├── StatsCards.jsx
 │   │   │       └── ViewsChart.jsx
 │   │   │
-│   │   ├── 📄 pages/
+│   │   ├── pages 📄
 │   │   │   ├── LandingPage.jsx
 │   │   │   ├── SignupPage.jsx
 │   │   │   ├── LoginPage.jsx
@@ -128,32 +129,32 @@ PortfolioBuilderStudio/
 │   │   │   ├── AnalyticsPage.jsx
 │   │   │   └── NotFoundPage.jsx
 │   │   │
-│   │   ├── 🎨 templates/
+│   │   ├── templates 🎨
 │   │   │   ├── ModernTemplate.jsx
 │   │   │   ├── MinimalTemplate.jsx
 │   │   │   └── CreativeTemplate.jsx
 │   │   │
-│   │   ├── 🐻 store/
+│   │   ├── store 🐻
 │   │   │   ├── authStore.js
 │   │   │   ├── portfolioStore.js
 │   │   │   └── uiStore.js
 │   │   │
-│   │   ├── 🪝 hooks/
+│   │   ├── hooks 🪝
 │   │   │   ├── useAuth.js
 │   │   │   ├── usePortfolio.js
 │   │   │   └── useAutoSave.js
 │   │   │
-│   │   ├── 📦 services/
+│   │   ├── services 📦
 │   │   │   ├── api.js
 │   │   │   ├── authService.js
 │   │   │   └── portfolioService.js
 │   │   │
-│   │   ├── 🛠️ utils/
+│   │   ├── utils 🛠️
 │   │   │   ├── constants.js
 │   │   │   ├── helpers.js
 │   │   │   └── dummyData.js
 │   │   │
-│   │   ├── 🎀 styles/
+│   │   ├── styles 🎀
 │   │   │   ├── globals.css
 │   │   │   └── tailwind.css
 │   │   │
@@ -161,24 +162,24 @@ PortfolioBuilderStudio/
 │   │   ├── Router.jsx
 │   │   └── index.js
 │   │
-│   ├── 🧁 package.json
-│   ├── 🎨 tailwind.config.js
-│   ├── ⚡ vite.config.js
-│   └── 📝 README.md
+│   ├── package.json 🧁
+│   ├── tailwind.config.js 🎨
+│   ├── vite.config.js ⚡
+│   └── README.md 📝
 │
-├── 🛠️ backend/
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── routes/
-│   │   ├── models/
-│   │   ├── middleware/
-│   │   └── config/
+├── backend 🛠️
+│   ├── src
+│   │   ├── controllers
+│   │   ├── routes
+│   │   ├── models
+│   │   ├── middleware
+│   │   └── config
 │   │
 │   └── server.js
 │
-├── 🧁 package.json
-├── 📄 README.md
-└── 📦 .gitignore
+├── package.json 🧁
+├── README.md 📄
+└── .gitignore 📦
 
 ````
 

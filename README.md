@@ -17,7 +17,7 @@ Welcome to Bloom Portfolio Studio — the dreamiest way to build and share your 
 | 🌸 **Colors** | #F4A6B5 (pink), #FFF8F7 (warm white) |
 | ✨ **Typography** | Playfair Display + Quicksand |
 | 🐰 **Feel** | Like a cozy café with pink lighting |
-| ☕ **Fuel** | Chai lattes and lots of love |
+
 
 ---
 
