@@ -62,43 +62,21 @@ Portfolio Builder Studio lets users:
 PortfolioBuilderStudio/
 
 
-frontend/ 
-├── public/
-│   ├── favicon.ico
-│   └── index.html
-│
-├── src/
-│   ├── assets/
-│   │   └── images/
-│   │       ├── templates/
-│   │       └── avatars/
-│   │
-│   ├── components/
-│   │   ├── common/
-│   │   ├── landing/
-│   │   ├── auth/
-│   │   ├── dashboard/
-│   │   ├── explore/
-│   │   ├── portfolio/
-│   │   └── analytics/
-│   │
-│   ├── pages/
-│   ├── templates/
-│   ├── store/
-│   ├── hooks/
-│   ├── services/
-│   ├── utils/
-│   ├── styles/
-│   │
-│   ├── App.jsx
-│   ├── Router.jsx
-│   └── main.jsx
-│
-├── package.json
-├── vite.config.js
-├── tailwind.config.js
-└── README.md
 
+├── frontend 🌸
+│   ├── src
+│   │   ├── assets
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── templates
+│   │   ├── store
+│   │   ├── hooks
+│   │   ├── services
+│   │   └── utils
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── tailwind.config.js
+│   └── README.md
 ````
 
 ---

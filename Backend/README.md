@@ -46,21 +46,21 @@ This is the cozy, dreamy backend API for Bloom Portfolio Studio. Built with love
 
 backend/ 
 
-├── src/
-│   ├── models/
-│   ├── controllers/
-│   ├── routes/
-│   ├── middleware/
-│   ├── config/
-│   ├── utils/
-│   ├── validators/
-│   └── seeders/
+├── backend 🌷
+│   ├── src
+│   │   ├── models
+│   │   ├── controllers
+│   │   ├── routes
+│   │   ├── middleware
+│   │   ├── config
+│   │   ├── utils
+│   │   └── validators
 │
-├── server.js
-├── package.json
-├── .env
-├── .gitignore
-└── README.md
+│   ├── server.js
+│   ├── package.json
+│   ├── .env
+│   ├── .gitignore
+│   └── README.md
 ````
 
 ---
