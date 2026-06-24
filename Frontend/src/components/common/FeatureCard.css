@@ -1,0 +1,88 @@
+/* Reusable FeatureCard Styles */
+.feature-card {
+  background-color: var(--color-bloom-card);
+  border: 1px solid rgba(232, 215, 214, 0.5);
+  border-radius: 40px;
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  box-shadow: var(--shadow-bloom-sm);
+  width: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-bloom);
+  border-color: rgba(229, 139, 157, 0.3);
+}
+
+.feature-card-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card-icon svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.feature-card:hover .feature-card-icon-wrapper {
+  transform: scale(1.08);
+}
+
+/* Icon Colors and Backgrounds */
+.feature-bg-pink {
+  background-color: #FFF0EE;
+}
+.feature-icon-pink svg {
+  color: #E58B9D;
+  stroke: #E58B9D;
+  fill: none;
+}
+
+.feature-bg-lavender {
+  background-color: #F3EEF9;
+}
+.feature-icon-lavender svg {
+  color: #B59EC9;
+  stroke: #B59EC9;
+  fill: none;
+}
+
+.feature-bg-mint {
+  background-color: #EDF6EE;
+}
+.feature-icon-mint svg {
+  color: #76B880;
+  stroke: #76B880;
+  fill: none;
+}
+
+/* Text Stylings */
+.feature-card-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-bloom-text);
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.feature-card-description {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-bloom-text-muted);
+  line-height: 1.6;
+  max-width: 280px;
+}
