@@ -12,8 +12,12 @@ app.use(express.json());
 // Import routes
 const authRoutes = require('./src/routes/authRoutes');
 
-// Use routes
+// Authentication routes:
 app.use('/api/auth', authRoutes);
+
+// portfolio route:
+const portfolioRoutes = require('./src/routes/portfolioRoutes');
+app.use('/api/portfolio', portfolioRoutes);
 
 
 app.get('/', (req, res) => {
