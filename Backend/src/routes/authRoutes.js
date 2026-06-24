@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { signup, login, getMe } = require('../controllers/authController');
-const { protect } = require('../middlewares/auth');  // ← FIXED: middleware (no 's')
+const { protect } = require('../middlewares/auth');
 
 // Public routes
 router.post('/signup', signup);
