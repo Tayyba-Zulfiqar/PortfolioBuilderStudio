@@ -1,15 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+
+import Header from '../components/Header';
+import Hero from '../components/Hero';
+import FloatingShapes from '../components/FloatingShapes';
 
 const LandingPage = () => {
-    return (
-        <div>
-            <h1>🌸 Bloom Portfolio Studio</h1>
-            <p>Build your story, beautifully.</p>
-            <Link to="/signup">Get Started</Link>
-            <Link to="/login">Login</Link>
-        </div>
-    );
+  return (
+    <div style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh' }}>
+      {/* Top Navigation */}
+      <Header />
+
+      {/* Floating Background Shapes */}
+      <FloatingShapes />
+
+      {/* Main Hero Section */}
+      <Hero />
+    </div>
+  );
 };
 
 export default LandingPage;

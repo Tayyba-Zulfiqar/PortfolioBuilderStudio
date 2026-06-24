@@ -1,0 +1,109 @@
+/* Header & Navigation Styles */
+.header-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(255, 248, 247, 0.75);
+  border-bottom: 1px solid rgba(240, 227, 226, 0.4);
+  transition: var(--transition-normal);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-charcoal);
+  opacity: 0.8;
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--brand-pink);
+  transition: var(--transition-normal);
+}
+
+.nav-link:hover {
+  opacity: 1;
+  color: var(--brand-pink-hover);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-login {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--brand-pink);
+  transition: var(--transition-fast);
+}
+
+.nav-login:hover {
+  color: var(--brand-pink-hover);
+  transform: translateY(-1px);
+}
+
+/* Mobile Nav Toggle & Responsive Styles */
+.mobile-nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.mobile-nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-charcoal);
+  border-radius: 2px;
+  transition: var(--transition-fast);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    height: 70px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-actions {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: flex;
+  }
+}

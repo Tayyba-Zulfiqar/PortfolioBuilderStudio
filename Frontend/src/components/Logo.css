@@ -1,0 +1,42 @@
+/* Logo Component Styles */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-script);
+  font-size: 34px;
+  color: var(--brand-pink);
+  font-weight: 400;
+  user-select: none;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.logo-container:hover {
+  transform: scale(1.02);
+}
+
+.logo-icon-wrapper {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: var(--brand-pink-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(231, 158, 159, 0.2);
+}
+
+.logo-icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--brand-pink);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.logo-text {
+  margin-top: 4px;
+  font-family: var(--font-script);
+  font-weight: 500;
+}

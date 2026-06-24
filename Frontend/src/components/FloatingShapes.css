@@ -1,0 +1,79 @@
+/* Floating Shapes Components */
+.floating-shapes-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-shape {
+  position: absolute;
+  opacity: 0.15;
+  color: var(--brand-pink);
+  transform-origin: center;
+}
+
+.shape-1 {
+  top: 22%;
+  left: 8%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.shape-2 {
+  top: 45%;
+  right: 15%;
+  animation: float-slow 12s ease-in-out infinite;
+}
+
+.shape-3 {
+  bottom: 25%;
+  left: 10%;
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+.shape-4 {
+  bottom: 15%;
+  right: 8%;
+  animation: float 9s ease-in-out infinite;
+}
+
+.shape-5 {
+  top: 15%;
+  right: 25%;
+  animation: float 11s ease-in-out infinite;
+}
+
+.shape-6 {
+  bottom: 30%;
+  right: 32%;
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+.shape-7 {
+  bottom: 40%;
+  left: 30%;
+  animation: float 7s ease-in-out infinite;
+}
+
+.shape-svg {
+  width: 48px;
+  height: 48px;
+  fill: none;
+  stroke: var(--brand-pink);
+  stroke-width: 1.5;
+}
+
+.shape-svg-fill {
+  fill: var(--brand-pink);
+}
+
+@media (max-width: 768px) {
+  .shape-svg {
+    width: 32px;
+    height: 32px;
+  }
+}
