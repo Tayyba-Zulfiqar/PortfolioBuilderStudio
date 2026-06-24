@@ -1,19 +1,19 @@
 /* BloomPortfolio Custom Design System - Global Styles */
 :root {
-  /* Exact Theme Color Palette */
-  --color-bloom-pink: #F4A6B5;
-  --color-bloom-pink-light: #F8C8D4;
-  --color-bloom-rose: #E8B4B8;
+  /* Exact Theme Color Palette - Darkened Slightly for Better Visibility */
+  --color-bloom-pink: #E58B9D;
+  --color-bloom-pink-light: #F4B8C7;
+  --color-bloom-rose: #D89BA0;
   --color-bloom-bg: #FFF8F7;
   --color-bloom-card: #FFFBF9;
-  --color-bloom-text: #4A3A3A;
-  --color-bloom-text-muted: #7A6B6B;
+  --color-bloom-text: #382A2A;
+  --color-bloom-text-muted: #685B5B;
   --color-bloom-text-light: #B5A4A4;
   --color-bloom-lavender: #D4C5D9;
   --color-bloom-peach: #FADADD;
   --color-bloom-mint: #D4E9D6;
-  --color-bloom-border: #F0E3E2;
-  --color-bloom-hover: #F0C4CF;
+  --color-bloom-border: #E8D7D6;
+  --color-bloom-hover: #E5B2C0;
 
   --font-serif: "Playfair Display", serif;
   --font-sans: "Quicksand", system-ui, sans-serif;
