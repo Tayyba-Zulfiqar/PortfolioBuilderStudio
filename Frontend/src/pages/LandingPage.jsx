@@ -1,7 +1,7 @@
 
-import Header from '../components/Header';
-import Hero from '../components/Hero';
-import FloatingShapes from '../components/FloatingShapes';
+import Header from '../components/UI/landing-page/Header';
+import Hero from '../components/UI/landing-page/Hero';
+import FloatingShapes from '../components/UI/landing-page/FloatingShapes';
 
 const LandingPage = () => {
   return (

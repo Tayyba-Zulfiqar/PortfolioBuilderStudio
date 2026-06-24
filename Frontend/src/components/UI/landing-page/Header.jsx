@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import Logo from './Logo';
-import Button from './Button';
+import Button from '../../common/Button';
 
 const Header = () => {
   const navigate = useNavigate();

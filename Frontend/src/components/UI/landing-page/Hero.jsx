@@ -1,7 +1,7 @@
-import React from 'react';
+
 import './Hero.css';
 import { Link } from 'react-router-dom';
-import Button from './Button';
+import Button from '../../common/Button';
 
 const Hero = () => {
 
@@ -13,7 +13,7 @@ const Hero = () => {
 
       {/* Main Title: Build Your Dream Portfolio */}
       <h1 className="hero-title">
-        Build Your <em>Dream</em> Portfolio
+        Build Your <em>Dream</em> <br /> Portfolio
       </h1>
 
       {/* Subtitle */}
