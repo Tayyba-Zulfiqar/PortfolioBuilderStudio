@@ -1,17 +1,17 @@
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthStore } from './src/store/authStore';
+import { useAuthStore } from './store/authStore';
 
 // Import pages 
-import LandingPage from './src/pages/LandingPage';
-import SignupPage from './src/pages/SignupPage';
-import LoginPage from './src/pages/LoginPage';
-import DashboardPage from './src/pages/DashboardPage';
-import ExplorePage from './src/pages/ExplorePage';
-import PublicPortfolioPage from './src/pages/PublicPortfolioPage';
-import AnalyticsPage from './src/pages/AnalyticsPage';
-import SettingsPage from './src/pages/SettingsPage';
-import NotFoundPage from './src/pages/NotFoundPage';
+import LandingPage from './pages/LandingPage';
+import SignupPage from './pages/SignupPage';
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import ExplorePage from './pages/ExplorePage';
+import PublicPortfolioPage from './pages/PublicPortfolioPage';
+import AnalyticsPage from './pages/AnalyticsPage';
+import SettingsPage from './pages/SettingsPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 // Protected route wrapper
 const ProtectedRoute = ({ children }) => {
