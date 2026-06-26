@@ -6,7 +6,7 @@
 }
 
 .active-card {
-    background: var(--card-bg);
+    background: var(--color-bloom-card);
     border-radius: 2rem;
     padding: 2.5rem 2.5rem 2.2rem;
     max-width: 620px;
@@ -32,18 +32,18 @@
 }
 
 .stat-label {
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--text-light);
+    color: var(--color-bloom-text-light);
 }
 
 .stat-value {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-serif);
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--text-dark);
+    color: var(--text-charcoal);
 }
 
 .stat-value.published {
@@ -51,7 +51,7 @@
 }
 
 .stat-value.draft {
-    color: var(--text-medium);
+    color: var(--text-gray);
 }
 
 .stat-divider {

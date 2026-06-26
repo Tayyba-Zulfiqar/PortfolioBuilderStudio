@@ -1,5 +1,5 @@
 .quick-tips {
-    background: rgba(255, 248, 247, 0.7);
+    background: rgba(244, 166, 181, 0.06);
     backdrop-filter: blur(4px);
     border-radius: 1.5rem;
     padding: 1.5rem 2rem;
@@ -12,10 +12,10 @@
 }
 
 .tips-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-serif);
     font-size: 1rem;
     font-weight: 700;
-    color: var(--text-dark);
+    color: var(--text-charcoal);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -36,9 +36,9 @@
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.95rem;
-    color: var(--text-medium);
+    color: var(--text-gray);
 }
 
 .tip-emoji {

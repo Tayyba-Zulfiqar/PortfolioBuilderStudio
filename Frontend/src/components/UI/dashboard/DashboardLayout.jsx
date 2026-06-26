@@ -1,5 +1,4 @@
-import React from 'react';
-import FloatingShapes from '../UI/landing-page/FloatingShapes';
+import FloatingShapes from '../landing-page/FloatingShapes'
 import './DashboardLayout.css';
 
 const DashboardLayout = ({ children }) => {

@@ -1,10 +1,10 @@
-import React from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import DashboardLayout from './DashboardLayout';
 import WelcomeHeader from './WelcomeHeader';
 import QuickTips from './QuickTips';
-import Button from '../common/Button';
-import Logo from '../common/Logo';
+import Button from '../../common/Button';
+import Logo from '../../common/Logo';
 import './EmptyDashboard.css';
 
 const EmptyDashboard = () => {
@@ -41,6 +41,7 @@ const EmptyDashboard = () => {
                         >
                             Start Building
                         </Button>
+
                     </div>
 
                     <QuickTips />

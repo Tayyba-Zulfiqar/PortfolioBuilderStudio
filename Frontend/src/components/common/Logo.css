@@ -40,3 +40,20 @@
   font-family: var(--font-script);
   font-weight: 500;
 }
+
+/* Icon-Only Modifiers for Dashboard Badge Reusability */
+.logo-container.icon-only {
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: none !important;
+}
+
+.logo-container.icon-only .logo-icon-wrapper {
+  background-color: transparent;
+  border: none;
+  width: auto;
+  height: auto;
+  padding: 0;
+}
