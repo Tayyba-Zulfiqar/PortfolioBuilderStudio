@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './WelcomeHeader.css';
 
 const WelcomeHeader = ({ tag = "welcome, lovely", title, subtitle }) => {

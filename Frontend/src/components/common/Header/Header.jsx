@@ -41,30 +41,61 @@ const Header = () => {
         setMobileMenuOpen(false);
         navigate('/');
     };
-
     const handleHomeClick = (e) => {
         e.preventDefault();
-        window.history.pushState(null, '', '/');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // If we're already on the landing page, scroll to top
+        if (location.pathname === '/') {
+            window.history.pushState(null, '', '/');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            // Otherwise, navigate to landing page
+            navigate('/');
+            // After navigation, scroll to top
+            setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+        }
         setMobileMenuOpen(false);
     };
 
     const handleFeaturesClick = (e) => {
         e.preventDefault();
-        window.history.pushState(null, '', '/#features');
-        const element = document.getElementById('features');
-        if (element) element.scrollIntoView({ behavior: 'smooth' });
+
+        // If we're already on the landing page, scroll to features
+        if (location.pathname === '/') {
+            window.history.pushState(null, '', '/#features');
+            const element = document.getElementById('features');
+            if (element) element.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // Otherwise, navigate to landing page with features hash
+            navigate('/#features');
+            // After navigation, scroll to features
+            setTimeout(() => {
+                const element = document.getElementById('features');
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
+            }, 200);
+        }
         setMobileMenuOpen(false);
     };
 
     const handleTemplatesClick = (e) => {
         e.preventDefault();
-        window.history.pushState(null, '', '/#templates');
-        const element = document.getElementById('templates');
-        if (element) element.scrollIntoView({ behavior: 'smooth' });
+
+        // If we're already on the landing page, scroll to templates
+        if (location.pathname === '/') {
+            window.history.pushState(null, '', '/#templates');
+            const element = document.getElementById('templates');
+            if (element) element.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // Otherwise, navigate to landing page with templates hash
+            navigate('/#templates');
+            // After navigation, scroll to templates
+            setTimeout(() => {
+                const element = document.getElementById('templates');
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
+            }, 200);
+        }
         setMobileMenuOpen(false);
     };
-
     // --- Effects ---
     useEffect(() => {
         if (currentPath === '/' && !currentHash) {

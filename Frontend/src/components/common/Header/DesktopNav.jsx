@@ -2,6 +2,7 @@
 import { NavLink } from 'react-router-dom';
 
 
+
 const DesktopNav = ({ isAuthenticated, handleHomeClick, handleFeaturesClick, handleTemplatesClick, isHomeActive, isFeaturesActive, isTemplatesActive }) => {
     return (
         <nav className="nav-links">

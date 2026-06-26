@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 90px 24px;
+  padding: 50px 24px;
   position: relative;
   z-index: 10;
 }
