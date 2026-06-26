@@ -37,22 +37,74 @@ exports.getMyPortfolio = async (req, res) => {
 // @route   PUT /api/portfolio
 // @access  Private
 // ============================================
+// ============================================
+// @desc    Update entire portfolio
+// @route   PUT /api/portfolio
+// @access  Private
+// ============================================
 exports.updatePortfolio = async (req, res) => {
     try {
-        const { portfolio } = req.body;
+        const portfolioData = req.body.portfolio || req.body;
 
-        const user = await User.findByIdAndUpdate(
-            req.userId,
-            { portfolio },
-            { new: true, runValidators: true }
-        ).select('portfolio views');
-
+        // ✅ Find user
+        const user = await User.findById(req.userId);
         if (!user) {
             return res.status(404).json({
                 success: false,
                 message: 'User not found 🌸',
             });
         }
+
+        // ✅ MERGE - Update only fields that are sent
+        // This preserves existing data while updating new fields
+        if (portfolioData) {
+            // Merge about
+            if (portfolioData.about) {
+                user.portfolio.about = { ...user.portfolio.about, ...portfolioData.about };
+            }
+
+            // Merge socialLinks
+            if (portfolioData.socialLinks) {
+                user.portfolio.socialLinks = { ...user.portfolio.socialLinks, ...portfolioData.socialLinks };
+            }
+
+            // Merge projects
+            if (portfolioData.projects) {
+                user.portfolio.projects = portfolioData.projects;
+            }
+
+            // Merge skills
+            if (portfolioData.skills) {
+                user.portfolio.skills = portfolioData.skills;
+            }
+
+            // Merge experience
+            if (portfolioData.experience) {
+                user.portfolio.experience = portfolioData.experience;
+            }
+
+            // Merge education
+            if (portfolioData.education) {
+                user.portfolio.education = portfolioData.education;
+            }
+
+            // Merge template
+            if (portfolioData.template) {
+                user.portfolio.template = portfolioData.template;
+            }
+
+            // Merge isPublished
+            if (portfolioData.isPublished !== undefined) {
+                user.portfolio.isPublished = portfolioData.isPublished;
+            }
+
+            // Merge theme
+            if (portfolioData.theme) {
+                user.portfolio.theme = { ...user.portfolio.theme, ...portfolioData.theme };
+            }
+        }
+
+        await user.save();
 
         res.status(200).json({
             success: true,

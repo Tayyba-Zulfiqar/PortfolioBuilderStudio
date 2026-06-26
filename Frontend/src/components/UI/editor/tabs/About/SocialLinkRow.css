@@ -1,0 +1,50 @@
+/* ======= Social Link Row ======= */
+
+.social-link-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.social-link-row .form-input {
+    flex: 1;
+}
+
+.social-link-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #fff;
+}
+
+.social-link-icon--github {
+    background: #1a1a2e;
+}
+
+.social-link-icon--linkedin {
+    background: #0077b5;
+}
+
+.social-link-icon--twitter {
+    background: #1da1f2;
+}
+
+.social-link-icon--youtube {
+    background: #ff0000;
+}
+
+@media (max-width: 480px) {
+    .social-link-row {
+        flex-wrap: wrap;
+    }
+
+    .social-link-icon {
+        width: 36px;
+        height: 36px;
+    }
+}

@@ -1,0 +1,6 @@
+/* ======= About Tab Specific ======= */
+
+.about-tab {
+  animation: fadeInSlideUp 0.3s ease;
+  padding: 0 4px;
+}

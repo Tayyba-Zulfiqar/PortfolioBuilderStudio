@@ -60,7 +60,7 @@ const userSchema = new mongoose.Schema(
                     type: String,
                     default: '',
                     trim: true,
-                    match: [/^(https?:\/\/[^\s]+)$/, 'Invalid image URL'],
+                    match: [/^(https?:\/\/[^\s]+|data:image\/[a-zA-Z]+;base64,[^\s]+)$/, 'Invalid image URL'],
                 },
             },
             socialLinks: {
