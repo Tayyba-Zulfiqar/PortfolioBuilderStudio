@@ -1,5 +1,4 @@
 
-import Header from '../landing-page/Header';
 import FloatingShapes from '../landing-page/FloatingShapes';
 import Logo from '../../common/Logo';
 import './AuthCard.css';
@@ -8,8 +7,6 @@ import './AuthCard.css';
 const AuthCard = ({ title, subtitle, children }) => {
   return (
     <div className="auth-page-container">
-
-      <Header />
 
       <FloatingShapes />
 
