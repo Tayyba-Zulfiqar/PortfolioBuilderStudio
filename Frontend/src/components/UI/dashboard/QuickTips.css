@@ -1,0 +1,59 @@
+.quick-tips {
+    background: rgba(255, 248, 247, 0.7);
+    backdrop-filter: blur(4px);
+    border-radius: 1.5rem;
+    padding: 1.5rem 2rem;
+    margin-top: 1.8rem;
+    border: 1px solid var(--border-light);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.tips-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.tips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.tips-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-medium);
+}
+
+.tip-emoji {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    .quick-tips {
+        padding: 1rem 1.25rem;
+    }
+
+    .tips-item {
+        font-size: 0.85rem;
+    }
+}

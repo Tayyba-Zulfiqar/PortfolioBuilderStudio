@@ -1,0 +1,14 @@
+.dashboard-container {
+    min-height: 100vh;
+    background: var(--bg-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+}

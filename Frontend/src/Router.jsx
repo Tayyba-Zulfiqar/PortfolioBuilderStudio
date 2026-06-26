@@ -7,7 +7,7 @@ import PublicRoutes from './components/common/PublicRoutes';
 import LandingPage from './pages/LandingPage';
 import SignupPage from './pages/AuthPage/SignupPage';
 import LoginPage from './pages/AuthPage/LoginPage';
-import DashboardPage from './pages/DashboardPage';
+import DashboardPage from './pages/DashboardPage/DashboardPage';
 import ExplorePage from './pages/ExplorePage';
 import PublicPortfolioPage from './pages/PublicPortfolioPage';
 import AnalyticsPage from './pages/AnalyticsPage';
