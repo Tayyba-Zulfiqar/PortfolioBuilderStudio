@@ -47,7 +47,7 @@
 
 .nav-link:hover {
   opacity: 1;
-  color: var(--brand-pink-hover);
+  color: var(--brand-pink-solid-btn);
 }
 
 .nav-link:hover::after {
@@ -68,7 +68,7 @@
 }
 
 .nav-login:hover {
-  color: var(--brand-pink-hover);
+  color: var(--brand-pink-solid-btn);
   transform: translateY(-1px);
 }
 

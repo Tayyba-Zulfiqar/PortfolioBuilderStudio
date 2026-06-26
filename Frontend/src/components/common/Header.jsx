@@ -4,18 +4,25 @@ import './Header.css';
 import Logo from './Logo';
 import Button from './Button';
 import { useAuthStore } from '../../store/authStore';
+import ConfirmationModal from './ConfirmationModal';
 
 const Header = () => {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const { isAuthenticated, logout, user } = useAuthStore();
 
   const handleLogoClick = () => {
     navigate('/');
   };
 
-  const handleLogout = () => {
+  const handleLogoutClick = () => {
+    setShowLogoutModal(true);
+  };
+
+  const handleConfirmLogout = () => {
     logout();
+    setShowLogoutModal(false);
     setMobileMenuOpen(false);
     navigate('/');
   };
@@ -47,7 +54,7 @@ const Header = () => {
         {/* Right Actions */}
         <div className="nav-actions">
           {isAuthenticated ? (
-            <Button variant="secondary" onClick={handleLogout}>
+            <Button variant="secondary" onClick={handleLogoutClick}>
               Logout
             </Button>
           ) : (
@@ -92,7 +99,7 @@ const Header = () => {
                 Analytics
               </Link>
               <div className="mobile-divider"></div>
-              <Button variant="secondary" onClick={handleLogout} style={{ width: '100%' }}>
+              <Button variant="secondary" onClick={handleLogoutClick} style={{ width: '100%' }}>
                 Logout
               </Button>
             </>
@@ -118,6 +125,18 @@ const Header = () => {
           )}
         </div>
       )}
+
+      {/* Reusable Confirmation Modal for Logout */}
+      <ConfirmationModal
+        isOpen={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+        onConfirm={handleConfirmLogout}
+        title="Log Out? 🌸"
+        message="You're about to log out. Any unsaved changes will be lost."
+        confirmText="Logout"
+        cancelText="Stay"
+        variant="default"
+      />
     </header>
   );
 };

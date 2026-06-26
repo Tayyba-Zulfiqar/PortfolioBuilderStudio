@@ -35,9 +35,9 @@
 }
 
 .btn-secondary:hover {
-  background-color: var(--brand-pink-light);
-  border-color: var(--brand-pink-hover);
-  color: var(--brand-pink-hover);
+  background-color: var(--brand-pink-solid-btn);
+  border-color: var(--brand-pink-solid-btn);
+  color: var(--white);
   transform: translateY(-2px);
 }
 
