@@ -1,12 +1,7 @@
-import React from 'react';
+import EditorLayout from '../components/UI/editor/EditorLayout';
 
 const SettingsPage = () => {
-    return (
-        <div>
-            <h1>⚙️ Settings</h1>
-            <p>Manage your account settings.</p>
-        </div>
-    );
+  return <EditorLayout />;
 };
 
 export default SettingsPage;

@@ -1,0 +1,210 @@
+/* SettingsTab.css */
+
+.settings-tab {
+  animation: fadeInSlideUp 0.3s ease;
+}
+
+/* Section wrappers */
+.settings-section {
+  margin-bottom: 28px;
+}
+
+.settings-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-bloom-text-muted);
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+
+/* ===== Template Cards ===== */
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.template-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid var(--color-bloom-border);
+  border-radius: 16px;
+  padding: 0 0 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  background: #fff;
+}
+
+.template-card:hover {
+  border-color: var(--color-bloom-pink-light);
+  box-shadow: 0 4px 16px rgba(229, 139, 157, 0.12);
+  transform: translateY(-2px);
+}
+
+.template-card--active {
+  border-color: var(--color-bloom-pink) !important;
+  box-shadow: 0 0 0 3px rgba(229, 139, 157, 0.18), 0 4px 16px rgba(229, 139, 157, 0.15) !important;
+}
+
+.template-card__preview {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+}
+
+.template-card__label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-bloom-text);
+}
+
+/* ===== Color Pickers ===== */
+.color-pickers-row {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.color-picker-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.color-picker-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Color swatch that opens native color picker */
+.color-swatch-input {
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--color-bloom-border);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 3px;
+  background: #fff;
+}
+
+.color-swatch-input::-webkit-color-swatch-wrapper { padding: 0; border-radius: 6px; }
+.color-swatch-input::-webkit-color-swatch { border: none; border-radius: 6px; }
+
+.color-hex {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: var(--color-bloom-text);
+  font-weight: 500;
+}
+
+/* ===== Custom URL ===== */
+.custom-url-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--color-bloom-peach);
+  border-radius: 12px;
+  border: 1.5px solid var(--color-bloom-border);
+}
+
+.custom-url-text {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-bloom-pink);
+}
+
+/* ===== Publish Toggle ===== */
+.publish-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+  background: #fff;
+  border: 1.5px solid var(--color-bloom-border);
+  border-radius: 14px;
+}
+
+.publish-info { flex: 1; }
+
+.publish-title {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-bloom-text);
+  margin-bottom: 3px;
+}
+
+.publish-desc {
+  font-size: 13px;
+  color: var(--color-bloom-text-muted);
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  width: 52px;
+  height: 30px;
+  background: var(--color-bloom-border);
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.toggle-switch--on {
+  background: var(--color-bloom-pink);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-switch--on .toggle-thumb {
+  transform: translateX(22px);
+}
+
+/* ===== Delete Account ===== */
+.settings-section--danger {
+  padding-top: 8px;
+  border-top: 1.5px solid var(--color-bloom-border);
+}
+
+.delete-account-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-bloom-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  padding: 6px 0;
+}
+
+.delete-account-btn:hover {
+  color: #e57373;
+}

@@ -1,0 +1,69 @@
+/* EditorPanel.css - Left Panel Styles */
+
+.editor-panel-wrapper {
+  flex: 1;
+  padding: 32px 40px;
+  overflow-y: auto;
+}
+
+/* Tab Navigation */
+.editor-tabs {
+  display: flex;
+  gap: 4px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 12px rgba(229, 139, 157, 0.10);
+  margin-bottom: 36px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border: 1.5px solid var(--color-bloom-border);
+}
+
+.editor-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.editor-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-bloom-text-muted);
+  transition: var(--transition-fast);
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.editor-tab:hover {
+  color: var(--color-bloom-pink);
+  background: var(--color-bloom-peach);
+}
+
+.editor-tab--active {
+  background: var(--color-bloom-peach) !important;
+  color: var(--color-bloom-pink) !important;
+  font-weight: 600;
+}
+
+.editor-tab__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.editor-tab__label {
+  font-family: var(--font-sans);
+}
+
+/* Content Area */
+.editor-content {
+  animation: fadeInSlideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

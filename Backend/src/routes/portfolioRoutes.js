@@ -4,15 +4,17 @@ const { protect } = require('../middlewares/auth');
 const {
     getMyPortfolio,
     updatePortfolio,
-    getPublicPortfolio
+    getPublicPortfolio,
+    togglePublish,
 } = require('../controllers/portfolioController');
 
-// Protected routes
+
+// PROTECTED ROUTES (require authentication)
 router.get('/me', protect, getMyPortfolio);
 router.put('/', protect, updatePortfolio);
+router.patch('/publish', protect, togglePublish);
 
-
-// Public dynamic routes
+// PUBLIC ROUTES
 router.get('/:username', getPublicPortfolio);
 
 module.exports = router;

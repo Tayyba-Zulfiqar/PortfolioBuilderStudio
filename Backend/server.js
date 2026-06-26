@@ -9,16 +9,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Import routes
+// ✅ IMPORT ROUTES (ONCE)
 const authRoutes = require('./src/routes/authRoutes');
-
-// Authentication routes:
-app.use('/api/auth', authRoutes);
-
-// portfolio route:
 const portfolioRoutes = require('./src/routes/portfolioRoutes');
-app.use('/api/portfolio', portfolioRoutes);
 
+// ✅ USE ROUTES (ONCE)
+app.use('/api/auth', authRoutes);
+app.use('/api/portfolio', portfolioRoutes);
 
 app.get('/', (req, res) => {
     res.json({ message: '🌸 Bloom Portfolio API is running!' });

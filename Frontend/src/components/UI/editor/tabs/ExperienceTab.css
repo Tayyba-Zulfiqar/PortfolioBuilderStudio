@@ -1,0 +1,105 @@
+/* ExperienceTab.css */
+
+.experience-tab {
+  animation: fadeInSlideUp 0.3s ease;
+}
+
+.exp-date-row {
+  display: flex;
+  gap: 14px;
+}
+
+/* Experience Cards */
+.exp-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.exp-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fff;
+  border: 1.5px solid var(--color-bloom-border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  transition: var(--transition-fast);
+}
+
+.exp-card:hover {
+  border-color: var(--color-bloom-pink-light);
+  box-shadow: 0 4px 16px rgba(229, 139, 157, 0.10);
+}
+
+/* Company Logo */
+.exp-card__logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.exp-card__logo-letter {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.exp-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.exp-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.exp-card__title {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-bloom-text);
+  margin-bottom: 2px;
+}
+
+.exp-card__company {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-bloom-pink);
+}
+
+.exp-card__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.exp-card__date {
+  font-size: 13px;
+  color: var(--color-bloom-text-light);
+  white-space: nowrap;
+}
+
+.exp-card__actions {
+  display: flex;
+  gap: 6px;
+}
+
+.exp-card__desc {
+  font-size: 13px;
+  color: var(--color-bloom-text-muted);
+  line-height: 1.6;
+}
