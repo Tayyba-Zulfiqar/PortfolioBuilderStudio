@@ -12,8 +12,16 @@ const generateToken = (userId) => {
 // @route   POST /api/auth/signup
 // @access  Public
 exports.signup = async (req, res) => {
+
     try {
         const { username, email, password, fullName } = req.body;
+
+        if (!username || !email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: 'All fields (username, email, password) are required 🌸'
+            });
+        }
 
         // Check if user exists
         const existingUser = await User.findOne({

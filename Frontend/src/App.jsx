@@ -1,18 +1,21 @@
+
 import { useEffect } from 'react';
 import { useAuthStore } from './store/authStore';
-import Router from './Router'
+import { usePortfolioStore } from './store/portfolioStore';
+import Router from './Router';
+
 function App() {
-  const { token, fetchUser } = useAuthStore();
+  const { token, isAuthenticated, fetchUser } = useAuthStore();
+  const { fetchPortfolio } = usePortfolioStore();
 
   useEffect(() => {
-    if (token) {
+    if (token && isAuthenticated) {
       fetchUser();
+      fetchPortfolio();
     }
-  }, [token, fetchUser]);
+  }, [token, isAuthenticated, fetchUser, fetchPortfolio]);
 
   return <Router />;
-
-
 }
 
 export default App;
