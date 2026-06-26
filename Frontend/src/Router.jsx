@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './store/authStore';
-import Header from './components/common/Header';
+import Header from './components/common/Header/Header';
 import PublicRoutes from './components/common/PublicRoutes';
 
 // Import pages 
@@ -18,7 +18,7 @@ import NotFoundPage from './pages/NotFoundPage';
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated } = useAuthStore();
     if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
     return children;
 };

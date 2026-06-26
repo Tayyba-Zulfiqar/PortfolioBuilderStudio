@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import Logo from './Logo';
 import Button from './Button';
@@ -11,11 +11,21 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const { isAuthenticated, logout, user } = useAuthStore();
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const currentHash = location.hash;
 
+  // Handle logo click - always navigate to home
   const handleLogoClick = () => {
-    navigate('/');
+    if (currentPath === '/' && !currentHash) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
+    setMobileMenuOpen(false);
   };
 
+  // Handle logout modal
   const handleLogoutClick = () => {
     setShowLogoutModal(true);
   };
@@ -27,6 +37,62 @@ const Header = () => {
     navigate('/');
   };
 
+  // Handle Home navigation - scrolls to top if already on home
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    // Update the URL without hash
+    window.history.pushState(null, '', '/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileMenuOpen(false);
+  };
+
+  // Handle Features navigation with hash
+  const handleFeaturesClick = (e) => {
+    e.preventDefault();
+    // Update the URL with hash
+    window.history.pushState(null, '', '/#features');
+    const featuresSection = document.getElementById('features');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMobileMenuOpen(false);
+  };
+
+  // Handle Templates navigation with hash
+  const handleTemplatesClick = (e) => {
+    e.preventDefault();
+    // Update the URL with hash
+    window.history.pushState(null, '', '/#templates');
+    const templatesSection = document.getElementById('templates');
+    if (templatesSection) {
+      templatesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMobileMenuOpen(false);
+  };
+
+  // Reset scroll position when navigating to home from other pages
+  useEffect(() => {
+    // If we just navigated to home and there's no hash, scroll to top
+    if (currentPath === '/' && !currentHash) {
+      window.scrollTo({ top: 0 });
+    }
+
+    // If we navigated to home with a hash, scroll to that element
+    if (currentPath === '/' && currentHash) {
+      const element = document.getElementById(currentHash.replace('#', ''));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [currentPath, currentHash]);
+
+  // Check if a nav link should be active
+  const isHomeActive = currentPath === '/' && !currentHash;
+  const isFeaturesActive = currentPath === '/' && currentHash === '#features';
+  const isTemplatesActive = currentPath === '/' && currentHash === '#templates';
+
   return (
     <header className="header-wrapper">
       <div className="container navbar">
@@ -37,16 +103,35 @@ const Header = () => {
         <nav className="nav-links">
           {isAuthenticated ? (
             <>
-              <Link to="/dashboard" className="nav-link">Dashboard</Link>
-              <Link to="/library" className="nav-link">My Library</Link>  {/* ✅ FIXED */}
-              <Link to="/explore" className="nav-link">Explore</Link>
-              <Link to="/analytics" className="nav-link">Analytics</Link>
+              <NavLink to="/dashboard" className="nav-link">Dashboard</NavLink>
+              <NavLink to="/library" className="nav-link">My Library</NavLink>
+              <NavLink to="/explore" className="nav-link">Explore</NavLink>
+              <NavLink to="/analytics" className="nav-link">Analytics</NavLink>
             </>
           ) : (
             <>
-              <a href="/#features" className="nav-link">Features</a>
-              <a href="/#templates" className="nav-link">Templates</a>
-              <Link to="/explore" className="nav-link">Explore</Link>
+              <a
+                href="/"
+                className={`nav-link ${isHomeActive ? 'active' : ''}`}
+                onClick={handleHomeClick}
+              >
+                Home
+              </a>
+              <a
+                href="/#features"
+                className={`nav-link ${isFeaturesActive ? 'active' : ''}`}
+                onClick={handleFeaturesClick}
+              >
+                Features
+              </a>
+              <a
+                href="/#templates"
+                className={`nav-link ${isTemplatesActive ? 'active' : ''}`}
+                onClick={handleTemplatesClick}
+              >
+                Templates
+              </a>
+              <NavLink to="/explore" className="nav-link">Explore</NavLink>
             </>
           )}
         </nav>
@@ -86,18 +171,18 @@ const Header = () => {
         <div className="mobile-drawer">
           {isAuthenticated ? (
             <>
-              <Link to="/dashboard" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
+              <NavLink to="/dashboard" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
                 Dashboard
-              </Link>
-              <Link to="/library" className="nav-link" onClick={() => setMobileMenuOpen(false)}>  {/* ✅ FIXED */}
+              </NavLink>
+              <NavLink to="/library" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
                 My Library
-              </Link>
-              <Link to="/explore" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
+              </NavLink>
+              <NavLink to="/explore" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
                 Explore
-              </Link>
-              <Link to="/analytics" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
+              </NavLink>
+              <NavLink to="/analytics" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
                 Analytics
-              </Link>
+              </NavLink>
               <div className="mobile-divider"></div>
               <Button variant="secondary" onClick={handleLogoutClick} style={{ width: '100%' }}>
                 Logout
@@ -105,15 +190,30 @@ const Header = () => {
             </>
           ) : (
             <>
-              <a href="/#features" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
+              <a
+                href="/"
+                className={`nav-link ${isHomeActive ? 'active' : ''}`}
+                onClick={handleHomeClick}
+              >
+                Home
+              </a>
+              <a
+                href="/#features"
+                className={`nav-link ${isFeaturesActive ? 'active' : ''}`}
+                onClick={handleFeaturesClick}
+              >
                 Features
               </a>
-              <a href="/#templates" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
+              <a
+                href="/#templates"
+                className={`nav-link ${isTemplatesActive ? 'active' : ''}`}
+                onClick={handleTemplatesClick}
+              >
                 Templates
               </a>
-              <Link to="/explore" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
+              <NavLink to="/explore" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
                 Explore
-              </Link>
+              </NavLink>
               <div className="mobile-divider"></div>
               <Link to="/login" className="nav-login" onClick={() => setMobileMenuOpen(false)}>
                 Login
