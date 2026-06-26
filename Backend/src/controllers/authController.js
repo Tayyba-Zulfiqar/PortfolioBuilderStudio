@@ -13,7 +13,7 @@ const generateToken = (userId) => {
 // @access  Public
 exports.signup = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, email, password, fullName } = req.body;
 
         // Check if user exists
         const existingUser = await User.findOne({
@@ -31,7 +31,12 @@ exports.signup = async (req, res) => {
         const user = await User.create({
             username,
             email,
-            password
+            password,
+            portfolio: {
+                about: {
+                    fullName: fullName || ''
+                }
+            }
         });
 
         // Generate token

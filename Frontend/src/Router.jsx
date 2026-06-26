@@ -4,8 +4,8 @@ import { useAuthStore } from './store/authStore';
 
 // Import pages 
 import LandingPage from './pages/LandingPage';
-import SignupPage from './pages/SignupPage';
-import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/AuthPage/SignupPage';
+import LoginPage from './pages/AuthPage/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ExplorePage from './pages/ExplorePage';
 import PublicPortfolioPage from './pages/PublicPortfolioPage';

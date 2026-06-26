@@ -1,10 +1,8 @@
-
-
 import './Logo.css';
 
-const Logo = ({ onClick }) => {
+const Logo = ({ onClick, style, className = '' }) => {
   return (
-    <div className="logo-container" onClick={onClick}>
+    <div className={`logo-container ${className}`} onClick={onClick} style={style}>
       <div className="logo-icon-wrapper">
         <svg
           xmlns="http://www.w3.org/2000/svg"

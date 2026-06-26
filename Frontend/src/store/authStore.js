@@ -16,6 +16,7 @@ export const useAuthStore = create(
                 try {
                     const response = await authAPI.signup(userData);
                     const { token, user } = response.data.data;
+                    localStorage.setItem('token', token);
                     set({
                         user,
                         token,
@@ -38,6 +39,7 @@ export const useAuthStore = create(
                 try {
                     const response = await authAPI.login({ email, password });
                     const { token, user } = response.data.data;
+                    localStorage.setItem('token', token);
                     set({
                         user,
                         token,
