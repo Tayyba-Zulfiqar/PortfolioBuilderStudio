@@ -46,8 +46,6 @@ const AboutTab = ({ portfolio, onNextTab }) => {
       profilePicture: '',
       github: '',
       linkedin: '',
-      twitter: '',
-      youtube: '',
     },
   });
 
@@ -64,8 +62,6 @@ const AboutTab = ({ portfolio, onNextTab }) => {
         profilePicture: portfolio.about?.profilePicture || '',
         github: portfolio.socialLinks?.github || '',
         linkedin: portfolio.socialLinks?.linkedin || '',
-        twitter: portfolio.socialLinks?.twitter || '',
-        youtube: portfolio.socialLinks?.youtube || '',
       });
       setPreviewImage(portfolio.about?.profilePicture || '');
     }
@@ -77,7 +73,7 @@ const AboutTab = ({ portfolio, onNextTab }) => {
   };
 
   const onSubmit = async (data) => {
-    const { github, linkedin, twitter, youtube, ...aboutData } = data;
+    const { github, linkedin, ...aboutData } = data;
 
     const payload = {
       about: {
@@ -90,8 +86,6 @@ const AboutTab = ({ portfolio, onNextTab }) => {
       socialLinks: {
         github: github || '',
         linkedin: linkedin || '',
-        twitter: twitter || '',
-        youtube: youtube || '',
       },
     };
 

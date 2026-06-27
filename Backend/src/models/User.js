@@ -66,8 +66,6 @@ const userSchema = new mongoose.Schema(
             socialLinks: {
                 github: { type: String, default: '', trim: true },
                 linkedin: { type: String, default: '', trim: true },
-                twitter: { type: String, default: '', trim: true },
-                youtube: { type: String, default: '', trim: true },
             },
             projects: [
                 {

@@ -3,7 +3,7 @@ import SocialLinkRow from './SocialLinkRow';
 import './SocialLinksInput.css';
 
 const SocialLinksInput = ({ register, errors }) => {
-    const socialLinks = ['github', 'linkedin', 'twitter', 'youtube'];
+    const socialLinks = ['github', 'linkedin'];
 
     return (
         <div className="social-links-section">

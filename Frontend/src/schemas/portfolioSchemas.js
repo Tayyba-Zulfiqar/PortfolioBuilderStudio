@@ -46,18 +46,6 @@ export const socialLinksSchema = z.object({
         .optional()
         .or(z.literal(''))
         .default(''),
-    twitter: z
-        .string()
-        .url('Must be a valid URL')
-        .optional()
-        .or(z.literal(''))
-        .default(''),
-    youtube: z
-        .string()
-        .url('Must be a valid URL')
-        .optional()
-        .or(z.literal(''))
-        .default(''),
 });
 
 

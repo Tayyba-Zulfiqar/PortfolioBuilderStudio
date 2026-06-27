@@ -1,11 +1,7 @@
 import React from 'react';
 import './ExperienceCard.css';
 
-const LOGO_COLORS = ['#1a1a2e', '#0d7377', '#6b2fa0', '#c0392b', '#e67e22', '#27ae60'];
-
 const ExperienceCard = ({ experience, index, onEdit, onDelete }) => {
-  const logoColor = LOGO_COLORS[index % LOGO_COLORS.length];
-  const initials = experience.company?.slice(0, 1).toUpperCase() || '?';
 
   const formatDate = (exp) => {
     const start = exp.startDate || '';
@@ -18,10 +14,6 @@ const ExperienceCard = ({ experience, index, onEdit, onDelete }) => {
 
   return (
     <div className="exp-card">
-      <div className="exp-card__logo" style={{ background: logoColor }}>
-        <span className="exp-card__logo-letter">{initials}</span>
-      </div>
-
       <div className="exp-card__body">
         <div className="exp-card__top">
           <div>
