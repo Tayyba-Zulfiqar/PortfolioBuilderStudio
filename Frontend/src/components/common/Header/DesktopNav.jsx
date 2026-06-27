@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 
 
-const DesktopNav = ({ isAuthenticated, handleHomeClick, handleFeaturesClick, handleTemplatesClick, isHomeActive, isFeaturesActive, isTemplatesActive }) => {
+const DesktopNav = ({ isAuthenticated, handleHomeClick, handleFeaturesClick, isHomeActive, isFeaturesActive }) => {
     return (
         <nav className="nav-links">
             {isAuthenticated ? (
@@ -11,7 +11,6 @@ const DesktopNav = ({ isAuthenticated, handleHomeClick, handleFeaturesClick, han
                     <NavLink to="/dashboard" className="nav-link">Dashboard</NavLink>
                     <NavLink to="/library" className="nav-link">My Library</NavLink>
                     <NavLink to="/explore" className="nav-link">Explore</NavLink>
-                    <NavLink to="/analytics" className="nav-link">Analytics</NavLink>
                 </>
             ) : (
                 <>
@@ -28,13 +27,6 @@ const DesktopNav = ({ isAuthenticated, handleHomeClick, handleFeaturesClick, han
                         onClick={handleFeaturesClick}
                     >
                         Features
-                    </a>
-                    <a
-                        href="/#templates"
-                        className={`nav-link ${isTemplatesActive ? 'active' : ''}`}
-                        onClick={handleTemplatesClick}
-                    >
-                        Templates
                     </a>
                     <NavLink to="/explore" className="nav-link">Explore</NavLink>
                 </>

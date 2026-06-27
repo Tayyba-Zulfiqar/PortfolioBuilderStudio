@@ -21,7 +21,6 @@ const Header = () => {
     // Check active states
     const isHomeActive = currentPath === '/' && !currentHash;
     const isFeaturesActive = currentPath === '/' && currentHash === '#features';
-    const isTemplatesActive = currentPath === '/' && currentHash === '#templates';
 
     // --- Handlers ---
     const handleLogoClick = () => {
@@ -76,26 +75,6 @@ const Header = () => {
         }
         setMobileMenuOpen(false);
     };
-
-    const handleTemplatesClick = (e) => {
-        e.preventDefault();
-
-        // If we're already on the landing page, scroll to templates
-        if (location.pathname === '/') {
-            window.history.pushState(null, '', '/#templates');
-            const element = document.getElementById('templates');
-            if (element) element.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            // Otherwise, navigate to landing page with templates hash
-            navigate('/#templates');
-            // After navigation, scroll to templates
-            setTimeout(() => {
-                const element = document.getElementById('templates');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-            }, 200);
-        }
-        setMobileMenuOpen(false);
-    };
     // --- Effects ---
     useEffect(() => {
         if (currentPath === '/' && !currentHash) {
@@ -120,10 +99,8 @@ const Header = () => {
                     isAuthenticated={isAuthenticated}
                     handleHomeClick={handleHomeClick}
                     handleFeaturesClick={handleFeaturesClick}
-                    handleTemplatesClick={handleTemplatesClick}
                     isHomeActive={isHomeActive}
                     isFeaturesActive={isFeaturesActive}
-                    isTemplatesActive={isTemplatesActive}
                 />
 
                 <NavActions
@@ -149,10 +126,8 @@ const Header = () => {
                 handleLogoutClick={handleLogoutClick}
                 handleHomeClick={handleHomeClick}
                 handleFeaturesClick={handleFeaturesClick}
-                handleTemplatesClick={handleTemplatesClick}
                 isHomeActive={isHomeActive}
                 isFeaturesActive={isFeaturesActive}
-                isTemplatesActive={isTemplatesActive}
             />
 
             <ConfirmationModal

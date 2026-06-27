@@ -13,6 +13,16 @@ const EmptySection = ({ type }) => {
             'Fill in all sections — About, Projects, Skills, Experience, Education — and save your Settings to see your portfolio here.',
           btnLabel: 'Finish My Portfolio',
           btnSecondary: null,
+          redirectTo: '/settings',
+        }
+      : type === 'saved'
+      ? {
+          emoji: '⭐',
+          title: 'No saved',
+          subtitle: 'Explore community portfolios and save them here for design inspiration.',
+          btnLabel: 'Start Exploring',
+          btnSecondary: null,
+          redirectTo: '/explore',
         }
       : {
           emoji: '✏️',
@@ -20,6 +30,7 @@ const EmptySection = ({ type }) => {
           subtitle: 'Start building your portfolio! Any sections you save will appear here as a draft until everything is complete.',
           btnLabel: 'Start Building',
           btnSecondary: null,
+          redirectTo: '/settings',
         };
 
   return (
@@ -30,7 +41,7 @@ const EmptySection = ({ type }) => {
       <button
         type="button"
         className="empty-section__btn"
-        onClick={() => navigate('/settings')}
+        onClick={() => navigate(content.redirectTo)}
       >
         {content.btnLabel}
       </button>

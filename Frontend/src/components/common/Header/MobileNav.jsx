@@ -10,10 +10,8 @@ const MobileNav = ({
     handleLogoutClick,
     handleHomeClick,
     handleFeaturesClick,
-    handleTemplatesClick,
     isHomeActive,
     isFeaturesActive,
-    isTemplatesActive,
 }) => {
     if (!mobileMenuOpen) return null;
 
@@ -29,9 +27,6 @@ const MobileNav = ({
                     </NavLink>
                     <NavLink to="/explore" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
                         Explore
-                    </NavLink>
-                    <NavLink to="/analytics" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
-                        Analytics
                     </NavLink>
                     <div className="mobile-divider"></div>
                     <Button variant="secondary" onClick={handleLogoutClick} style={{ width: '100%' }}>
@@ -53,13 +48,6 @@ const MobileNav = ({
                         onClick={handleFeaturesClick}
                     >
                         Features
-                    </a>
-                    <a
-                        href="/#templates"
-                        className={`nav-link ${isTemplatesActive ? 'active' : ''}`}
-                        onClick={handleTemplatesClick}
-                    >
-                        Templates
                     </a>
                     <NavLink to="/explore" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
                         Explore

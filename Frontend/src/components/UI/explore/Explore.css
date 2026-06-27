@@ -1,5 +1,7 @@
 .explore-page {
   min-height: calc(100vh - 70px);
+  position: relative;
+  overflow: hidden;
   background:
     linear-gradient(180deg, rgba(255, 248, 247, 0.95) 0%, rgba(255, 241, 240, 0.9) 100%),
     var(--color-bloom-bg);
@@ -7,7 +9,7 @@
 
 .explore-hero {
   min-height: 205px;
-  padding: 10px 24px 24px;
+  padding: 50px 24px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,7 +66,7 @@
   width: 100%;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 30px 14px 58px;
+  padding: 60px 14px 58px;
 }
 
 .explore-featured__heading {
@@ -372,7 +374,7 @@
   }
 
   .explore-featured {
-    padding: 28px 14px 44px;
+    padding: 48px 14px 44px;
   }
 
   .explore-featured__heading {
@@ -426,4 +428,3 @@
     height: 54px;
   }
 }
-

@@ -10,7 +10,6 @@ import LoginPage from './pages/AuthPage/LoginPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
 import ExplorePage from './pages/ExplorePage';
 import PublicPortfolioPage from './pages/PublicPortfolioPage';
-import AnalyticsPage from './pages/AnalyticsPage';
 import SettingsPage from './pages/SettingsPage';
 import NewPortfolioRedirect from './components/UI/editor/NewPortfolioRedirect';
 import LibraryPage from './pages/LibraryPage/Library';
@@ -47,9 +46,6 @@ const Router = () => {
                 } />
                 <Route path="/library" element={
                     <ProtectedRoute><LibraryPage /></ProtectedRoute>
-                } />
-                <Route path="/analytics" element={
-                    <ProtectedRoute><AnalyticsPage /></ProtectedRoute>
                 } />
                 <Route path="/settings" element={
                     <ProtectedRoute><SettingsPage /></ProtectedRoute>
