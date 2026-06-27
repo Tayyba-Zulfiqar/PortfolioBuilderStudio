@@ -69,7 +69,7 @@ export const projectSchema = z.object({
         .min(3, 'Title must be at least 3 characters')
         .max(100, 'Title is too long'),
     description: z
-        .string()
+        .string().min(10, 'Description must be at least 10 characters')
         .max(500, 'Description is too long'),
     techStack: z
         .array(z.string())
@@ -137,7 +137,10 @@ export const experienceSchema = z.object({
         .default(''),
 }).refine((data) => {
     if (!data.endDate || !data.startDate) return true;
-    return new Date(data.endDate) >= new Date(data.startDate);
+    const start = new Date(data.startDate);
+    const end = new Date(data.endDate);
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) return true;
+    return end >= start;
 }, {
     message: 'End date must be after start date',
     path: ['endDate'],
@@ -238,7 +241,42 @@ export const skillFormSchema = skillSchema;
 export const experienceFormSchema = experienceSchema;
 
 // For validating a single education form (modal)
-export const educationFormSchema = educationSchema;
+export const educationFormSchema = z.object({
+    degree: z
+        .string()
+        .min(3, 'Degree must be at least 3 characters')
+        .max(100, 'Degree is too long'),
+    institution: z
+        .string()
+        .min(2, 'Institution name must be at least 2 characters')
+        .max(100, 'Institution name is too long'),
+    startYear: z
+        .string()
+        .min(1, 'Start year is required')
+        .regex(/^(19|20)\d{2}$/, 'Please enter a valid year (1900-2099)'),
+    endYear: z
+        .string()
+        .min(1, 'End year is required')
+        .regex(/^(?:(19|20)\d{2}|[Pp]resent)$/, 'Please enter a valid year (1900-2099) or "Present"'),
+    gpa: z
+        .string()
+        .refine((val) => {
+            if (!val) return true;
+            const parsed = parseFloat(val);
+            return !isNaN(parsed) && parsed >= 0 && parsed <= 4.0;
+        }, 'GPA must be between 0 and 4.0')
+        .optional()
+        .or(z.literal('')),
+}).refine((data) => {
+    if (!data.startYear || !data.endYear) return true;
+    const start = parseInt(data.startYear);
+    const end = parseInt(data.endYear);
+    if (isNaN(start) || isNaN(end)) return true;
+    return end >= start;
+}, {
+    message: 'End year must be after start year',
+    path: ['endYear'],
+});
 
 // For validating settings only
 export const settingsFormSchema = settingsSchema;

@@ -312,13 +312,13 @@
 }
 
 .btn-cancel {
-  padding: 11px 22px;
+  padding: 13px 22px;
   background: var(--color-bloom-peach);
   color: var(--color-bloom-text-muted);
   border: none;
   border-radius: 999px;
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition-fast);

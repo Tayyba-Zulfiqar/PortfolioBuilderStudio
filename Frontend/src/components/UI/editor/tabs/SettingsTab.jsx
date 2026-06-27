@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { usePortfolioStore } from '../../../../store/portfolioStore';
 import { useAuthStore } from '../../../../store/authStore';
+import FormActions from '../../../common/FormInputs/FormActions';
 import './SettingsTab.css';
 
 const showToast = (msg) => {
@@ -57,7 +58,14 @@ const SettingsTab = ({ portfolio, onNextTab }) => {
     }
   }, [portfolio]);
 
-  const handleSave = async () => {
+  const isDirty =
+    selectedTemplate !== (portfolio?.template || 'elegant') ||
+    isPublished !== (portfolio?.isPublished || false) ||
+    primaryColor !== (portfolio?.theme?.primaryColor || '#F4A6B5') ||
+    secondaryColor !== (portfolio?.theme?.secondaryColor || '#E8B4B8');
+
+  const handleSave = async (e) => {
+    if (e) e.preventDefault();
     const result = await updatePortfolio({
       template: selectedTemplate,
       isPublished,
@@ -73,7 +81,7 @@ const SettingsTab = ({ portfolio, onNextTab }) => {
   const customUrl = `${user?.username || 'yourname'}.bloomportfolio.com`;
 
   return (
-    <div className="settings-tab">
+    <form className="settings-tab" onSubmit={handleSave}>
       <h1 className="editor-section-title">Portfolio Settings</h1>
 
       {/* Template Selection */}
@@ -82,6 +90,7 @@ const SettingsTab = ({ portfolio, onNextTab }) => {
         <div className="template-grid">
           {TEMPLATES.map((tpl) => (
             <button
+              type="button"
               key={tpl.id}
               className={`template-card ${selectedTemplate === tpl.id ? 'template-card--active' : ''}`}
               onClick={() => setSelectedTemplate(tpl.id)}
@@ -165,9 +174,9 @@ const SettingsTab = ({ portfolio, onNextTab }) => {
         <label className="settings-label">Custom URL</label>
         <div className="custom-url-box">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-bloom-pink)" strokeWidth="2" strokeLinecap="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
           </svg>
           <span className="custom-url-text">{customUrl}</span>
         </div>
@@ -181,6 +190,7 @@ const SettingsTab = ({ portfolio, onNextTab }) => {
             <p className="publish-desc">Make your portfolio visible to the world</p>
           </div>
           <button
+            type="button"
             className={`toggle-switch ${isPublished ? 'toggle-switch--on' : ''}`}
             onClick={() => setIsPublished((prev) => !prev)}
             role="switch"
@@ -194,22 +204,26 @@ const SettingsTab = ({ portfolio, onNextTab }) => {
 
       {/* Delete Account */}
       <div className="settings-section settings-section--danger">
-        <button className="delete-account-btn" id="delete-account-btn">
+        <button type="button" className="delete-account-btn" id="delete-account-btn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <polyline points="3 6 5 6 21 6"/>
-            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
           </svg>
           Delete Account
         </button>
       </div>
 
-      {/* Save */}
-      <div className="tab-save-row">
-        <button className="btn-save" onClick={handleSave} disabled={isSaving} id="settings-save-btn">
-          {isSaving ? 'Saving...' : 'Save Settings'}
-        </button>
-      </div>
-    </div>
+      <FormActions
+        isSaving={isSaving}
+        isSubmitting={false}
+        isValid={true}
+        isDirty={isDirty}
+        errors={{}}
+        saveText="Save Settings"
+        savingText="Saving..."
+        showErrorSummary={false}
+      />
+    </form>
   );
 };
 

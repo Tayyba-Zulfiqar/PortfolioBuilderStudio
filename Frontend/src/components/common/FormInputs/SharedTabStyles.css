@@ -24,10 +24,21 @@
 }
 
 /* ============================================
-   FORM GROUP
+   FORM GROUP & LAYOUT
    ============================================ */
 .form-group {
     margin-bottom: 20px;
+}
+
+.exp-date-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.exp-date-row .form-group {
+    flex: 1;
+    margin-bottom: 0 !important;
 }
 
 .form-label {
@@ -160,6 +171,9 @@
     transition: all 0.2s ease;
     box-shadow: 0 4px 14px rgba(229, 139, 157, 0.3);
     min-width: 160px;
+}
+
+.tab-save-row {
     margin-top: 30px;
     margin-bottom: 50px;
 }

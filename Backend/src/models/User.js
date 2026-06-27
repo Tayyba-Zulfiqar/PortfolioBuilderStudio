@@ -179,9 +179,9 @@ const userSchema = new mongoose.Schema(
                         maxlength: [100, 'Institution name is too long'],
                     },
                     year: {
-                        type: Number,
-                        min: [1900, 'Please enter a valid year (1900-2100)'],
-                        max: [2100, 'Please enter a valid year (1900-2100)'],
+                        type: String,
+                        trim: true,
+                        maxlength: [20, 'Year is too long'],
                     },
                     gpa: {
                         type: Number,

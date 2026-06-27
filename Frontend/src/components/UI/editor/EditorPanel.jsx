@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import AboutTab from './tabs/About/AboutTab';
-import ProjectsTab from './tabs/ProjectsTab';
-import SkillsTab from './tabs/SkillsTab';
-import ExperienceTab from './tabs/ExperienceTab';
-import EducationTab from './tabs/EducationTab';
+import ProjectsTab from './tabs/Projects/ProjectsTab';
+import SkillsTab from './tabs/Skills/SkillsTab';
+import ExperienceTab from './tabs/Experience/ExperienceTab';
+import EducationTab from './tabs/Education/EducationTab';
 import SettingsTab from './tabs/SettingsTab';
 import './EditorPanel.css';
 

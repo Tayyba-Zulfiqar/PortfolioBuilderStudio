@@ -12,7 +12,17 @@ import SocialLinksInput from './SocialLinksInput';
 import './AboutTab.css';
 import '../../../../common/FormInputs/SharedTabStyles.css';
 
-
+const showToast = (msg) => {
+  const el = document.createElement('div');
+  el.className = 'bloom-toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  requestAnimationFrame(() => el.classList.add('bloom-toast--show'));
+  setTimeout(() => {
+    el.classList.remove('bloom-toast--show');
+    setTimeout(() => el.remove(), 300);
+  }, 2800);
+};
 
 const AboutTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
@@ -24,7 +34,7 @@ const AboutTab = ({ portfolio, onNextTab }) => {
     reset,
     watch,
     setValue,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting, isValid, isDirty },
   } = useForm({
     resolver: zodResolver(aboutAndSocialSchema),
     mode: 'onChange',
@@ -63,7 +73,7 @@ const AboutTab = ({ portfolio, onNextTab }) => {
 
   const handleImageChange = (base64) => {
     setPreviewImage(base64);
-    setValue('profilePicture', base64, { shouldValidate: true });
+    setValue('profilePicture', base64, { shouldValidate: true, shouldDirty: true });
   };
 
   const onSubmit = async (data) => {
@@ -87,10 +97,11 @@ const AboutTab = ({ portfolio, onNextTab }) => {
 
     const result = await updatePortfolio(payload);
     if (result.success) {
-      alert('Saved! 🌸');
+      showToast('Saved! 🌸');
+      reset(data); // Reset form with the saved data to clear isDirty state
       if (onNextTab) onNextTab();
     } else {
-      alert('Something went wrong 😢');
+      showToast('Something went wrong 😢');
     }
   };
 
@@ -147,6 +158,7 @@ const AboutTab = ({ portfolio, onNextTab }) => {
         isSaving={isSaving}
         isSubmitting={isSubmitting}
         isValid={isValid}
+        isDirty={isDirty}
         errors={errors}
         saveText="Save Changes"
         savingText="Saving..."

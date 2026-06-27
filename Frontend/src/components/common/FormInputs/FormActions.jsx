@@ -5,6 +5,7 @@ const FormActions = ({
     isSaving,
     isSubmitting,
     isValid = true,
+    isDirty = true,
     errors = {},
     onSave,
     saveText = 'Save Changes',
@@ -19,14 +20,21 @@ const FormActions = ({
             <button
                 type="submit"
                 className="btn-save"
-                disabled={isSaving || isSubmitting || !isValid}
+                disabled={isSaving || isSubmitting || !isValid || !isDirty}
                 onClick={onSave}
             >
                 {isSaving || isSubmitting ? savingText : saveText}
             </button>
+            
             {showErrorSummary && !isValid && hasErrors && (
                 <p className="form-error" style={{ marginTop: '8px', textAlign: 'center' }}>
                     Please fix the errors above before saving.
+                </p>
+            )}
+
+            {!isDirty && isValid && (
+                <p className="form-message" style={{ marginTop: '8px', textAlign: 'center', fontSize: '14px', color: 'var(--color-bloom-text-muted)' }}>
+                    No changes to save
                 </p>
             )}
         </div>
