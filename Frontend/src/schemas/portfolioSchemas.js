@@ -10,18 +10,22 @@ export const aboutSchema = z.object({
         .max(60, 'Name is too long'),
     headline: z
         .string()
+        .min(4, 'Headline is required and should be at least 4 characters')
         .max(100, 'Headline is too long'),
     bio: z
         .string()
+        .min(10, 'Bio is required and should be at least 10 characters')
         .max(500, 'Bio is too long'),
     location: z
         .string()
-        .max(100, 'Location is too long')
-        .optional()
-        .default(''),
+        .min(4, 'Location is required and should be at least 4 characters')
+        .max(100, 'Location is too long'),
     profilePicture: z
         .string()
-        .url('Invalid image URL')
+        .refine(
+            (val) => !val || /^(https?:\/\/[^\s]+|data:image\/[a-zA-Z+]+;base64,[^\s]+)$/.test(val),
+            'Invalid image URL'
+        )
         .optional()
         .default(''),
 });
@@ -117,16 +121,11 @@ export const experienceSchema = z.object({
     startDate: z
         .string()
         .min(1, 'Start date is required'),
-    // In experienceSchema, add:
     endDate: z
         .string()
         .nullable()
         .optional()
-        .default(null)
-        .refine((date) => {
-            if (!date) return true;
-            return new Date(date) >= new Date(startDate);
-        }, { message: 'End date must be after start date' }),
+        .default(null),
     description: z
         .string()
         .max(500, 'Description is too long')
@@ -136,6 +135,12 @@ export const experienceSchema = z.object({
         .string()
         .optional()
         .default(''),
+}).refine((data) => {
+    if (!data.endDate || !data.startDate) return true;
+    return new Date(data.endDate) >= new Date(data.startDate);
+}, {
+    message: 'End date must be after start date',
+    path: ['endDate'],
 });
 
 

@@ -1,12 +1,17 @@
+// frontend/src/components/dashboard/editor/tabs/AboutTab.jsx
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { aboutAndSocialSchema } from '../../../../../schemas/portfolioSchemas';
 import { usePortfolioStore } from '../../../../../store/portfolioStore';
+import FormInput from '../../../../common/FormInputs/FormInput';
+import FormTextarea from '../../../../common/FormInputs/FormTextarea';
+import FormActions from '../../../../common/FormInputs/FormActions';
 import ProfilePictureUpload from './ProfilePictureUpload';
 import SocialLinksInput from './SocialLinksInput';
 import './AboutTab.css';
-import './SharedTabStyles.css'
+import '../../../../common/FormInputs/SharedTabStyles.css';
+
 
 
 const AboutTab = ({ portfolio, onNextTab }) => {
@@ -39,7 +44,6 @@ const AboutTab = ({ portfolio, onNextTab }) => {
   const bioValue = watch('bio') || '';
   const bioMax = 500;
 
-  // Load portfolio data
   useEffect(() => {
     if (portfolio) {
       reset({
@@ -99,78 +103,54 @@ const AboutTab = ({ portfolio, onNextTab }) => {
         onImageChange={handleImageChange}
       />
 
-      {/* Full Name */}
-      <div className="form-group">
-        <label className="form-label" htmlFor="about-fullName">Full Name</label>
-        <input
-          id="about-fullName"
-          type="text"
-          className={`form-input ${errors.fullName ? 'has-error' : ''}`}
-          placeholder="Sarah Johnson"
-          {...register('fullName')}
-        />
-        {errors.fullName && <p className="form-error">{errors.fullName.message}</p>}
-      </div>
+      <FormInput
+        label="Full Name"
+        id="about-fullName"
+        placeholder="Sarah Johnson"
+        error={errors.fullName}
+        required
+        {...register('fullName')}
+      />
 
-      {/* Headline */}
-      <div className="form-group">
-        <label className="form-label" htmlFor="about-headline">Headline</label>
-        <input
-          id="about-headline"
-          type="text"
-          className={`form-input ${errors.headline ? 'has-error' : ''}`}
-          placeholder="Creative Developer & Designer"
-          {...register('headline')}
-        />
-        {errors.headline && <p className="form-error">{errors.headline.message}</p>}
-      </div>
+      <FormInput
+        label="Headline"
+        id="about-headline"
+        placeholder="Creative Developer & Designer"
+        error={errors.headline}
+        required
+        {...register('headline')}
+      />
 
-      {/* Bio */}
-      <div className="form-group">
-        <label className="form-label" htmlFor="about-bio">Bio</label>
-        <textarea
-          id="about-bio"
-          className={`form-textarea ${errors.bio ? 'has-error' : ''}`}
-          placeholder="Passionate about creating beautiful, functional digital experiences..."
-          maxLength={bioMax}
-          rows={5}
-          {...register('bio')}
-        />
-        <div className="form-char-counter">{bioValue.length}/{bioMax}</div>
-        {errors.bio && <p className="form-error">{errors.bio.message}</p>}
-      </div>
+      <FormTextarea
+        label="Bio"
+        id="about-bio"
+        placeholder="Passionate about creating beautiful, functional digital experiences..."
+        error={errors.bio}
+        rows={5}
+        maxLength={bioMax}
+        charCount={bioValue.length}
+        required
+        {...register('bio')}
+      />
 
-      {/* Location */}
-      <div className="form-group">
-        <label className="form-label" htmlFor="about-location">Location</label>
-        <input
-          id="about-location"
-          type="text"
-          className={`form-input ${errors.location ? 'has-error' : ''}`}
-          placeholder="San Francisco, CA"
-          {...register('location')}
-        />
-        {errors.location && <p className="form-error">{errors.location.message}</p>}
-      </div>
+      <FormInput
+        label="Location"
+        id="about-location"
+        placeholder="San Francisco, CA"
+        error={errors.location}
+        required
+        {...register('location')}
+      />
 
-      {/* Social Links */}
       <SocialLinksInput register={register} errors={errors} />
-
-      {/* Save Button */}
-      <div className="tab-save-row">
-        <button
-          type="submit"
-          className="btn-save"
-          disabled={isSaving || isSubmitting}
-        >
-          {isSaving || isSubmitting ? 'Saving...' : 'Save Changes'}
-        </button>
-        {!isValid && Object.keys(errors).length > 0 && (
-          <p className="form-error" style={{ marginTop: '8px', textAlign: 'center' }}>
-            Please fix the errors above before saving.
-          </p>
-        )}
-      </div>
+      <FormActions
+        isSaving={isSaving}
+        isSubmitting={isSubmitting}
+        isValid={isValid}
+        errors={errors}
+        saveText="Save Changes"
+        savingText="Saving..."
+      />
     </form>
   );
 };

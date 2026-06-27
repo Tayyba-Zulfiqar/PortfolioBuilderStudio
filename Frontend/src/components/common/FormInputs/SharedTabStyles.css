@@ -1,5 +1,11 @@
-/* ======= Shared Tab Styles ======= */
+/* ============================================
+   SHARED TAB STYLES
+   Used by: AboutTab, ProjectsTab, SkillsTab, ExperienceTab, EducationTab, SettingsTab
+   ============================================ */
 
+/* ============================================
+   SECTION TITLES
+   ============================================ */
 .editor-section-title {
     font-family: var(--font-serif);
     font-size: 26px;
@@ -17,7 +23,9 @@
     margin-bottom: 16px;
 }
 
-/* Form Inputs */
+/* ============================================
+   FORM GROUP
+   ============================================ */
 .form-group {
     margin-bottom: 20px;
 }
@@ -32,6 +40,33 @@
     letter-spacing: 0.01em;
 }
 
+.required-star {
+    color: var(--color-bloom-pink);
+    margin-left: 2px;
+}
+
+/* ============================================
+   INPUT WRAPPER
+   ============================================ */
+.form-input-wrapper {
+    position: relative;
+}
+
+.form-input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-bloom-text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* ============================================
+   INPUTS, TEXTAREA, SELECT
+   ============================================ */
 .form-input,
 .form-textarea,
 .form-select {
@@ -45,6 +80,10 @@
     background: #fff;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     outline: none;
+}
+
+.form-input.with-icon {
+    padding-left: 42px;
 }
 
 .form-input::placeholder,
@@ -65,13 +104,6 @@
     line-height: 1.6;
 }
 
-.form-char-counter {
-    text-align: right;
-    font-size: 12px;
-    color: var(--color-bloom-text-light);
-    margin-top: 5px;
-}
-
 .form-select {
     cursor: pointer;
     appearance: none;
@@ -81,14 +113,28 @@
     padding-right: 36px;
 }
 
-/* Error Styles */
+/* ============================================
+   CHARACTER COUNTER
+   ============================================ */
+.form-char-counter {
+    text-align: right;
+    font-size: 12px;
+    color: var(--color-bloom-text-light);
+    margin-top: 5px;
+}
+
+/* ============================================
+   ERROR STYLES
+   ============================================ */
 .form-input.has-error,
-.form-textarea.has-error {
+.form-textarea.has-error,
+.form-select.has-error {
     border-color: #ef4444 !important;
 }
 
 .form-input.has-error:focus,
-.form-textarea.has-error:focus {
+.form-textarea.has-error:focus,
+.form-select.has-error:focus {
     border-color: #ef4444 !important;
     box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
 }
@@ -99,12 +145,7 @@
     margin-top: 0.3rem;
 }
 
-/* Save Button */
-.tab-save-row {
-    margin-top: 32px;
-    padding-top: 20px;
-    border-top: 1.5px solid var(--color-bloom-border);
-}
+
 
 .btn-save {
     padding: 13px 32px;
@@ -118,9 +159,12 @@
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 4px 14px rgba(229, 139, 157, 0.3);
+    min-width: 160px;
+    margin-top: 30px;
+    margin-bottom: 50px;
 }
 
-.btn-save:hover {
+.btn-save:hover:not(:disabled) {
     background: var(--color-bloom-hover);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(229, 139, 157, 0.4);
@@ -132,7 +176,9 @@
     transform: none;
 }
 
-/* Toast */
+/* ============================================
+   TOAST NOTIFICATIONS
+   ============================================ */
 .bloom-toast {
     position: fixed;
     bottom: 28px;
@@ -165,7 +211,9 @@
     background: #10B981;
 }
 
-/* Animation */
+/* ============================================
+   ANIMATIONS
+   ============================================ */
 @keyframes fadeInSlideUp {
     from {
         opacity: 0;
@@ -175,5 +223,30 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+    .btn-save {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .editor-section-title {
+        font-size: 22px;
+    }
+
+    .editor-section-subtitle {
+        font-size: 16px;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+        font-size: 14px;
+        padding: 11px 14px;
     }
 }
