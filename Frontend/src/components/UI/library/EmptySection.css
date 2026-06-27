@@ -1,0 +1,58 @@
+/* EmptySection — shown when a library section has no portfolios */
+
+.empty-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--color-bloom-card);
+  border: 1.5px dashed var(--color-bloom-border);
+  border-radius: 20px;
+  gap: 12px;
+  animation: fadeInSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.empty-section__icon {
+  font-size: 42px;
+  margin-bottom: 4px;
+}
+
+.empty-section__title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-bloom-text);
+  margin: 0;
+}
+
+.empty-section__subtitle {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-bloom-text-muted);
+  max-width: 400px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.empty-section__btn {
+  margin-top: 8px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 999px;
+  background: var(--color-bloom-pink);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: var(--shadow-bloom-sm);
+}
+
+.empty-section__btn:hover {
+  background: var(--color-bloom-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-bloom);
+}

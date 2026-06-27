@@ -433,3 +433,52 @@
   background: var(--color-bloom-pink);
   border-radius: 10px;
 }
+
+/* Validation Warning Card */
+.validation-warning-card {
+  background: #FFF5F6;
+  border: 1.5px solid #FAD3D8;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 28px;
+  animation: fadeInSlideUp 0.3s ease;
+}
+
+.validation-warning-card__title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: #c93b4e;
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.validation-warning-card__text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-bloom-text-muted);
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+.validation-warning-card__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.validation-warning-card__item {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  background: #FFE8EA;
+  color: #c93b4e;
+  border-radius: 999px;
+  border: 1px solid #FABEC5;
+}

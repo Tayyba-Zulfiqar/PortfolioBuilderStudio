@@ -1,0 +1,75 @@
+/* LibrarySection — Grouping and headers for drafts vs completed */
+
+.library-section {
+  margin-bottom: 3.5rem;
+  animation: fadeInSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.library-section__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--color-bloom-border);
+  padding-bottom: 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.library-section__heading-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.library-section__icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.library-section__title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-charcoal);
+  margin: 0;
+}
+
+.library-section__subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-gray);
+  margin: 4px 0 0 0;
+}
+
+.library-section__count {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-bloom-text-light);
+  background: var(--color-bloom-card);
+  border: 1px solid var(--color-bloom-border);
+  padding: 6px 14px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-bloom-sm);
+}
+
+.library-section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.8rem;
+}
+
+@media (max-width: 768px) {
+  .library-section__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .library-section__count {
+    align-self: flex-start;
+  }
+
+  .library-section__title {
+    font-size: 1.4rem;
+  }
+}
