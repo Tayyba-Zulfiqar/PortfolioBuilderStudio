@@ -11,6 +11,8 @@
     box-shadow: 0 8px 30px rgba(244, 166, 181, 0.12);
     overflow: hidden;
     color: #4A3A3A;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
 }
 
 /* ===== HEADER ===== */

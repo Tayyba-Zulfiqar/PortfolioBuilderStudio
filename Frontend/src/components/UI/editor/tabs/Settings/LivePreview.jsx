@@ -16,6 +16,7 @@ const LivePreview = ({ portfolio, onShowFullPreview, primaryColor, secondaryColo
   const renderTemplate = () => {
     switch (template) {
       case 'professional':
+      case 'modern':
         return <ProfessionalTemplate data={previewData} />;
       case 'creative':
         return <CreativeTemplate data={previewData} />;

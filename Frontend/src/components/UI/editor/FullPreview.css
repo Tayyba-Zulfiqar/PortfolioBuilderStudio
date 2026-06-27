@@ -1,5 +1,22 @@
 /* FullPreview.css */
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Print area — captured by html2pdf, no clipping */
+#portfolio-print-area {
+  width: 100%;
+  background: #fff;
+}
+
+.full-preview-pdf-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
 .full-preview-mode {
   position: fixed;
   top: 0;
@@ -634,14 +651,17 @@
     background: #fff !important;
   }
 
-  .full-portfolio {
+  .full-portfolio,
+  .template-professional,
+  .template-creative,
+  .template-minimal {
     border: none !important;
     box-shadow: none !important;
     border-radius: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    padding: 10mm !important;
+    padding: 15mm 10mm !important;
     background: #fff !important;
     color: #000 !important;
     /* Force browser to print background colors and images */
@@ -649,22 +669,41 @@
     print-color-adjust: exact !important;
   }
 
-  .portfolio-hero {
-    padding-top: 20px !important;
+  .portfolio-hero,
+  .professional-header,
+  .creative-header,
+  .minimal-header {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   /* Prevent sections breaking awkwardly across pages */
-  .portfolio-section {
+  .portfolio-section,
+  .professional-section,
+  .creative-section,
+  .minimal-section {
     page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
-  .portfolio-project-item {
+  .portfolio-project-item,
+  .professional-project-item,
+  .creative-project-item,
+  .minimal-project-item {
     page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   .portfolio-experience-item,
-  .portfolio-education-item {
+  .portfolio-education-item,
+  .professional-experience-item,
+  .professional-education-item,
+  .creative-experience-item,
+  .creative-education-item,
+  .minimal-experience-item,
+  .minimal-education-item {
     page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   /* Force background colors to print natively */
