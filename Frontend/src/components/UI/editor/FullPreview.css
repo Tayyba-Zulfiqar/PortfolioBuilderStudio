@@ -612,11 +612,12 @@
    PRINT MEDIA QUERY FOR CLEAN PDF EXPORT
    ========================================================================== */
 @media print {
+
   /* Hide the top controls bar */
   .full-preview-controls {
     display: none !important;
   }
-  
+
   /* Ensure page fits viewport for printing */
   .full-preview-mode {
     position: static !important;
@@ -625,14 +626,14 @@
     overflow: visible !important;
     background: #fff !important;
   }
-  
+
   .full-preview-content-wrapper {
     padding: 0 !important;
     overflow: visible !important;
     height: auto !important;
     background: #fff !important;
   }
-  
+
   .full-portfolio {
     border: none !important;
     box-shadow: none !important;
@@ -671,7 +672,7 @@
     background: linear-gradient(135deg, var(--theme-secondary, #E8B4B8) 0%, var(--theme-primary, #F4A6B5) 100%) !important;
     color: #fff !important;
   }
-  
+
   .full-portfolio--creative .portfolio-hero {
     background: linear-gradient(135deg, var(--theme-primary, #F4A6B5) 0%, var(--theme-secondary, #E8B4B8) 100%) !important;
     color: #382A2A !important;

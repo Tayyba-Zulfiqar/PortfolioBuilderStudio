@@ -2,8 +2,8 @@ import React from 'react';
 
 const TEMPLATES = [
   {
-    id: 'modern',
-    label: 'Elegant',
+    id: 'professional',
+    label: 'Professional',
   },
   {
     id: 'minimal',

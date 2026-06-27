@@ -9,7 +9,7 @@ import './EditorLayout.css';
 
 const EditorLayout = () => {
   const [activeTab, setActiveTab] = useState('about');
-  const [showFullPreview, setShowFullPreview] = useState(false);
+  const [fullPreviewConfig, setFullPreviewConfig] = useState(null);
   const { portfolio, fetchPortfolio, isLoading } = usePortfolioStore();
   const { user } = useAuthStore();
 
@@ -26,12 +26,22 @@ const EditorLayout = () => {
     );
   }
 
-  if (showFullPreview) {
+  if (fullPreviewConfig) {
+    const mergedPortfolio = {
+      ...portfolio,
+      template: fullPreviewConfig.template || portfolio?.template,
+      theme: {
+        ...portfolio?.theme,
+        primaryColor: fullPreviewConfig.primaryColor || portfolio?.theme?.primaryColor,
+        secondaryColor: fullPreviewConfig.secondaryColor || portfolio?.theme?.secondaryColor,
+      }
+    };
+
     return (
       <FullPreview
-        portfolio={portfolio}
+        portfolio={mergedPortfolio}
         user={user}
-        onClose={() => setShowFullPreview(false)}
+        onClose={() => setFullPreviewConfig(null)}
       />
     );
   }
@@ -44,7 +54,7 @@ const EditorLayout = () => {
         setActiveTab={setActiveTab}
         portfolio={portfolio}
         user={user}
-        onShowFullPreview={() => setShowFullPreview(true)}
+        onShowFullPreview={(overrides) => setFullPreviewConfig(overrides || {})}
       />
     </div>
   );

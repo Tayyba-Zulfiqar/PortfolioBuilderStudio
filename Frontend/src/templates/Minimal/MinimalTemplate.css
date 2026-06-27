@@ -1,0 +1,287 @@
+/* ============================================
+   MINIMAL TEMPLATE
+   ============================================ */
+
+.template-minimal {
+    font-family: 'Quicksand', sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(244, 166, 181, 0.12);
+    overflow: hidden;
+    color: #4A3A3A;
+}
+
+/* ===== HEADER ===== */
+.minimal-header {
+    padding: 40px 48px 24px;
+    text-align: center;
+    background: #fff;
+}
+
+.minimal-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #4A3A3A;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.minimal-title {
+    font-size: 17px;
+    font-weight: 400;
+    color: #7A6B6B;
+    margin: 4px 0 0;
+}
+
+.minimal-header-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color, #F4A6B5);
+    margin: 16px auto 0;
+    border-radius: 4px;
+}
+
+/* ===== BODY ===== */
+.minimal-body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+    padding: 8px 40px 24px;
+}
+
+/* ===== LEFT COLUMN ===== */
+.minimal-left {
+    padding-right: 32px;
+    border-right: 1.5px solid #F0E3E2;
+}
+
+.minimal-right {
+    padding-left: 32px;
+}
+
+/* ===== SECTIONS ===== */
+.minimal-section {
+    margin-bottom: 24px;
+}
+
+.minimal-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary-color, #F4A6B5);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0 0 10px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--primary-color, #F4A6B5);
+}
+
+/* ===== CONTACT ===== */
+.minimal-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.minimal-contact-item {
+    font-size: 13px;
+    color: #7A6B6B;
+    margin: 0;
+    word-break: break-word;
+}
+
+/* ===== ABOUT ===== */
+.minimal-about-text {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #7A6B6B;
+    margin: 0;
+}
+
+/* ===== SKILLS ===== */
+.minimal-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.minimal-skill-tag {
+    font-size: 12px;
+    font-weight: 500;
+    color: #4A3A3A;
+    background: #FFF0F2;
+    padding: 4px 12px;
+    border-radius: 4px;
+    border: 1px solid #F0E3E2;
+}
+
+/* ===== EDUCATION ===== */
+.minimal-education-item {
+    margin-bottom: 12px;
+}
+
+.minimal-education-item:last-child {
+    margin-bottom: 0;
+}
+
+.minimal-education-year {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--primary-color, #F4A6B5);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.minimal-education-institution {
+    font-weight: 600;
+    font-size: 14px;
+    color: #4A3A3A;
+    margin: 0;
+}
+
+.minimal-education-degree {
+    font-size: 13px;
+    color: #7A6B6B;
+    margin: 0;
+}
+
+/* ===== EXPERIENCE ===== */
+.minimal-experience-item {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #F0E3E2;
+}
+
+.minimal-experience-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.minimal-experience-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #4A3A3A;
+    margin: 0;
+}
+
+.minimal-experience-company {
+    font-size: 14px;
+    color: #7A6B6B;
+    margin: 0;
+}
+
+.minimal-experience-date {
+    font-size: 12px;
+    color: #B5A4A4;
+    margin: 2px 0 6px;
+}
+
+.minimal-experience-description {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #7A6B6B;
+    margin: 0;
+}
+
+/* ===== PROJECTS ===== */
+.minimal-project-item {
+    margin-bottom: 14px;
+}
+
+.minimal-project-item:last-child {
+    margin-bottom: 0;
+}
+
+.minimal-project-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #4A3A3A;
+    margin: 0;
+}
+
+.minimal-project-description {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #7A6B6B;
+    margin: 2px 0;
+}
+
+.minimal-project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.minimal-tech-tag {
+    font-size: 11px;
+    color: #7A6B6B;
+    background: #F5F0F0;
+    padding: 2px 10px;
+    border-radius: 4px;
+}
+
+/* ===== FOOTER ===== */
+.minimal-footer {
+    text-align: center;
+    padding: 14px;
+    background: #FFF8F7;
+    border-top: 1px solid #F0E3E2;
+    font-size: 12px;
+    color: #B5A4A4;
+}
+
+.minimal-footer p {
+    margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .minimal-body {
+        grid-template-columns: 1fr;
+        padding: 8px 20px 16px;
+    }
+
+    .minimal-left {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1.5px solid #F0E3E2;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+    }
+
+    .minimal-right {
+        padding-left: 0;
+    }
+
+    .minimal-header {
+        padding: 28px 20px 16px;
+    }
+
+    .minimal-name {
+        font-size: 28px;
+    }
+
+    .minimal-title {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .minimal-body {
+        padding: 8px 16px 12px;
+    }
+
+    .minimal-header {
+        padding: 20px 16px 12px;
+    }
+
+    .minimal-name {
+        font-size: 24px;
+    }
+}
