@@ -7,11 +7,11 @@ import LibrarySection from '../../components/UI/library/LibrarySection';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 const LibraryPage = () => {
-  const { portfolio, fetchPortfolio, isLoading } = usePortfolioStore();
+  const { portfolios, fetchAllPortfolios, isLoading } = usePortfolioStore();
 
   useEffect(() => {
-    fetchPortfolio();
-  }, [fetchPortfolio]);
+    fetchAllPortfolios();
+  }, [fetchAllPortfolios]);
 
   if (isLoading) {
     return (
@@ -23,15 +23,9 @@ const LibraryPage = () => {
     );
   }
 
-  // Determine completeness
-  const completeness = getPortfolioCompleteness(portfolio);
-  const isComplete = completeness.isComplete;
-
-  // Distribute portfolios into Completed and Draft lists
-  // Since the user currently has one active portfolio, we place it in the correct section
-  // and keep the other section empty to trigger its EmptyState.
-  const completedPortfolios = portfolio && isComplete ? [portfolio] : [];
-  const draftPortfolios = portfolio && !isComplete ? [portfolio] : [];
+  // Distribute all portfolios into Completed and Draft lists
+  const completedPortfolios = (portfolios || []).filter((p) => getPortfolioCompleteness(p).isComplete);
+  const draftPortfolios = (portfolios || []).filter((p) => !getPortfolioCompleteness(p).isComplete);
 
   return (
     <DashboardLayout>

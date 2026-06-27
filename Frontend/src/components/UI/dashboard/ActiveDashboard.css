@@ -1,28 +1,67 @@
+/* ============================================================
+   ActiveDashboard.css
+   ============================================================ */
+
 .active-dashboard {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem 0 2rem;
+    padding: 1rem 0 3rem;
+    gap: 2.5rem;
+    width: 100%;
 }
 
 .active-card {
     background: var(--color-bloom-card);
     border-radius: 2rem;
-    padding: 2.5rem 2.5rem 2.2rem;
-    max-width: 620px;
+    padding: 2.5rem;
+    max-width: 680px;
     width: 100%;
-    box-shadow: 0 8px 30px rgba(244, 166, 181, 0.12);
+    box-shadow: var(--shadow-bloom);
     text-align: center;
-    border: 1px solid var(--border-light);
+    border: 1.5px solid var(--border-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.active-card__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.active-card__badge {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-bloom-text-light);
+    background: var(--color-bloom-peach);
+    padding: 4px 12px;
+    border-radius: 999px;
+}
+
+.active-card__title {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-charcoal);
+    margin: 0;
 }
 
 .active-stats {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 2.5rem;
+    width: 100%;
     padding: 0.5rem 0;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
 }
 
 .stat-item {
@@ -41,13 +80,13 @@
 
 .stat-value {
     font-family: var(--font-serif);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--text-charcoal);
 }
 
 .stat-value.published {
-    color: var(--brand-pink);
+    color: #55a37f;
 }
 
 .stat-value.draft {
@@ -56,22 +95,205 @@
 
 .stat-divider {
     width: 1px;
-    height: 40px;
+    height: 35px;
     background: var(--border-light);
 }
 
 .active-actions {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1rem;
+    width: 100%;
 }
 
-@media (max-width: 480px) {
-    .active-card {
-        padding: 1.8rem 1.2rem;
-    }
+.active-actions .btn {
+    flex: 1;
+    max-width: 220px;
+}
 
+/* ============================================================
+   Portfolios Collections Section
+   ============================================================ */
+
+.portfolios-list-section {
+    width: 100%;
+    max-width: 680px;
+    background: var(--color-bloom-card);
+    border-radius: 2rem;
+    border: 1.5px solid var(--border-light);
+    padding: 2rem;
+    box-shadow: var(--shadow-bloom-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.portfolios-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid var(--border-light);
+    padding-bottom: 0.8rem;
+}
+
+.portfolios-list-title {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-charcoal);
+    margin: 0;
+}
+
+.dashboard-new-btn {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--color-bloom-pink);
+    border: none;
+    border-radius: 999px;
+    padding: 8px 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-bloom-sm);
+}
+
+.dashboard-new-btn:hover:not(:disabled) {
+    background: var(--color-bloom-hover);
+    transform: translateY(-1.5px);
+    box-shadow: var(--shadow-bloom);
+}
+
+.dashboard-new-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.portfolios-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.portfolio-row-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    background: #fff;
+    border: 1.5px solid var(--border-light);
+    border-radius: 16px;
+    transition: var(--transition-fast);
+}
+
+.portfolio-row-card:hover {
+    border-color: var(--color-bloom-pink-light);
+    box-shadow: var(--shadow-bloom-sm);
+}
+
+.portfolio-row-card.active-row {
+    border-color: var(--color-bloom-pink);
+    background: #FFF9FA;
+}
+
+.portfolio-row-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.portfolio-row-card__name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.portfolio-row-card__name {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-charcoal);
+    margin: 0;
+}
+
+.active-tag-badge {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    background: rgba(130, 201, 165, 0.2);
+    color: #2b7858;
+    border: 1px solid rgba(130, 201, 165, 0.4);
+    padding: 2px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
+
+.portfolio-row-card__meta {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--color-bloom-text-light);
+    margin: 0;
+}
+
+.portfolio-row-card__actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.row-action-btn {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border: 1.5px solid transparent;
+}
+
+.row-action-btn--activate {
+    background: transparent;
+    color: #2a6e4f;
+    border-color: rgba(130, 201, 165, 0.6);
+}
+
+.row-action-btn--activate:hover {
+    background: #eefdf6;
+    border-color: #2a6e4f;
+}
+
+.row-action-btn--edit {
+    background: transparent;
+    color: var(--color-bloom-pink);
+    border-color: var(--color-bloom-pink-light);
+}
+
+.row-action-btn--edit:hover {
+    background: #FFF3F5;
+    border-color: var(--color-bloom-pink);
+}
+
+.row-action-btn--delete {
+    background: transparent;
+    color: #c93b4e;
+    border-color: #fcd5d9;
+}
+
+.row-action-btn--delete:hover {
+    background: #fff0f1;
+    border-color: #c93b4e;
+}
+
+/* ============================================================
+   Responsive Adjustment
+   ============================================================ */
+
+@media (max-width: 640px) {
     .active-stats {
         gap: 1rem;
         flex-wrap: wrap;
@@ -79,5 +301,26 @@
 
     .stat-divider {
         display: none;
+    }
+
+    .active-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .active-actions .btn {
+        width: 100%;
+        max-width: none;
+    }
+
+    .portfolio-row-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .portfolio-row-card__actions {
+        width: 100%;
+        justify-content: flex-end;
     }
 }

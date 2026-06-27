@@ -141,7 +141,7 @@ const PortfolioCard = ({ portfolio, type }) => {
           <button
             type="button"
             className="portfolio-card__btn portfolio-card__btn--primary"
-            onClick={() => navigate('/settings')}
+            onClick={() => navigate(`/settings/${portfolio._id}`)}
           >
             {type === 'completed' ? 'Edit Portfolio' : 'Continue Editing'}
           </button>
@@ -149,7 +149,7 @@ const PortfolioCard = ({ portfolio, type }) => {
             <button
               type="button"
               className="portfolio-card__btn portfolio-card__btn--secondary"
-              onClick={() => navigate('/settings')}
+              onClick={() => navigate(`/preview/${portfolio._id}`)}
               title="Open full preview"
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

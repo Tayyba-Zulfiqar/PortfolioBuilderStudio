@@ -5,24 +5,23 @@ import ActiveDashboard from '../../components/UI/dashboard/ActiveDashboard';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 const DashboardPage = () => {
-  const { portfolio, fetchPortfolio, isLoading } = usePortfolioStore();
+  const { portfolios, fetchAllPortfolios, isLoading } = usePortfolioStore();
 
   useEffect(() => {
-    fetchPortfolio();
-  }, [fetchPortfolio]);
+    fetchAllPortfolios();
+  }, [fetchAllPortfolios]);
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+        <LoadingSpinner />
+      </div>
+    );
   }
 
-  // Determine if user has content in their portfolio
-  const isFirstTime =
-    !portfolio ||
-    (!portfolio.about?.headline &&
-      (!portfolio.projects || portfolio.projects.length === 0) &&
-      (!portfolio.skills || portfolio.skills.length === 0));
+  const hasPortfolios = portfolios && portfolios.length > 0;
 
-  return isFirstTime ? <EmptyDashboard /> : <ActiveDashboard portfolio={portfolio} />;
+  return hasPortfolios ? <ActiveDashboard portfolios={portfolios} /> : <EmptyDashboard />;
 };
 
 export default DashboardPage;

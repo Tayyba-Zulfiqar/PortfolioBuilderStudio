@@ -1,0 +1,106 @@
+/* PreviewPage.css */
+
+.preview-page-loading,
+.preview-page-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  gap: 16px;
+  font-family: var(--font-sans);
+  color: var(--color-bloom-text-muted);
+}
+
+.preview-page-error h2 {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--color-bloom-text);
+  margin: 0;
+}
+
+.preview-page-error .btn-back {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 999px;
+  background: var(--color-bloom-pink);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-bloom-sm);
+  transition: var(--transition-fast);
+}
+
+.preview-page-error .btn-back:hover {
+  background: var(--color-bloom-hover);
+  transform: translateY(-2px);
+}
+
+.preview-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-bloom-bg);
+}
+
+.preview-page-header-bar {
+  height: 64px;
+  background: linear-gradient(90deg, var(--color-bloom-peach) 0%, var(--color-bloom-bg) 100%);
+  border-bottom: 1.5px solid var(--color-bloom-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.preview-banner-title {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--color-bloom-text);
+}
+
+.preview-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--color-bloom-text-muted);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid var(--color-bloom-border);
+  transition: var(--transition-fast);
+}
+
+.preview-back-btn:hover {
+  color: var(--color-bloom-text);
+  background-color: #fff;
+  border-color: var(--color-bloom-pink-light);
+  transform: translateX(-2px);
+}
+
+.preview-page-content {
+  flex: 1;
+  padding: 40px 24px;
+  background-color: var(--color-bloom-bg);
+}
+
+.preview-page-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: var(--shadow-bloom);
+  overflow: hidden;
+}

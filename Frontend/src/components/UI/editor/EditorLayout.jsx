@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { usePortfolioStore } from '../../../store/portfolioStore';
 import { useAuthStore } from '../../../store/authStore';
 import EditorPanel from './EditorPanel';
@@ -8,14 +9,15 @@ import FloatingShapes from '../landing-page/FloatingShapes';
 import './EditorLayout.css';
 
 const EditorLayout = () => {
+  const { id } = useParams();
   const [activeTab, setActiveTab] = useState('about');
   const [fullPreviewConfig, setFullPreviewConfig] = useState(null);
   const { portfolio, fetchPortfolio, isLoading } = usePortfolioStore();
   const { user } = useAuthStore();
 
   useEffect(() => {
-    fetchPortfolio();
-  }, [fetchPortfolio]);
+    fetchPortfolio(id);
+  }, [fetchPortfolio, id]);
 
   if (isLoading) {
     return (

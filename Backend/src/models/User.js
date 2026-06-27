@@ -1,6 +1,198 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+const portfolioSchema = new mongoose.Schema(
+    {
+        name: {
+            type: String,
+            default: 'My Portfolio',
+            trim: true,
+        },
+        about: {
+            fullName: {
+                type: String,
+                default: '',
+                trim: true,
+                minlength: [2, 'Name must be at least 2 characters'],
+                maxlength: [60, 'Name is too long'],
+            },
+            headline: {
+                type: String,
+                default: '',
+                trim: true,
+                maxlength: [100, 'Headline is too long'],
+            },
+            bio: {
+                type: String,
+                default: '',
+                maxlength: [500, 'Bio is too long'],
+            },
+            location: {
+                type: String,
+                default: '',
+                trim: true,
+                maxlength: [100, 'Location is too long'],
+            },
+            profilePicture: {
+                type: String,
+                default: '',
+                trim: true,
+                match: [/^(https?:\/\/[^\s]+|data:image\/[a-zA-Z+]+;base64,[^\s]+)$/, 'Invalid image URL'],
+            },
+        },
+        socialLinks: {
+            github: { type: String, default: '', trim: true },
+            linkedin: { type: String, default: '', trim: true },
+        },
+        projects: [
+            {
+                title: {
+                    type: String,
+                    required: [true, 'Project title is required'],
+                    trim: true,
+                    minlength: [3, 'Title must be at least 3 characters'],
+                    maxlength: [100, 'Title is too long'],
+                },
+                description: {
+                    type: String,
+                    default: '',
+                    maxlength: [500, 'Description is too long'],
+                },
+                techStack: [
+                    {
+                        type: String,
+                        trim: true,
+                    },
+                ],
+                liveUrl: {
+                    type: String,
+                    default: '',
+                    trim: true,
+                },
+                githubUrl: {
+                    type: String,
+                    default: '',
+                    trim: true,
+                },
+                images: [
+                    {
+                        type: String,
+                        trim: true,
+                    },
+                ],
+            },
+        ],
+        skills: [
+            {
+                name: {
+                    type: String,
+                    required: [true, 'Skill name is required'],
+                    trim: true,
+                    minlength: [2, 'Skill name must be at least 2 characters'],
+                    maxlength: [50, 'Skill name is too long'],
+                },
+                proficiency: {
+                    type: String,
+                    enum: {
+                        values: ['Beginner', 'Intermediate', 'Expert'],
+                        message: 'Please select a valid proficiency level',
+                    },
+                    default: 'Beginner',
+                },
+            },
+        ],
+        experience: [
+            {
+                title: {
+                    type: String,
+                    required: [true, 'Job title is required'],
+                    trim: true,
+                    minlength: [3, 'Job title must be at least 3 characters'],
+                    maxlength: [100, 'Job title is too long'],
+                },
+                company: {
+                    type: String,
+                    required: [true, 'Company name is required'],
+                    trim: true,
+                    minlength: [2, 'Company name must be at least 2 characters'],
+                    maxlength: [100, 'Company name is too long'],
+                },
+                startDate: {
+                    type: Date,
+                    required: [true, 'Start date is required'],
+                },
+                endDate: {
+                    type: Date,
+                    default: null,
+                },
+                description: {
+                    type: String,
+                    default: '',
+                    maxlength: [500, 'Description is too long'],
+                },
+                logo: {
+                    type: String,
+                    default: '',
+                    trim: true,
+                },
+            },
+        ],
+        education: [
+            {
+                degree: {
+                    type: String,
+                    required: [true, 'Degree is required'],
+                    trim: true,
+                    minlength: [3, 'Degree must be at least 3 characters'],
+                    maxlength: [100, 'Degree is too long'],
+                },
+                institution: {
+                    type: String,
+                    required: [true, 'Institution name is required'],
+                    trim: true,
+                    minlength: [2, 'Institution name must be at least 2 characters'],
+                    maxlength: [100, 'Institution name is too long'],
+                },
+                year: {
+                    type: String,
+                    trim: true,
+                    maxlength: [20, 'Year is too long'],
+                },
+                gpa: {
+                    type: Number,
+                    min: [0, 'GPA must be between 0 and 4.0'],
+                    max: [4, 'GPA must be between 0 and 4.0'],
+                },
+            },
+        ],
+        template: {
+            type: String,
+            enum: {
+                values: ['modern', 'minimal', 'creative'],
+                message: 'Please select a valid template',
+            },
+            default: 'modern',
+        },
+        isPublished: {
+            type: Boolean,
+            default: false,
+        },
+        theme: {
+            primaryColor: {
+                type: String,
+                default: '#F4A6B5',
+                match: [/^#[0-9A-Fa-f]{6}$/, 'Must be a valid hex color'],
+            },
+            secondaryColor: {
+                type: String,
+                default: '#E8B4B8',
+                match: [/^#[0-9A-Fa-f]{6}$/, 'Must be a valid hex color'],
+            },
+        },
+    },
+    { timestamps: true }
+);
+
 const userSchema = new mongoose.Schema(
     {
         username: {
@@ -30,188 +222,18 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        // Legacy single portfolio for backward compatibility / migration
         portfolio: {
-            about: {
-                fullName: {
-                    type: String,
-                    default: '',
-                    trim: true,
-                    minlength: [2, 'Name must be at least 2 characters'],
-                    maxlength: [60, 'Name is too long'],
-                },
-                headline: {
-                    type: String,
-                    default: '',
-                    trim: true,
-                    maxlength: [100, 'Headline is too long'],
-                },
-                bio: {
-                    type: String,
-                    default: '',
-                    maxlength: [500, 'Bio is too long'],
-                },
-                location: {
-                    type: String,
-                    default: '',
-                    trim: true,
-                    maxlength: [100, 'Location is too long'],
-                },
-                profilePicture: {
-                    type: String,
-                    default: '',
-                    trim: true,
-                    match: [/^(https?:\/\/[^\s]+|data:image\/[a-zA-Z]+;base64,[^\s]+)$/, 'Invalid image URL'],
-                },
-            },
-            socialLinks: {
-                github: { type: String, default: '', trim: true },
-                linkedin: { type: String, default: '', trim: true },
-            },
-            projects: [
-                {
-                    title: {
-                        type: String,
-                        required: [true, 'Project title is required'],
-                        trim: true,
-                        minlength: [3, 'Title must be at least 3 characters'],
-                        maxlength: [100, 'Title is too long'],
-                    },
-                    description: {
-                        type: String,
-                        default: '',
-                        maxlength: [500, 'Description is too long'],
-                    },
-                    techStack: [
-                        {
-                            type: String,
-                            trim: true,
-                        },
-                    ],
-                    liveUrl: {
-                        type: String,
-                        default: '',
-                        trim: true,
-                    },
-                    githubUrl: {
-                        type: String,
-                        default: '',
-                        trim: true,
-                    },
-                    images: [
-                        {
-                            type: String,
-                            trim: true,
-                        },
-                    ],
-                },
-            ],
-            skills: [
-                {
-                    name: {
-                        type: String,
-                        required: [true, 'Skill name is required'],
-                        trim: true,
-                        minlength: [2, 'Skill name must be at least 2 characters'],
-                        maxlength: [50, 'Skill name is too long'],
-                    },
-                    proficiency: {
-                        type: String,
-                        enum: {
-                            values: ['Beginner', 'Intermediate', 'Expert'],
-                            message: 'Please select a valid proficiency level',
-                        },
-                        default: 'Beginner',
-                    },
-                },
-            ],
-            experience: [
-                {
-                    title: {
-                        type: String,
-                        required: [true, 'Job title is required'],
-                        trim: true,
-                        minlength: [3, 'Job title must be at least 3 characters'],
-                        maxlength: [100, 'Job title is too long'],
-                    },
-                    company: {
-                        type: String,
-                        required: [true, 'Company name is required'],
-                        trim: true,
-                        minlength: [2, 'Company name must be at least 2 characters'],
-                        maxlength: [100, 'Company name is too long'],
-                    },
-                    startDate: {
-                        type: Date,
-                        required: [true, 'Start date is required'],
-                    },
-                    endDate: {
-                        type: Date,
-                        default: null,
-                    },
-                    description: {
-                        type: String,
-                        default: '',
-                        maxlength: [500, 'Description is too long'],
-                    },
-                    logo: {
-                        type: String,
-                        default: '',
-                        trim: true,
-                    },
-                },
-            ],
-            education: [
-                {
-                    degree: {
-                        type: String,
-                        required: [true, 'Degree is required'],
-                        trim: true,
-                        minlength: [3, 'Degree must be at least 3 characters'],
-                        maxlength: [100, 'Degree is too long'],
-                    },
-                    institution: {
-                        type: String,
-                        required: [true, 'Institution name is required'],
-                        trim: true,
-                        minlength: [2, 'Institution name must be at least 2 characters'],
-                        maxlength: [100, 'Institution name is too long'],
-                    },
-                    year: {
-                        type: String,
-                        trim: true,
-                        maxlength: [20, 'Year is too long'],
-                    },
-                    gpa: {
-                        type: Number,
-                        min: [0, 'GPA must be between 0 and 4.0'],
-                        max: [4, 'GPA must be between 0 and 4.0'],
-                    },
-                },
-            ],
-            template: {
-                type: String,
-                enum: {
-                    values: ['modern', 'minimal', 'creative'],
-                    message: 'Please select a valid template',
-                },
-                default: 'modern',
-            },
-            isPublished: {
-                type: Boolean,
-                default: false,
-            },
-            theme: {
-                primaryColor: {
-                    type: String,
-                    default: '#F4A6B5',
-                    match: [/^#[0-9A-Fa-f]{6}$/, 'Must be a valid hex color'],
-                },
-                secondaryColor: {
-                    type: String,
-                    default: '#E8B4B8',
-                    match: [/^#[0-9A-Fa-f]{6}$/, 'Must be a valid hex color'],
-                },
-            },
+            type: mongoose.Schema.Types.Mixed,
+        },
+        // Multiple portfolios support
+        portfolios: {
+            type: [portfolioSchema],
+            default: [],
+        },
+        activePortfolioId: {
+            type: mongoose.Schema.Types.ObjectId,
+            default: null,
         },
         views: {
             type: Number,

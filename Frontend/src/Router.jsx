@@ -13,6 +13,7 @@ import PublicPortfolioPage from './pages/PublicPortfolioPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import SettingsPage from './pages/SettingsPage';
 import LibraryPage from './pages/LibraryPage/Library';
+import PreviewPage from './pages/PreviewPage/PreviewPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const ProtectedRoute = ({ children }) => {
@@ -52,9 +53,13 @@ const Router = () => {
                 <Route path="/settings" element={
                     <ProtectedRoute><SettingsPage /></ProtectedRoute>
                 } />
+                <Route path="/settings/:id" element={
+                    <ProtectedRoute><SettingsPage /></ProtectedRoute>
+                } />
 
                 {/* Public Routes - Always accessible */}
                 <Route path="/explore" element={<ExplorePage />} />
+                <Route path="/preview/:id" element={<PreviewPage />} />
                 <Route path="/:username" element={<PublicPortfolioPage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
