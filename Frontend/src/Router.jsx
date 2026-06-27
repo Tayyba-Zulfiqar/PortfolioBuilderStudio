@@ -12,6 +12,7 @@ import ExplorePage from './pages/ExplorePage';
 import PublicPortfolioPage from './pages/PublicPortfolioPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import SettingsPage from './pages/SettingsPage';
+import NewPortfolioRedirect from './components/UI/editor/NewPortfolioRedirect';
 import LibraryPage from './pages/LibraryPage/Library';
 import PreviewPage from './pages/PreviewPage/PreviewPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -52,6 +53,9 @@ const Router = () => {
                 } />
                 <Route path="/settings" element={
                     <ProtectedRoute><SettingsPage /></ProtectedRoute>
+                } />
+                <Route path="/portfolio/new" element={
+                    <ProtectedRoute><NewPortfolioRedirect /></ProtectedRoute>
                 } />
                 <Route path="/settings/:id" element={
                     <ProtectedRoute><SettingsPage /></ProtectedRoute>

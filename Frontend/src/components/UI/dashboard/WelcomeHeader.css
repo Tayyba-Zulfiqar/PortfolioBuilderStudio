@@ -1,6 +1,7 @@
 .welcome-header {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
 }
 
 .welcome-tag {
@@ -12,7 +13,7 @@
 
 .welcome-title {
     font-family: var(--font-serif);
-    font-size: 2.8rem;
+    font-size: clamp(2rem, 5vw, 2.8rem);
     font-weight: 700;
     color: var(--text-charcoal);
     display: flex;
@@ -21,6 +22,8 @@
     gap: 0.8rem;
     flex-wrap: wrap;
     margin-bottom: 0.5rem;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
 }
 
 .sparkle-left,

@@ -13,7 +13,12 @@ const portfolioSchema = new mongoose.Schema(
                 type: String,
                 default: '',
                 trim: true,
-                minlength: [2, 'Name must be at least 2 characters'],
+                validate: {
+                    validator: function (value) {
+                        return !value || value.length >= 2;
+                    },
+                    message: 'Name must be at least 2 characters',
+                },
                 maxlength: [60, 'Name is too long'],
             },
             headline: {

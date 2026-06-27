@@ -7,7 +7,7 @@
 
 .empty-card {
     background: var(--color-bloom-card);
-    border-radius: 2rem;
+    border-radius: 8px;
     padding: 2.5rem 2.5rem 2.2rem;
     max-width: 620px;
     width: 100%;
@@ -19,7 +19,7 @@
 .badge {
     width: 76px;
     height: 76px;
-    border-radius: 50%;
+    border-radius: 8px;
     background: rgba(244, 166, 181, 0.25);
     display: flex;
     align-items: center;
@@ -41,6 +41,7 @@
     font-weight: 700;
     color: var(--text-charcoal);
     margin-bottom: 0.5rem;
+    line-height: 1.2;
 }
 
 .card-subtitle {

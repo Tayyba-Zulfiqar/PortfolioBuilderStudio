@@ -213,6 +213,15 @@ export const portfolioSchema = z.object({
 });
 
 
+// PORTFOLIO NAME SCHEMA
+
+export const portfolioNameSchema = z
+    .string()
+    .min(3, 'Portfolio name must be at least 3 characters')
+    .max(50, 'Portfolio name cannot exceed 50 characters')
+    .trim();
+
+
 // PARTIAL SCHEMAS (for individual tab saves)
 
 
