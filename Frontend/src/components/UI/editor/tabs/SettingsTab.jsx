@@ -39,7 +39,7 @@ const TEMPLATES = [
   },
 ];
 
-const SettingsTab = ({ portfolio }) => {
+const SettingsTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
   const { user } = useAuthStore();
 
@@ -63,7 +63,10 @@ const SettingsTab = ({ portfolio }) => {
       isPublished,
       theme: { primaryColor, secondaryColor },
     });
-    if (result.success) showToast('Settings saved! 🌸');
+    if (result.success) {
+      showToast('Settings saved! 🌸');
+      if (onNextTab) onNextTab();
+    }
     else showToast('Oops! Something went wrong 😢');
   };
 

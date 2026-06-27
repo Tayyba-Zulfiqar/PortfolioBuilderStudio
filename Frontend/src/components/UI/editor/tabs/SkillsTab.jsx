@@ -75,7 +75,7 @@ const AddSkillModal = ({ onSave, onClose }) => {
   );
 };
 
-const SkillsTab = ({ portfolio }) => {
+const SkillsTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
   const [skills, setSkills] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -99,7 +99,10 @@ const SkillsTab = ({ portfolio }) => {
 
   const handleSave = async () => {
     const result = await updatePortfolio({ skills });
-    if (result.success) showToast('Skills saved! 🌸');
+    if (result.success) {
+      showToast('Skills saved! 🌸');
+      if (onNextTab) onNextTab();
+    }
     else showToast('Oops! Something went wrong 😢');
   };
 

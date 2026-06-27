@@ -137,7 +137,7 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel, label }) => (
   </div>
 );
 
-const ExperienceTab = ({ portfolio }) => {
+const ExperienceTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
   const [experiences, setExperiences] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -169,7 +169,10 @@ const ExperienceTab = ({ portfolio }) => {
 
   const handleSave = async () => {
     const result = await updatePortfolio({ experience: experiences });
-    if (result.success) showToast('Experience saved! 🌸');
+    if (result.success) {
+      showToast('Experience saved! 🌸');
+      if (onNextTab) onNextTab();
+    }
     else showToast('Oops! Something went wrong 😢');
   };
 

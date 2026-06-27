@@ -133,7 +133,7 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel, label }) => (
   </div>
 );
 
-const EducationTab = ({ portfolio }) => {
+const EducationTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
 
   const mapEdu = (list) => (list || []).map((e) => ({
@@ -181,7 +181,10 @@ const EducationTab = ({ portfolio }) => {
       gpa: parseFloat(e.gpa) || undefined,
     }));
     const result = await updatePortfolio({ education: mapped });
-    if (result.success) showToast('Education saved! 🌸');
+    if (result.success) {
+      showToast('Education saved! 🌸');
+      if (onNextTab) onNextTab();
+    }
     else showToast('Oops! Something went wrong 😢');
   };
 

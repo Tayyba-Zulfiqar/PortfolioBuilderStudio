@@ -9,7 +9,7 @@ import './AboutTab.css';
 import './SharedTabStyles.css'
 
 
-const AboutTab = ({ portfolio }) => {
+const AboutTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
   const [previewImage, setPreviewImage] = useState('');
 
@@ -84,6 +84,7 @@ const AboutTab = ({ portfolio }) => {
     const result = await updatePortfolio(payload);
     if (result.success) {
       alert('Saved! 🌸');
+      if (onNextTab) onNextTab();
     } else {
       alert('Something went wrong 😢');
     }

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import AboutTab from './tabs/About/AboutTab';
 import ProjectsTab from './tabs/ProjectsTab';
 import SkillsTab from './tabs/SkillsTab';
@@ -80,6 +81,24 @@ const TAB_COMPONENTS = {
 const EditorPanel = ({ activeTab, setActiveTab, portfolio, user }) => {
   const ActiveTabComponent = TAB_COMPONENTS[activeTab];
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const wrapper = document.querySelector('.editor-panel-wrapper');
+      if (wrapper) {
+        wrapper.scrollTop = 0;
+      }
+      window.scrollTo(0, 0);
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [activeTab]);
+
+  const handleNextTab = () => {
+    const currentIndex = TABS.findIndex((t) => t.id === activeTab);
+    if (currentIndex >= 0 && currentIndex < TABS.length - 1) {
+      setActiveTab(TABS[currentIndex + 1].id);
+    }
+  };
+
   return (
     <div className="editor-panel-wrapper">
       <div className="editor-panel">
@@ -102,7 +121,7 @@ const EditorPanel = ({ activeTab, setActiveTab, portfolio, user }) => {
 
         {/* Active Tab Content */}
         <div className="editor-content" role="tabpanel" aria-labelledby={`editor-tab-${activeTab}`}>
-          <ActiveTabComponent portfolio={portfolio} user={user} />
+          <ActiveTabComponent portfolio={portfolio} user={user} onNextTab={handleNextTab} />
         </div>
       </div>
     </div>

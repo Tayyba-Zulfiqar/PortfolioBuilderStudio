@@ -125,7 +125,7 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel, label }) => (
   </div>
 );
 
-const ProjectsTab = ({ portfolio }) => {
+const ProjectsTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
   const [projects, setProjects] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -159,7 +159,10 @@ const ProjectsTab = ({ portfolio }) => {
 
   const handleSave = async () => {
     const result = await updatePortfolio({ projects });
-    if (result.success) showToast('Projects saved! 🌸');
+    if (result.success) {
+      showToast('Projects saved! 🌸');
+      if (onNextTab) onNextTab();
+    }
     else showToast('Oops! Something went wrong 😢');
   };
 
