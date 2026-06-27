@@ -82,11 +82,11 @@
 .form-textarea,
 .form-select {
     width: 100%;
-    padding: 15px 20px;
-    border: 1.5px solid var(--color-bloom-border);
+    padding: 16px 20px;
+    border: 1px solid #ffdae0;
     border-radius: 14px;
     font-family: var(--font-sans);
-    font-size: 16px;
+    font-size: 17px;
     color: var(--color-bloom-text);
     background: #fff;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;

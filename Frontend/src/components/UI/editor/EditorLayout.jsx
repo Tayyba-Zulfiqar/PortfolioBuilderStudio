@@ -4,6 +4,7 @@ import { useAuthStore } from '../../../store/authStore';
 import EditorPanel from './EditorPanel';
 import PreviewPanel from './PreviewPanel';
 import LoadingSpinner from '../../common/LoadingSpinner';
+import FloatingShapes from '../landing-page/FloatingShapes';
 import './EditorLayout.css';
 
 const EditorLayout = () => {
@@ -25,7 +26,8 @@ const EditorLayout = () => {
   }
 
   return (
-    <div className={`editor-layout ${activeTab === 'settings' ? 'editor-layout--split' : ''}`}>
+    <div className={`editor-layout ${activeTab === 'settings' ? 'editor-layout--split' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
+      <FloatingShapes />
       <EditorPanel
         activeTab={activeTab}
         setActiveTab={setActiveTab}

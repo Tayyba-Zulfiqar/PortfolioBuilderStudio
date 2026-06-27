@@ -199,7 +199,7 @@ const ExperienceTab = ({ portfolio, onNextTab }) => {
 
       {deleteTarget && (
         <ConfirmDeleteModal
-          label={deleteTarget.exp?.title || ''}
+          label={deleteTarget.exp?.company || ''}
           onConfirm={confirmDelete}
           onCancel={() => setDeleteTarget(null)}
         />

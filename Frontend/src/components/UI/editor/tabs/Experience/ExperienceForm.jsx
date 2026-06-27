@@ -31,13 +31,13 @@ const ExperienceForm = ({ experience, onSave, onClose }) => {
     mode: 'all',
     defaultValues: experience
       ? {
-          title: experience.title || '',
-          company: experience.company || '',
-          startDate: experience.startDate || '',
-          endDate: experience.endDate || '',
-          description: experience.description || '',
-          logo: experience.logo || '',
-        }
+        title: experience.title || '',
+        company: experience.company || '',
+        startDate: experience.startDate || '',
+        endDate: experience.endDate || '',
+        description: experience.description || '',
+        logo: experience.logo || '',
+      }
       : EMPTY_EXP,
   });
 
@@ -64,11 +64,11 @@ const ExperienceForm = ({ experience, onSave, onClose }) => {
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">
-            {experience?._id ? 'Edit Experience' : 'Add Experience'} 💼
+            {experience?._id ? 'Edit Experience' : 'Add Experience'}
           </h2>
-          <button 
-            className="modal-close" 
-            onClick={onClose} 
+          <button
+            className="modal-close"
+            onClick={onClose}
             id="exp-modal-close"
             type="button"
           >
@@ -165,10 +165,10 @@ const ExperienceForm = ({ experience, onSave, onClose }) => {
                   />
                 )}
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', fontSize: '14px', color: 'var(--color-bloom-text-muted)', cursor: 'pointer' }}>
-                  <input 
-                    type="checkbox" 
-                    checked={isCurrent} 
-                    onChange={handleCurrentChange} 
+                  <input
+                    type="checkbox"
+                    checked={isCurrent}
+                    onChange={handleCurrentChange}
                   />
                   I currently work here
                 </label>
@@ -186,16 +186,16 @@ const ExperienceForm = ({ experience, onSave, onClose }) => {
           </div>
 
           <div className="modal-footer">
-            <button 
-              className="btn-cancel" 
-              onClick={onClose} 
+            <button
+              className="btn-cancel"
+              onClick={onClose}
               type="button"
             >
               Cancel
             </button>
-            <button 
-              className="btn-save" 
-              type="submit" 
+            <button
+              className="btn-save"
+              type="submit"
               id="exp-save-btn"
             >
               {experience?._id ? 'Update Experience' : 'Add Experience'}
