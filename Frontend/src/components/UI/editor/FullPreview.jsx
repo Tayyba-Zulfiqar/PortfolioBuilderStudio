@@ -42,7 +42,7 @@ const FullPreview = ({
           format: 'a4',
           orientation: 'portrait',
         },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+        pagebreak: { mode: ['css', 'legacy'] },
       };
 
       await html2pdf().set(options).from(element).save();
