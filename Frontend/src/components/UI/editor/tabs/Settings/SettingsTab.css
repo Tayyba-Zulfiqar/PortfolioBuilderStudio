@@ -31,10 +31,9 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  border: 2px solid var(--color-bloom-border);
+  border: 1.5px solid #F3E6E7;
   border-radius: 16px;
-  padding: 0 0 14px;
-  overflow: hidden;
+  padding: 12px;
   cursor: pointer;
   transition: var(--transition-fast);
   background: #fff;
@@ -42,30 +41,30 @@
 
 .template-card:hover {
   border-color: var(--color-bloom-pink-light);
-  box-shadow: 0 4px 16px rgba(229, 139, 157, 0.12);
-  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(229, 139, 157, 0.08);
 }
 
 .template-card--active {
   border-color: var(--color-bloom-pink) !important;
-  box-shadow: 0 0 0 3px rgba(229, 139, 157, 0.18), 0 4px 16px rgba(229, 139, 157, 0.15) !important;
 }
 
 .template-card__preview {
   width: 100%;
-  height: 100px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0;
+  background-color: #FFF0F2;
+  border-radius: 12px;
 }
 
 .template-card__label {
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 600;
-  color: var(--color-bloom-text);
+  font-weight: 500;
+  color: var(--color-bloom-text-muted);
 }
+
 
 /* ===== Color Pickers ===== */
 .color-pickers-row {
