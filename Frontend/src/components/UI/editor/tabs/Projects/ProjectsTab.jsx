@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { projectSchema } from '../../../../../schemas/portfolioSchemas';
 import { usePortfolioStore } from '../../../../../store/portfolioStore';
 import ProjectCard from './ProjectCard';
 import ProjectForm from './ProjectForm';
@@ -42,64 +46,82 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel, label }) => (
 
 const ProjectsTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
-  const [projects, setProjects] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
+  const [editingProjectIndex, setEditingProjectIndex] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [modalKey, setModalKey] = useState(0);
 
-  const [isDirty, setIsDirty] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isValid, isDirty },
+  } = useForm({
+    resolver: zodResolver(
+      z.object({
+        projects: z.array(projectSchema),
+      })
+    ),
+    mode: 'onChange',
+    defaultValues: {
+      projects: [],
+    },
+  });
+
+  const { fields: projects, append, remove, update } = useFieldArray({
+    control,
+    name: 'projects',
+  });
 
   useEffect(() => {
     if (portfolio?.projects) {
-      setProjects(portfolio.projects);
-      setIsDirty(false);
+      reset({ projects: portfolio.projects });
     }
-  }, [portfolio]);
+  }, [portfolio, reset]);
 
   const openAddModal = () => {
     setEditingProject(null);
+    setEditingProjectIndex(null);
     setModalKey((k) => k + 1);
     setModalOpen(true);
   };
 
-  const openEditModal = (proj) => {
+  const openEditModal = (proj, index) => {
     setEditingProject(proj);
+    setEditingProjectIndex(index);
     setModalKey((k) => k + 1);
     setModalOpen(true);
   };
 
   const handleSaveProject = (formData) => {
-    let updated;
-    if (editingProject?._id) {
-      updated = projects.map((p) => (p._id === editingProject._id ? { ...editingProject, ...formData } : p));
+    if (editingProjectIndex !== null) {
+      update(editingProjectIndex, formData);
     } else {
-      updated = [...projects, { ...formData, _id: Date.now().toString() }];
+      append(formData);
     }
-    setProjects(updated);
-    setIsDirty(true);
     setModalOpen(false);
   };
 
-  const handleDelete = (proj) => {
-    setDeleteTarget(proj);
+  const handleDelete = (proj, index) => {
+    setDeleteTarget({ proj, index });
   };
 
   const confirmDelete = () => {
-    setProjects((prev) => prev.filter((p) => p._id !== deleteTarget._id));
-    setIsDirty(true);
+    if (deleteTarget) {
+      remove(deleteTarget.index);
+    }
     setDeleteTarget(null);
   };
 
-  const handleSave = async (e) => {
-    if (e) e.preventDefault();
-    const sanitizedProjects = projects.map(({ _id, ...rest }) => 
+  const onSubmit = async (data) => {
+    const sanitizedProjects = data.projects.map(({ _id, ...rest }) => 
       _id && /^[0-9a-fA-F]{24}$/.test(_id) ? { _id, ...rest } : rest
     );
     const result = await updatePortfolio({ projects: sanitizedProjects });
     if (result.success) {
       showToast('Projects saved! 🚀');
-      setIsDirty(false);
+      reset(data);
       if (onNextTab) onNextTab();
     } else {
       showToast('Oops! Something went wrong 😢');
@@ -141,10 +163,11 @@ const ProjectsTab = ({ portfolio, onNextTab }) => {
         </div>
       ) : (
         <div className="project-cards">
-          {projects.map((proj) => (
+          {projects.map((proj, index) => (
             <ProjectCard
-              key={proj._id}
+              key={proj.id || proj._id || index}
               project={proj}
+              index={index}
               onEdit={openEditModal}
               onDelete={handleDelete}
             />
@@ -152,13 +175,13 @@ const ProjectsTab = ({ portfolio, onNextTab }) => {
         </div>
       )}
 
-      <form onSubmit={handleSave}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FormActions
           isSaving={isSaving}
-          isSubmitting={false}
-          isValid={true}
+          isSubmitting={isSubmitting}
+          isValid={isValid}
           isDirty={isDirty}
-          errors={{}}
+          errors={errors}
           saveText="Save Changes"
           savingText="Saving..."
           showErrorSummary={false}
@@ -176,7 +199,7 @@ const ProjectsTab = ({ portfolio, onNextTab }) => {
 
       {deleteTarget && (
         <ConfirmDeleteModal
-          label={deleteTarget.title}
+          label={deleteTarget.proj?.title || ''}
           onConfirm={confirmDelete}
           onCancel={() => setDeleteTarget(null)}
         />

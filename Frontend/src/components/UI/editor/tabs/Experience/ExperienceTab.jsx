@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { experienceSchema } from '../../../../../schemas/portfolioSchemas';
 import { usePortfolioStore } from '../../../../../store/portfolioStore';
 import ExperienceCard from './ExperienceCard';
 import ExperienceForm from './ExperienceForm';
@@ -42,54 +46,72 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel, label }) => (
 
 const ExperienceTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
-  const [experiences, setExperiences] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingExp, setEditingExp] = useState(null);
+  const [editingExpIndex, setEditingExpIndex] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [modalKey, setModalKey] = useState(0);
 
-  const [isDirty, setIsDirty] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isValid, isDirty },
+  } = useForm({
+    resolver: zodResolver(
+      z.object({
+        experience: z.array(experienceSchema),
+      })
+    ),
+    mode: 'onChange',
+    defaultValues: {
+      experience: [],
+    },
+  });
+
+  const { fields: experiences, append, remove, update } = useFieldArray({
+    control,
+    name: 'experience',
+  });
 
   useEffect(() => {
     if (portfolio?.experience) {
-      setExperiences(portfolio.experience);
-      setIsDirty(false);
+      reset({ experience: portfolio.experience });
     }
-  }, [portfolio]);
+  }, [portfolio, reset]);
 
   const openAdd = () => {
     setEditingExp(null);
+    setEditingExpIndex(null);
     setModalKey((k) => k + 1);
     setModalOpen(true);
   };
 
-  const openEdit = (exp) => {
+  const openEdit = (exp, index) => {
     setEditingExp(exp);
+    setEditingExpIndex(index);
     setModalKey((k) => k + 1);
     setModalOpen(true);
   };
 
   const handleSaveExp = (formData) => {
-    let updated;
-    if (editingExp?._id) {
-      updated = experiences.map((e) => e._id === editingExp._id ? { ...editingExp, ...formData } : e);
+    if (editingExpIndex !== null) {
+      update(editingExpIndex, formData);
     } else {
-      updated = [...experiences, { ...formData, _id: Date.now().toString() }];
+      append(formData);
     }
-    setExperiences(updated);
-    setIsDirty(true);
     setModalOpen(false);
   };
 
   const confirmDelete = () => {
-    setExperiences((prev) => prev.filter((e) => e._id !== deleteTarget._id));
-    setIsDirty(true);
+    if (deleteTarget) {
+      remove(deleteTarget.index);
+    }
     setDeleteTarget(null);
   };
 
-  const handleSave = async (e) => {
-    if (e) e.preventDefault();
-    const sanitizedExperience = experiences.map(({ _id, ...rest }) => {
+  const onSubmit = async (data) => {
+    const sanitizedExperience = data.experience.map(({ _id, ...rest }) => {
       const exp = _id && /^[0-9a-fA-F]{24}$/.test(_id) ? { _id, ...rest } : rest;
       if (exp.endDate === 'Present' || exp.endDate === '') {
         exp.endDate = null;
@@ -99,7 +121,7 @@ const ExperienceTab = ({ portfolio, onNextTab }) => {
     const result = await updatePortfolio({ experience: sanitizedExperience });
     if (result.success) {
       showToast('Experience saved! 🌸');
-      setIsDirty(false);
+      reset(data);
       if (onNextTab) onNextTab();
     } else {
       showToast('Oops! Something went wrong 😢');
@@ -143,23 +165,23 @@ const ExperienceTab = ({ portfolio, onNextTab }) => {
         <div className="exp-cards">
           {experiences.map((exp, i) => (
             <ExperienceCard
-              key={exp._id || i}
+              key={exp.id || exp._id || i}
               experience={exp}
               index={i}
               onEdit={openEdit}
-              onDelete={setDeleteTarget}
+              onDelete={(target) => setDeleteTarget({ exp: target, index: i })}
             />
           ))}
         </div>
       )}
 
-      <form onSubmit={handleSave}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FormActions
           isSaving={isSaving}
-          isSubmitting={false}
-          isValid={true}
+          isSubmitting={isSubmitting}
+          isValid={isValid}
           isDirty={isDirty}
-          errors={{}}
+          errors={errors}
           saveText="Save Changes"
           savingText="Saving..."
           showErrorSummary={false}
@@ -177,7 +199,7 @@ const ExperienceTab = ({ portfolio, onNextTab }) => {
 
       {deleteTarget && (
         <ConfirmDeleteModal
-          label={deleteTarget.title}
+          label={deleteTarget.exp?.title || ''}
           onConfirm={confirmDelete}
           onCancel={() => setDeleteTarget(null)}
         />

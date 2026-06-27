@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { educationFormSchema } from '../../../../../schemas/portfolioSchemas';
 import { usePortfolioStore } from '../../../../../store/portfolioStore';
 import EducationCard from './EducationCard';
 import EducationForm from './EducationForm';
@@ -42,6 +46,11 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel, label }) => (
 
 const EducationTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editingEdu, setEditingEdu] = useState(null);
+  const [editingEduIndex, setEditingEduIndex] = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [modalKey, setModalKey] = useState(0);
 
   const mapEdu = (list) => (list || []).map((e) => ({
     ...e,
@@ -51,55 +60,66 @@ const EducationTab = ({ portfolio, onNextTab }) => {
     _id: e._id || Date.now().toString(),
   }));
 
-  const [educations, setEducations] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [editingEdu, setEditingEdu] = useState(null);
-  const [deleteTarget, setDeleteTarget] = useState(null);
-  const [modalKey, setModalKey] = useState(0);
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isValid, isDirty },
+  } = useForm({
+    resolver: zodResolver(
+      z.object({
+        education: z.array(educationFormSchema),
+      })
+    ),
+    mode: 'onChange',
+    defaultValues: {
+      education: [],
+    },
+  });
 
-  const [isDirty, setIsDirty] = useState(false);
+  const { fields: educations, append, remove, update } = useFieldArray({
+    control,
+    name: 'education',
+  });
 
   useEffect(() => {
     if (portfolio?.education) {
-      setEducations(mapEdu(portfolio.education));
-      setIsDirty(false);
+      reset({ education: mapEdu(portfolio.education) });
     }
-  }, [portfolio]);
+  }, [portfolio, reset]);
 
   const openAdd = () => {
     setEditingEdu(null);
+    setEditingEduIndex(null);
     setModalKey((k) => k + 1);
     setModalOpen(true);
   };
 
-  const openEdit = (edu) => {
+  const openEdit = (edu, index) => {
     setEditingEdu(edu);
+    setEditingEduIndex(index);
     setModalKey((k) => k + 1);
     setModalOpen(true);
   };
 
   const handleSaveEdu = (formData) => {
-    let updated;
-    if (editingEdu?._id) {
-      updated = educations.map((e) => e._id === editingEdu._id ? { ...editingEdu, ...formData } : e);
+    if (editingEduIndex !== null) {
+      update(editingEduIndex, formData);
     } else {
-      updated = [...educations, { ...formData, _id: Date.now().toString() }];
+      append(formData);
     }
-    setEducations(updated);
-    setIsDirty(true);
     setModalOpen(false);
   };
 
   const confirmDelete = () => {
-    setEducations((prev) => prev.filter((e) => e._id !== deleteTarget._id));
-    setIsDirty(true);
+    if (deleteTarget) {
+      remove(deleteTarget.index);
+    }
     setDeleteTarget(null);
   };
 
-  const handleSave = async (e) => {
-    if (e) e.preventDefault();
-    // Map back to backend schema
-    const mapped = educations.map((e) => {
+  const onSubmit = async (data) => {
+    const mapped = data.education.map((e) => {
       const item = {
         degree: e.degree,
         institution: e.institution,
@@ -111,10 +131,11 @@ const EducationTab = ({ portfolio, onNextTab }) => {
       }
       return item;
     });
+
     const result = await updatePortfolio({ education: mapped });
     if (result.success) {
       showToast('Education saved! 🎓');
-      setIsDirty(false);
+      reset(data);
       if (onNextTab) onNextTab();
     } else {
       showToast('Oops! Something went wrong 😢');
@@ -158,23 +179,23 @@ const EducationTab = ({ portfolio, onNextTab }) => {
         <div className="edu-cards">
           {educations.map((edu, i) => (
             <EducationCard
-              key={edu._id || i}
+              key={edu.id || edu._id || i}
               education={edu}
               index={i}
               onEdit={openEdit}
-              onDelete={setDeleteTarget}
+              onDelete={(target) => setDeleteTarget({ edu: target, index: i })}
             />
           ))}
         </div>
       )}
 
-      <form onSubmit={handleSave}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FormActions
           isSaving={isSaving}
-          isSubmitting={false}
-          isValid={true}
+          isSubmitting={isSubmitting}
+          isValid={isValid}
           isDirty={isDirty}
-          errors={{}}
+          errors={errors}
           saveText="Save Changes"
           savingText="Saving..."
           showErrorSummary={false}
@@ -192,7 +213,7 @@ const EducationTab = ({ portfolio, onNextTab }) => {
 
       {deleteTarget && (
         <ConfirmDeleteModal
-          label={deleteTarget.degree}
+          label={deleteTarget.edu?.degree || ''}
           onConfirm={confirmDelete}
           onCancel={() => setDeleteTarget(null)}
         />

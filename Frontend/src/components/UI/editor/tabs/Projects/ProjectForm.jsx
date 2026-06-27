@@ -5,6 +5,7 @@ import FormInput from '../../../../common/FormInputs/FormInput';
 import FormTextarea from '../../../../common/FormInputs/FormTextarea';
 import TechStackInput from './TechStackInput';
 import '../../../../common/FormInputs/SharedTabStyles.css';
+import './ProjectForm.css';
 
 const getEmptyProject = () => ({
   title: '',

@@ -1,4 +1,5 @@
 import React from 'react';
+import './EducationCard.css';
 
 const EducationCard = ({ education, index, onEdit, onDelete }) => {
   const formatYear = (edu) => {
@@ -28,7 +29,7 @@ const EducationCard = ({ education, index, onEdit, onDelete }) => {
             <div className="edu-card__actions">
               <button 
                 className="icon-btn icon-btn--edit" 
-                onClick={() => onEdit(education)} 
+                onClick={() => onEdit(education, index)} 
                 title="Edit" 
                 id={`edit-edu-${eduId}`}
                 type="button"
@@ -40,7 +41,7 @@ const EducationCard = ({ education, index, onEdit, onDelete }) => {
               </button>
               <button 
                 className="icon-btn icon-btn--delete" 
-                onClick={() => onDelete(education)} 
+                onClick={() => onDelete(education, index)} 
                 title="Delete" 
                 id={`delete-edu-${eduId}`}
                 type="button"

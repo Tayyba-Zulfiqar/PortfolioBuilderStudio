@@ -7,6 +7,7 @@ import { experienceSchema } from '../../../../../schemas/portfolioSchemas';
 import FormInput from '../../../../common/FormInputs/FormInput';
 import FormTextarea from '../../../../common/FormInputs/FormTextarea';
 import '../../../../common/FormInputs/SharedTabStyles.css';
+import './ExperienceForm.css';
 
 const EMPTY_EXP = {
   title: '',

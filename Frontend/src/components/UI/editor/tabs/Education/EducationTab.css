@@ -4,78 +4,69 @@
   animation: fadeInSlideUp 0.3s ease;
 }
 
-/* Education Cards */
-.edu-cards {
+/* ===== Header Row ===== */
+.tab-header-row {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 8px;
-}
-
-.edu-card {
-  background: #fff;
-  border: 1.5px solid var(--color-bloom-border);
-  border-radius: 14px;
-  padding: 18px 20px;
-  transition: var(--transition-fast);
-}
-
-.edu-card:hover {
-  border-color: var(--color-bloom-pink-light);
-  box-shadow: 0 4px 16px rgba(229, 139, 157, 0.10);
-}
-
-.edu-card__body { flex: 1; }
-
-.edu-card__top {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
+  margin-bottom: 28px;
 }
 
-.edu-card__degree {
-  font-family: var(--font-sans);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color-bloom-text);
-  margin-bottom: 4px;
-}
-
-.edu-card__institution {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-bloom-pink);
-  margin-bottom: 4px;
-}
-
-.edu-card__year {
-  font-size: 13px;
-  color: var(--color-bloom-text-muted);
-}
-
-.edu-card__right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-/* GPA Badge - pink pill matching screenshot */
-.edu-card__gpa {
+/* ===== Add Button ===== */
+.btn-add {
   display: inline-flex;
   align-items: center;
-  padding: 5px 14px;
-  background: var(--color-bloom-peach);
-  color: var(--color-bloom-pink);
+  gap: 6px;
+  padding: 11px 22px;
+  background: var(--color-bloom-pink);
+  color: #fff;
+  border: none;
   border-radius: 999px;
-  font-size: 13px;
+  font-family: var(--font-sans);
+  font-size: 14px;
   font-weight: 600;
-  white-space: nowrap;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(229, 139, 157, 0.3);
 }
 
-.edu-card__actions {
+.btn-add:hover {
+  background: var(--color-bloom-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 139, 157, 0.4);
+}
+
+.btn-add__emoji { margin-left: 2px; }
+
+/* ===== Empty State (shared) ===== */
+.empty-state {
   display: flex;
-  gap: 6px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+  background: #fff;
+  border: 2px dashed var(--color-bloom-border);
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.empty-state__icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.empty-state h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-bloom-text);
+  margin-bottom: 6px;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: var(--color-bloom-text-muted);
+  line-height: 1.5;
 }

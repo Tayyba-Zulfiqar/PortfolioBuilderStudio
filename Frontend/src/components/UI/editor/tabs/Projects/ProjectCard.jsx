@@ -1,6 +1,7 @@
 import React from 'react';
+import './ProjectCard.css';
 
-const ProjectCard = ({ project, onEdit, onDelete }) => {
+const ProjectCard = ({ project, index, onEdit, onDelete }) => {
   return (
     <div className="project-card">
       <div className="project-card__drag">
@@ -19,7 +20,7 @@ const ProjectCard = ({ project, onEdit, onDelete }) => {
           <div className="project-card__actions">
             <button 
               className="icon-btn icon-btn--edit" 
-              onClick={() => onEdit(project)} 
+              onClick={() => onEdit(project, index)} 
               title="Edit"
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -29,7 +30,7 @@ const ProjectCard = ({ project, onEdit, onDelete }) => {
             </button>
             <button 
               className="icon-btn icon-btn--delete" 
-              onClick={() => onDelete(project)} 
+              onClick={() => onDelete(project, index)} 
               title="Delete"
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">

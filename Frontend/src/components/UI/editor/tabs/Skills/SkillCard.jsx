@@ -1,4 +1,5 @@
 import React from 'react';
+import './SkillCard.css';
 
 const PROFICIENCY_COLORS = {
   Expert: { bg: '#dcf5e4', text: '#2d7a4f' },
@@ -26,7 +27,7 @@ const SkillCard = ({ skill, index, onRemove, onProficiencyChange }) => {
       <select
         className="skill-proficiency-select"
         value={skill.proficiency}
-        onChange={(e) => onProficiencyChange(skillId, e.target.value)}
+        onChange={(e) => onProficiencyChange(index, e.target.value)}
         title="Change proficiency"
         id={`skill-proficiency-${skillId}`}
       >
@@ -36,7 +37,7 @@ const SkillCard = ({ skill, index, onRemove, onProficiencyChange }) => {
       </select>
       <button
         className="skill-remove"
-        onClick={() => onRemove(skillId)}
+        onClick={() => onRemove(index)}
         title="Remove skill"
         id={`skill-remove-${skillId}`}
         type="button"

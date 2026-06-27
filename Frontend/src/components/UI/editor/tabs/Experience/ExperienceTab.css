@@ -4,102 +4,69 @@
   animation: fadeInSlideUp 0.3s ease;
 }
 
-.exp-date-row {
-  display: flex;
-  gap: 14px;
-}
-
-/* Experience Cards */
-.exp-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 8px;
-}
-
-.exp-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  background: #fff;
-  border: 1.5px solid var(--color-bloom-border);
-  border-radius: 14px;
-  padding: 18px 20px;
-  transition: var(--transition-fast);
-}
-
-.exp-card:hover {
-  border-color: var(--color-bloom-pink-light);
-  box-shadow: 0 4px 16px rgba(229, 139, 157, 0.10);
-}
-
-/* Company Logo */
-.exp-card__logo {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+/* ===== Header Row ===== */
+.tab-header-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
-.exp-card__logo-letter {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.exp-card__body {
-  flex: 1;
-  min-width: 0;
-}
-
-.exp-card__top {
-  display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 28px;
 }
 
-.exp-card__title {
+/* ===== Add Button ===== */
+.btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 22px;
+  background: var(--color-bloom-pink);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
   font-family: var(--font-sans);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color-bloom-text);
-  margin-bottom: 2px;
-}
-
-.exp-card__company {
   font-size: 14px;
-  font-weight: 500;
-  color: var(--color-bloom-pink);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(229, 139, 157, 0.3);
 }
 
-.exp-card__right {
+.btn-add:hover {
+  background: var(--color-bloom-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 139, 157, 0.4);
+}
+
+.btn-add__emoji { margin-left: 2px; }
+
+/* ===== Empty State (shared) ===== */
+.empty-state {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+  background: #fff;
+  border: 2px dashed var(--color-bloom-border);
+  border-radius: 16px;
+  margin-bottom: 24px;
 }
 
-.exp-card__date {
-  font-size: 13px;
-  color: var(--color-bloom-text-light);
-  white-space: nowrap;
+.empty-state__icon {
+  font-size: 48px;
+  margin-bottom: 12px;
 }
 
-.exp-card__actions {
-  display: flex;
-  gap: 6px;
+.empty-state h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-bloom-text);
+  margin-bottom: 6px;
 }
 
-.exp-card__desc {
-  font-size: 13px;
+.empty-state p {
+  font-size: 14px;
   color: var(--color-bloom-text-muted);
-  line-height: 1.6;
+  line-height: 1.5;
 }

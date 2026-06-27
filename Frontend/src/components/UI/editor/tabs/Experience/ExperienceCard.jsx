@@ -1,4 +1,5 @@
 import React from 'react';
+import './ExperienceCard.css';
 
 const LOGO_COLORS = ['#1a1a2e', '#0d7377', '#6b2fa0', '#c0392b', '#e67e22', '#27ae60'];
 
@@ -32,7 +33,7 @@ const ExperienceCard = ({ experience, index, onEdit, onDelete }) => {
             <div className="exp-card__actions">
               <button 
                 className="icon-btn icon-btn--edit" 
-                onClick={() => onEdit(experience)} 
+                onClick={() => onEdit(experience, index)} 
                 title="Edit" 
                 id={`edit-exp-${expId}`}
                 type="button"
@@ -44,7 +45,7 @@ const ExperienceCard = ({ experience, index, onEdit, onDelete }) => {
               </button>
               <button 
                 className="icon-btn icon-btn--delete" 
-                onClick={() => onDelete(experience)} 
+                onClick={() => onDelete(experience, index)} 
                 title="Delete" 
                 id={`delete-exp-${expId}`}
                 type="button"

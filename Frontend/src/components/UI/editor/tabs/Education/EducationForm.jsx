@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { educationFormSchema } from '../../../../../schemas/portfolioSchemas';
 import FormInput from '../../../../common/FormInputs/FormInput';
 import '../../../../common/FormInputs/SharedTabStyles.css';
+import './EducationForm.css';
 
 const EMPTY_EDU = {
   degree: '',

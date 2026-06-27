@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { skillSchema } from '../../../../../schemas/portfolioSchemas';
 import { usePortfolioStore } from '../../../../../store/portfolioStore';
 import SkillCard from './SkillCard';
 import SkillForm from './SkillForm';
@@ -19,46 +23,59 @@ const showToast = (msg) => {
 
 const SkillsTab = ({ portfolio, onNextTab }) => {
   const { updatePortfolio, isSaving } = usePortfolioStore();
-  const [skills, setSkills] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalKey, setModalKey] = useState(0);
-  const [editingSkill, setEditingSkill] = useState(null);
-  const [deleteTarget, setDeleteTarget] = useState(null);
-  const [isDirty, setIsDirty] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isValid, isDirty },
+  } = useForm({
+    resolver: zodResolver(
+      z.object({
+        skills: z.array(skillSchema),
+      })
+    ),
+    mode: 'onChange',
+    defaultValues: {
+      skills: [],
+    },
+  });
+
+  const { fields: skills, append, remove, update } = useFieldArray({
+    control,
+    name: 'skills',
+  });
 
   useEffect(() => {
     if (portfolio?.skills) {
-      setSkills(portfolio.skills);
-      setIsDirty(false);
+      reset({ skills: portfolio.skills });
     }
-  }, [portfolio]);
+  }, [portfolio, reset]);
 
   const handleAddSkill = (skill) => {
-    setSkills((prev) => [...prev, { ...skill, _id: Date.now().toString() }]);
+    append({ ...skill, _id: Date.now().toString() });
     setModalKey((k) => k + 1);
-    setIsDirty(true);
     setModalOpen(false);
   };
 
-  const handleRemoveSkill = (id) => {
-    setSkills((prev) => prev.filter((s) => s._id !== id));
-    setIsDirty(true);
+  const handleRemoveSkill = (index) => {
+    remove(index);
   };
 
-  const handleProficiencyChange = (id, proficiency) => {
-    setSkills((prev) => prev.map((s) => s._id === id ? { ...s, proficiency } : s));
-    setIsDirty(true);
+  const handleProficiencyChange = (index, proficiency) => {
+    update(index, { ...skills[index], proficiency });
   };
 
-  const handleSave = async (e) => {
-    if (e) e.preventDefault();
-    const sanitizedSkills = skills.map(({ _id, ...rest }) => 
+  const onSubmit = async (data) => {
+    const sanitizedSkills = data.skills.map(({ _id, ...rest }) => 
       _id && /^[0-9a-fA-F]{24}$/.test(_id) ? { _id, ...rest } : rest
     );
     const result = await updatePortfolio({ skills: sanitizedSkills });
     if (result.success) {
       showToast('Skills saved! 🚀');
-      setIsDirty(false);
+      reset(data);
       if (onNextTab) onNextTab();
     } else {
       showToast('Oops! Something went wrong 😢');
@@ -107,7 +124,7 @@ const SkillsTab = ({ portfolio, onNextTab }) => {
         <div className="skills-grid">
           {skills.map((skill, i) => (
             <SkillCard
-              key={skill._id || i}
+              key={skill.id || skill._id || i}
               skill={skill}
               index={i}
               onRemove={handleRemoveSkill}
@@ -117,13 +134,13 @@ const SkillsTab = ({ portfolio, onNextTab }) => {
         </div>
       )}
 
-      <form onSubmit={handleSave}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FormActions
           isSaving={isSaving}
-          isSubmitting={false}
-          isValid={true}
+          isSubmitting={isSubmitting}
+          isValid={isValid}
           isDirty={isDirty}
-          errors={{}}
+          errors={errors}
           saveText="Save Changes"
           savingText="Saving..."
           showErrorSummary={false}

@@ -1,0 +1,75 @@
+/* Education Cards */
+.edu-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.edu-card {
+  background: #fff;
+  border: 1.5px solid var(--color-bloom-border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  transition: var(--transition-fast);
+}
+
+.edu-card:hover {
+  border-color: var(--color-bloom-pink-light);
+  box-shadow: 0 4px 16px rgba(229, 139, 157, 0.10);
+}
+
+.edu-card__body { flex: 1; }
+
+.edu-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.edu-card__degree {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-bloom-text);
+  margin-bottom: 4px;
+}
+
+.edu-card__institution {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-bloom-pink);
+  margin-bottom: 4px;
+}
+
+.edu-card__year {
+  font-size: 13px;
+  color: var(--color-bloom-text-muted);
+}
+
+.edu-card__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* GPA Badge - pink pill matching screenshot */
+.edu-card__gpa {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  background: var(--color-bloom-peach);
+  color: var(--color-bloom-pink);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.edu-card__actions {
+  display: flex;
+  gap: 6px;
+}

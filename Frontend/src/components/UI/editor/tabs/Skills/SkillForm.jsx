@@ -4,6 +4,7 @@ import { skillSchema } from '../../../../../schemas/portfolioSchemas';
 import FormInput from '../../../../common/FormInputs/FormInput';
 import FormSelect from '../../../../common/FormInputs/FormSelect';
 import '../../../../common/FormInputs/SharedTabStyles.css';
+import './SkillForm.css';
 
 const DEFAULT_SKILL = {
   name: '',
