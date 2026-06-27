@@ -53,6 +53,11 @@
   letter-spacing: 0.01em;
 }
 
+.full-preview-control-spacer {
+  width: 130px;
+  flex-shrink: 0;
+}
+
 .full-preview-back-btn,
 .full-preview-pdf-btn {
   display: inline-flex;

@@ -539,3 +539,40 @@ exports.togglePublish = async (req, res) => {
         });
     }
 };
+
+// ============================================
+// @desc    Get all published portfolios for Explore
+// @route   GET /api/portfolio/explore
+// @access  Public
+// ============================================
+exports.getExplorePortfolios = async (req, res) => {
+    try {
+        const portfolios = await User.aggregate([
+            { $unwind: '$portfolios' },
+            { $match: { 'portfolios.isPublished': true } },
+            { $sort: { 'portfolios.updatedAt': -1, updatedAt: -1 } },
+            {
+                $project: {
+                    _id: '$portfolios._id',
+                    username: 1,
+                    views: 1,
+                    portfolio: '$portfolios',
+                },
+            },
+        ]);
+
+        res.status(200).json({
+            success: true,
+            data: {
+                portfolios,
+            },
+        });
+    } catch (error) {
+        console.error('Get explore portfolios error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: error.message,
+        });
+    }
+};

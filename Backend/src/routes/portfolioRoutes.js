@@ -11,6 +11,7 @@ const {
     deletePortfolio,
     setActivePortfolio,
     getPortfolioForPreview,
+    getExplorePortfolios,
 } = require('../controllers/portfolioController');
 
 // PROTECTED ROUTES (require authentication)
@@ -24,6 +25,7 @@ router.post('/:id/active', protect, setActivePortfolio);
 router.patch('/publish', protect, togglePublish);
 
 // PUBLIC ROUTES
+router.get('/explore', getExplorePortfolios);
 router.get('/preview/:id', getPortfolioForPreview);
 router.get('/:username', getPublicPortfolio);
 

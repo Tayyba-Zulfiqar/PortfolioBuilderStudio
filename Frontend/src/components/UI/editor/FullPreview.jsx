@@ -1,8 +1,14 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import './FullPreview.css';
 import { ProfessionalTemplate, CreativeTemplate, MinimalTemplate } from '../../../templates/index';
 
-const FullPreview = ({ portfolio, user, onClose }) => {
+const FullPreview = ({
+  portfolio,
+  onClose,
+  backLabel = 'Back to Settings',
+  title = 'Portfolio Full Preview Mode 🌸',
+  showDownload = true,
+}) => {
   const template = portfolio?.template || 'modern';
   const printAreaRef = useRef(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -70,11 +76,12 @@ const FullPreview = ({ portfolio, user, onClose }) => {
             <line x1="19" y1="12" x2="5" y2="12" />
             <polyline points="12 19 5 12 12 5" />
           </svg>
-          Back to Settings
+          {backLabel}
         </button>
         <div className="full-preview-title-bar">
-          Portfolio Full Preview Mode 🌸
+          {title}
         </div>
+        {showDownload ? (
         <button
           type="button"
           className="full-preview-pdf-btn"
@@ -99,6 +106,9 @@ const FullPreview = ({ portfolio, user, onClose }) => {
             </>
           )}
         </button>
+        ) : (
+          <div className="full-preview-control-spacer" />
+        )}
       </div>
 
       {/* Main Preview Area */}
