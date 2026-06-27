@@ -233,19 +233,6 @@
     border: 1px solid rgba(244, 166, 181, 0.2);
 }
 
-/* ===== FOOTER ===== */
-.creative-footer {
-    text-align: center;
-    padding: 16px;
-    background: #FFF8F7;
-    border-top: 1px solid #F0E3E2;
-    font-size: 13px;
-    color: #B5A4A4;
-}
-
-.creative-footer p {
-    margin: 0;
-}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {

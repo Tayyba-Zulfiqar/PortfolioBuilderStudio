@@ -226,19 +226,7 @@
     border-radius: 4px;
 }
 
-/* ===== FOOTER ===== */
-.minimal-footer {
-    text-align: center;
-    padding: 14px;
-    background: #FFF8F7;
-    border-top: 1px solid #F0E3E2;
-    font-size: 12px;
-    color: #B5A4A4;
-}
 
-.minimal-footer p {
-    margin: 0;
-}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {

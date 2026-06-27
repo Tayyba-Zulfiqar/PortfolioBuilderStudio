@@ -138,10 +138,6 @@ const CreativeTemplate = ({ data }) => {
                 </div>
             </div>
 
-            {/* ===== FOOTER ===== */}
-            <footer className="creative-footer">
-                <p>🌸 Built with Bloom Portfolio Studio</p>
-            </footer>
         </div>
     );
 };

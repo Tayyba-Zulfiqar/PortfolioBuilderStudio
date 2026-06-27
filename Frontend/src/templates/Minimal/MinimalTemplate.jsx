@@ -137,10 +137,7 @@ const MinimalTemplate = ({ data }) => {
                 </div>
             </div>
 
-            {/* ===== FOOTER ===== */}
-            <footer className="minimal-footer">
-                <p>🌸 Built with Bloom Portfolio Studio</p>
-            </footer>
+
         </div>
     );
 };

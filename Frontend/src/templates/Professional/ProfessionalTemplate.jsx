@@ -148,10 +148,6 @@ const ProfessionalTemplate = ({ data }) => {
                 </div>
             </div>
 
-            {/* ===== FOOTER ===== */}
-            <footer className="professional-footer">
-                <p>Built with 🌸 Bloom Portfolio Studio</p>
-            </footer>
         </div>
     );
 };

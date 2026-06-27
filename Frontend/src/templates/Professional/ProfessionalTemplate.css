@@ -234,19 +234,7 @@
     text-decoration: underline;
 }
 
-/* ===== FOOTER ===== */
-.professional-footer {
-    text-align: center;
-    padding: 16px;
-    background: #FFF8F7;
-    border-top: 1px solid #F0E3E2;
-    font-size: 13px;
-    color: #B5A4A4;
-}
 
-.professional-footer p {
-    margin: 0;
-}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
