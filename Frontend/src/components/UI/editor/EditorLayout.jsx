@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { usePortfolioStore } from '../../../store/portfolioStore';
 import { useAuthStore } from '../../../store/authStore';
 import EditorPanel from './EditorPanel';
-import PreviewPanel from './PreviewPanel';
+import FullPreview from './FullPreview';
 import LoadingSpinner from '../../common/LoadingSpinner';
 import FloatingShapes from '../landing-page/FloatingShapes';
 import './EditorLayout.css';
 
 const EditorLayout = () => {
   const [activeTab, setActiveTab] = useState('about');
+  const [showFullPreview, setShowFullPreview] = useState(false);
   const { portfolio, fetchPortfolio, isLoading } = usePortfolioStore();
   const { user } = useAuthStore();
 
@@ -25,18 +26,26 @@ const EditorLayout = () => {
     );
   }
 
+  if (showFullPreview) {
+    return (
+      <FullPreview
+        portfolio={portfolio}
+        user={user}
+        onClose={() => setShowFullPreview(false)}
+      />
+    );
+  }
+
   return (
-    <div className={`editor-layout ${activeTab === 'settings' ? 'editor-layout--split' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
+    <div className="editor-layout" style={{ position: 'relative', overflow: 'hidden' }}>
       <FloatingShapes />
       <EditorPanel
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         portfolio={portfolio}
         user={user}
+        onShowFullPreview={() => setShowFullPreview(true)}
       />
-      {activeTab === 'settings' && (
-        <PreviewPanel portfolio={portfolio} user={user} />
-      )}
     </div>
   );
 };

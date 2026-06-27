@@ -4,7 +4,7 @@ import ProjectsTab from './tabs/Projects/ProjectsTab';
 import SkillsTab from './tabs/Skills/SkillsTab';
 import ExperienceTab from './tabs/Experience/ExperienceTab';
 import EducationTab from './tabs/Education/EducationTab';
-import SettingsTab from './tabs/SettingsTab';
+import SettingsTab from './tabs/Settings/SettingsTab';
 import './EditorPanel.css';
 
 /* Icons as inline SVG strings for tabs */
@@ -78,7 +78,7 @@ const TAB_COMPONENTS = {
   settings: SettingsTab,
 };
 
-const EditorPanel = ({ activeTab, setActiveTab, portfolio, user }) => {
+const EditorPanel = ({ activeTab, setActiveTab, portfolio, user, onShowFullPreview }) => {
   const ActiveTabComponent = TAB_COMPONENTS[activeTab];
 
   useEffect(() => {
@@ -121,7 +121,12 @@ const EditorPanel = ({ activeTab, setActiveTab, portfolio, user }) => {
 
         {/* Active Tab Content */}
         <div className="editor-content" role="tabpanel" aria-labelledby={`editor-tab-${activeTab}`}>
-          <ActiveTabComponent portfolio={portfolio} user={user} onNextTab={handleNextTab} />
+          <ActiveTabComponent
+            portfolio={portfolio}
+            user={user}
+            onNextTab={handleNextTab}
+            onShowFullPreview={onShowFullPreview}
+          />
         </div>
       </div>
     </div>
