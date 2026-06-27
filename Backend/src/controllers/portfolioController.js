@@ -1,12 +1,67 @@
 const User = require('../models/User');
 
+const DEFAULT_THEME = { primaryColor: '#F4A6B5', secondaryColor: '#E8B4B8' };
+
+const hasText = (value) => typeof value === 'string' && value.trim().length > 0;
+
+const hasUsefulObjectValue = (item, ignoredKeys = []) => {
+    if (!item || typeof item !== 'object') return false;
+    return Object.entries(item.toObject ? item.toObject() : item).some(([key, value]) => {
+        if (key === '_id' || key === 'id' || ignoredKeys.includes(key)) return false;
+        if (Array.isArray(value)) return value.some((entry) => hasText(entry) || hasUsefulObjectValue(entry));
+        if (value instanceof Date) return true;
+        if (typeof value === 'string') return hasText(value);
+        if (typeof value === 'number' || typeof value === 'boolean') return value !== null;
+        if (value && typeof value === 'object') return hasUsefulObjectValue(value);
+        return false;
+    });
+};
+
+const isDefaultGeneratedName = (name = '') => !hasText(name) || name === 'My Portfolio' || name === 'My First Portfolio' || /^Portfolio #\d+$/.test(name);
+
+const hasPortfolioUserContent = (portfolio) => {
+    if (!portfolio) return false;
+    const p = portfolio.toObject ? portfolio.toObject() : portfolio;
+    const hasAbout = ['fullName', 'headline', 'bio', 'location', 'profilePicture'].some((key) => hasText(p.about?.[key]));
+    const hasSocial = ['github', 'linkedin'].some((key) => hasText(p.socialLinks?.[key]));
+    const hasCollections = ['projects', 'skills', 'experience', 'education'].some((key) =>
+        Array.isArray(p[key]) && p[key].some((item) => hasUsefulObjectValue(item, ['proficiency']))
+    );
+    const hasCustomSettings =
+        (hasText(p.name) && !isDefaultGeneratedName(p.name)) ||
+        (p.template && p.template !== 'modern') ||
+        (p.theme?.primaryColor && p.theme.primaryColor !== DEFAULT_THEME.primaryColor) ||
+        (p.theme?.secondaryColor && p.theme.secondaryColor !== DEFAULT_THEME.secondaryColor) ||
+        p.isPublished === true;
+
+    return hasAbout || hasSocial || hasCollections || hasCustomSettings;
+};
+
+const removeEmptyPortfolios = (user) => {
+    if (!user.portfolios || user.portfolios.length === 0) return false;
+
+    const keepIds = user.portfolios
+        .filter((portfolio) => hasPortfolioUserContent(portfolio))
+        .map((portfolio) => String(portfolio._id));
+
+    if (keepIds.length === user.portfolios.length) return false;
+
+    user.portfolios = user.portfolios.filter((portfolio) => keepIds.includes(String(portfolio._id)));
+    if (!user.activePortfolioId || !keepIds.includes(String(user.activePortfolioId))) {
+        user.activePortfolioId = user.portfolios[0]?._id || null;
+        user.portfolio = user.portfolios[0] || null;
+    }
+
+    return true;
+};
+
 // Helper to ensure a user has at least one portfolio migrated/initialized
 const ensurePortfoliosExist = (user) => {
     let modified = false;
 
     // Check if legacy single portfolio needs migration
     if (!user.portfolios || user.portfolios.length === 0) {
-        if (user.portfolio && (user.portfolio.about || user.portfolio.projects || user.portfolio.skills)) {
+        if (user.portfolio && hasPortfolioUserContent(user.portfolio)) {
             // Migrate legacy portfolio
             const migratedPortfolio = {
                 name: 'My Portfolio',
@@ -21,31 +76,14 @@ const ensurePortfoliosExist = (user) => {
                 theme: user.portfolio.theme || { primaryColor: '#F4A6B5', secondaryColor: '#E8B4B8' },
             };
             user.portfolios.push(migratedPortfolio);
-            user.activePortfolioId = user.portfolios[0]._id;
-            modified = true;
-        } else {
-            // Create a default first portfolio
-            const defaultPortfolio = {
-                name: 'My First Portfolio',
-                about: { fullName: '', headline: '', bio: '', location: '', profilePicture: '' },
-                socialLinks: { github: '', linkedin: '' },
-                projects: [],
-                skills: [],
-                experience: [],
-                education: [],
-                template: 'modern',
-                isPublished: false,
-                theme: { primaryColor: '#F4A6B5', secondaryColor: '#E8B4B8' },
-            };
-            user.portfolios.push(defaultPortfolio);
-            user.activePortfolioId = user.portfolios[0]._id;
+            user.activePortfolioId = user.portfolios[0]?._id || null;
             modified = true;
         }
     }
 
     // If activePortfolioId is unset but we have portfolios, set it to the first one
     if (!user.activePortfolioId && user.portfolios.length > 0) {
-        user.activePortfolioId = user.portfolios[0]._id;
+        user.activePortfolioId = user.portfolios[0]?._id || null;
         modified = true;
     }
 
@@ -74,7 +112,14 @@ exports.getMyPortfolio = async (req, res) => {
 
         // Return specific portfolio by ID query parameter, or default to active
         const portfolioId = req.query.id || user.activePortfolioId;
-        const portfolio = user.portfolios.id(portfolioId) || user.portfolios[0];
+        const portfolio = portfolioId ? user.portfolios.id(portfolioId) : user.portfolios[0];
+
+        if (!portfolio) {
+            return res.status(404).json({
+                success: false,
+                message: 'Portfolio not found',
+            });
+        }
 
         res.status(200).json({
             success: true,
@@ -108,7 +153,7 @@ exports.getAllPortfolios = async (req, res) => {
             });
         }
 
-        const modified = ensurePortfoliosExist(user);
+        const modified = ensurePortfoliosExist(user) || removeEmptyPortfolios(user);
         if (modified) {
             await user.save();
         }
@@ -116,7 +161,7 @@ exports.getAllPortfolios = async (req, res) => {
         res.status(200).json({
             success: true,
             data: {
-                portfolios: user.portfolios,
+                portfolios: user.portfolios.filter((portfolio) => hasPortfolioUserContent(portfolio)),
                 activePortfolioId: user.activePortfolioId,
             },
         });
@@ -145,8 +190,6 @@ exports.createPortfolio = async (req, res) => {
             });
         }
 
-        ensurePortfoliosExist(user);
-
         const newPortfolioCount = user.portfolios.length + 1;
         const newPortfolio = {
             name: `Portfolio #${newPortfolioCount}`,
@@ -158,7 +201,7 @@ exports.createPortfolio = async (req, res) => {
             education: [],
             template: 'modern',
             isPublished: false,
-            theme: { primaryColor: '#F4A6B5', secondaryColor: '#E8B4B8' },
+            theme: DEFAULT_THEME,
         };
 
         user.portfolios.push(newPortfolio);
@@ -296,21 +339,12 @@ exports.deletePortfolio = async (req, res) => {
                 message: 'Portfolio not found 🌸',
             });
         }
-
-        // Prevent deleting the only portfolio
-        if (user.portfolios.length <= 1) {
-            return res.status(400).json({
-                success: false,
-                message: 'You must keep at least one portfolio! 🌸',
-            });
-        }
-
         user.portfolios.pull(id);
 
         // Reset active if we deleted the active one
         if (String(user.activePortfolioId) === String(id)) {
-            user.activePortfolioId = user.portfolios[0]._id;
-            user.portfolio = user.portfolios[0]; // sync legacy
+            user.activePortfolioId = user.portfolios[0]?._id || null;
+            user.portfolio = user.portfolios[0] || null; // sync legacy
         }
 
         await user.save();
@@ -547,9 +581,17 @@ exports.togglePublish = async (req, res) => {
 // ============================================
 exports.getExplorePortfolios = async (req, res) => {
     try {
+        const currentUser = req.userId ? await User.findById(req.userId).select('savedPortfolios') : null;
+        const savedIds = new Set((currentUser?.savedPortfolios || []).map((id) => String(id)));
+
         const portfolios = await User.aggregate([
             { $unwind: '$portfolios' },
-            { $match: { 'portfolios.isPublished': true } },
+            {
+                $match: {
+                    'portfolios.isPublished': true,
+                    ...(currentUser ? { _id: { $ne: currentUser._id } } : {}),
+                },
+            },
             { $sort: { 'portfolios.updatedAt': -1, updatedAt: -1 } },
             {
                 $project: {
@@ -564,7 +606,10 @@ exports.getExplorePortfolios = async (req, res) => {
         res.status(200).json({
             success: true,
             data: {
-                portfolios,
+                portfolios: portfolios.map((item) => ({
+                    ...item,
+                    isSaved: savedIds.has(String(item._id)),
+                })),
             },
         });
     } catch (error) {
@@ -576,3 +621,88 @@ exports.getExplorePortfolios = async (req, res) => {
         });
     }
 };
+
+exports.getSavedPortfolios = async (req, res) => {
+    try {
+        const user = await User.findById(req.userId).select('savedPortfolios');
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        const savedIds = (user.savedPortfolios || []).map((id) => String(id));
+        const portfolios = await User.aggregate([
+            { $unwind: '$portfolios' },
+            {
+                $match: {
+                    'portfolios._id': { $in: user.savedPortfolios || [] },
+                    'portfolios.isPublished': true,
+                    _id: { $ne: user._id },
+                },
+            },
+            {
+                $project: {
+                    _id: '$portfolios._id',
+                    username: 1,
+                    views: 1,
+                    portfolio: '$portfolios',
+                },
+            },
+        ]);
+
+        portfolios.sort((a, b) => savedIds.indexOf(String(a._id)) - savedIds.indexOf(String(b._id)));
+
+        res.status(200).json({
+            success: true,
+            data: { portfolios },
+        });
+    } catch (error) {
+        console.error('Get saved portfolios error:', error);
+        res.status(500).json({ success: false, message: 'Server error', error: error.message });
+    }
+};
+
+exports.savePortfolio = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(req.userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        const owner = await User.findOne({ 'portfolios._id': id, _id: { $ne: user._id } });
+        const portfolio = owner?.portfolios.id(id);
+        if (!portfolio || !portfolio.isPublished) {
+            return res.status(404).json({ success: false, message: 'Portfolio not found or unavailable' });
+        }
+
+        const alreadySaved = (user.savedPortfolios || []).some((savedId) => String(savedId) === String(id));
+        if (!alreadySaved) {
+            user.savedPortfolios.push(portfolio._id);
+            await user.save();
+        }
+
+        res.status(200).json({ success: true, data: { savedPortfolioId: portfolio._id } });
+    } catch (error) {
+        console.error('Save portfolio error:', error);
+        res.status(500).json({ success: false, message: 'Server error', error: error.message });
+    }
+};
+
+exports.unsavePortfolio = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(req.userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        user.savedPortfolios = (user.savedPortfolios || []).filter((savedId) => String(savedId) !== String(id));
+        await user.save();
+
+        res.status(200).json({ success: true, data: { savedPortfolioId: id } });
+    } catch (error) {
+        console.error('Unsave portfolio error:', error);
+        res.status(500).json({ success: false, message: 'Server error', error: error.message });
+    }
+};
+

@@ -40,11 +40,7 @@ exports.signup = async (req, res) => {
             username,
             email,
             password,
-            portfolio: {
-                about: {
-                    fullName: fullName || ''
-                }
-            }
+            portfolio: null
         });
 
         // Generate token

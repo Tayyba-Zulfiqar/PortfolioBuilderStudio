@@ -31,7 +31,10 @@ export const authAPI = {
 // Portfolio Services
 export const portfolioAPI = {
     getAllPortfolios: () => API.get('/portfolio/all'),
+    getSavedPortfolios: () => API.get('/portfolio/saved'),
     getExplorePortfolios: () => API.get('/portfolio/explore'),
+    savePortfolio: (id) => API.post(`/portfolio/saved/${id}`),
+    unsavePortfolio: (id) => API.delete(`/portfolio/saved/${id}`),
     createPortfolio: () => API.post('/portfolio/new'),
     getMyPortfolio: (id) => API.get(id ? `/portfolio/me?id=${id}` : '/portfolio/me'),
     updatePortfolio: (data, id) => id ? API.put(`/portfolio/${id}`, data) : API.put('/portfolio', data),

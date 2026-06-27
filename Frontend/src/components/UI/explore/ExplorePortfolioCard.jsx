@@ -43,7 +43,7 @@ const BookmarkIcon = () => (
   </svg>
 );
 
-const ExplorePortfolioCard = ({ item, onView }) => {
+const ExplorePortfolioCard = ({ item, onView, onSave, isSaving }) => {
   const portfolio = item.portfolio;
   const name = portfolio?.about?.fullName || portfolio?.name || item.username || 'Bloom Creator';
   const headline = portfolio?.about?.headline || 'Portfolio Creator';
@@ -93,7 +93,15 @@ const ExplorePortfolioCard = ({ item, onView }) => {
           View
           <Logo iconOnly iconClassName="explore-card__view-icon" />
         </button>
-        <button type="button" className="explore-card__save-btn" aria-label={`Save ${name}`}>
+        <button
+          type="button"
+          className={`explore-card__save-btn ${item.isSaved ? 'explore-card__save-btn--saved' : ''}`}
+          aria-label={item.isSaved ? `${name} saved` : `Save ${name}`}
+          aria-pressed={item.isSaved}
+          disabled={isSaving || item.isSaved}
+          onClick={() => onSave(item)}
+          title={item.isSaved ? 'Saved' : 'Save portfolio'}
+        >
           <BookmarkIcon />
         </button>
       </div>

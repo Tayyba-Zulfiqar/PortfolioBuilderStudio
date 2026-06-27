@@ -4,6 +4,7 @@ import { portfolioAPI } from '../services/api';
 export const usePortfolioStore = create((set, get) => ({
     portfolio: null,
     portfolios: [],
+    savedPortfolios: [],
     activePortfolioId: null,
     isLoading: false,
     isSaving: false,
@@ -43,6 +44,24 @@ export const usePortfolioStore = create((set, get) => ({
             return {
                 success: false,
                 error: error.response?.data?.message || 'Failed to load portfolios'
+            };
+        }
+    },
+
+    fetchSavedPortfolios: async () => {
+        set({ isLoading: true });
+        try {
+            const response = await portfolioAPI.getSavedPortfolios();
+            set({
+                savedPortfolios: response.data.data.portfolios || [],
+                isLoading: false
+            });
+            return { success: true };
+        } catch (error) {
+            set({ isLoading: false });
+            return {
+                success: false,
+                error: error.response?.data?.message || 'Failed to load saved portfolios'
             };
         }
     },
@@ -125,6 +144,39 @@ export const usePortfolioStore = create((set, get) => ({
         }
     },
 
+    saveCommunityPortfolio: async (id) => {
+        set({ isSaving: true });
+        try {
+            const response = await portfolioAPI.savePortfolio(id);
+            set({ isSaving: false });
+            return { success: true, data: response.data };
+        } catch (error) {
+            set({ isSaving: false });
+            return {
+                success: false,
+                error: error.response?.data?.message || 'Failed to save portfolio'
+            };
+        }
+    },
+
+    unsaveCommunityPortfolio: async (id) => {
+        set({ isSaving: true });
+        try {
+            await portfolioAPI.unsavePortfolio(id);
+            set((state) => ({
+                savedPortfolios: state.savedPortfolios.filter((item) => String(item._id) !== String(id)),
+                isSaving: false
+            }));
+            return { success: true };
+        } catch (error) {
+            set({ isSaving: false });
+            return {
+                success: false,
+                error: error.response?.data?.message || 'Failed to remove saved portfolio'
+            };
+        }
+    },
+
     // Make a specific portfolio active
     makePortfolioActive: async (id) => {
         set({ isSaving: true });
@@ -161,5 +213,5 @@ export const usePortfolioStore = create((set, get) => ({
     },
 
     // Reset
-    reset: () => set({ portfolio: null, portfolios: [], activePortfolioId: null, isLoading: false, isSaving: false }),
+    reset: () => set({ portfolio: null, portfolios: [], savedPortfolios: [], activePortfolioId: null, isLoading: false, isSaving: false }),
 }));

@@ -240,6 +240,10 @@ const userSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             default: null,
         },
+        savedPortfolios: {
+            type: [mongoose.Schema.Types.ObjectId],
+            default: [],
+        },
         views: {
             type: Number,
             default: 0,

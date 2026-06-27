@@ -8,7 +8,7 @@ const SectionSparkle = () => (
   </svg>
 );
 
-const FeaturedPortfolios = ({ portfolios, isLoading, error, onRetry, onView }) => {
+const FeaturedPortfolios = ({ portfolios, isLoading, error, onRetry, onView, onSave, isSaving }) => {
   const hasPortfolios = portfolios.length > 0;
 
   return (
@@ -50,6 +50,8 @@ const FeaturedPortfolios = ({ portfolios, isLoading, error, onRetry, onView }) =
               key={`${item.username}-${item._id}`}
               item={item}
               onView={onView}
+              onSave={onSave}
+              isSaving={isSaving}
             />
           ))}
         </div>

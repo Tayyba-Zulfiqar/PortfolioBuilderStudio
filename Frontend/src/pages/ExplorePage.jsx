@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { portfolioAPI } from '../services/api';
+import { usePortfolioStore } from '../store/portfolioStore';
 import ExploreHero from '../components/UI/explore/ExploreHero';
 import FeaturedPortfolios from '../components/UI/explore/FeaturedPortfolios';
 import FullPreview from '../components/UI/editor/FullPreview';
@@ -10,6 +11,7 @@ const ExplorePage = () => {
     const [selectedPortfolio, setSelectedPortfolio] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
+    const { saveCommunityPortfolio, isSaving } = usePortfolioStore();
 
     const fetchExplorePortfolios = useCallback(async () => {
         try {
@@ -29,6 +31,19 @@ const ExplorePage = () => {
         fetchExplorePortfolios();
     }, [fetchExplorePortfolios]);
 
+    const handleSave = async (item) => {
+        const result = await saveCommunityPortfolio(item._id);
+        if (result.success) {
+            setPortfolios((current) =>
+                current.map((portfolio) =>
+                    String(portfolio._id) === String(item._id) ? { ...portfolio, isSaved: true } : portfolio
+                )
+            );
+        } else {
+            setError(result.error || 'Failed to save portfolio');
+        }
+    };
+
     return (
         <main className="explore-page">
             <ExploreHero />
@@ -38,6 +53,8 @@ const ExplorePage = () => {
                 error={error}
                 onRetry={fetchExplorePortfolios}
                 onView={setSelectedPortfolio}
+                onSave={handleSave}
+                isSaving={isSaving}
             />
 
             {selectedPortfolio && (

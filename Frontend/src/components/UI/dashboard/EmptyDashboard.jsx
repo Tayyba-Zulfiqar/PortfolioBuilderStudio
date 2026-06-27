@@ -37,7 +37,7 @@ const EmptyDashboard = () => {
                     <div className="btn-group">
                         <Button
                             variant="primary"
-                            onClick={() => navigate('/settings')}
+                            onClick={() => navigate('/portfolio/new')}
                             icon={<EditIcon />}
                         >
                             Start Building

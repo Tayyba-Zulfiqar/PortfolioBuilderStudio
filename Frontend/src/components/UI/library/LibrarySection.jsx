@@ -15,9 +15,15 @@ const SECTION_META = {
     subtitle: 'Portfolios still in progress. Come back and finish them any time.',
     accentClass: 'library-section--draft',
   },
+  saved: {
+    icon: '☆',
+    title: 'Saved Portfolios',
+    subtitle: 'Community portfolios you saved for inspiration.',
+    accentClass: 'library-section--saved',
+  },
 };
 
-const LibrarySection = ({ type, portfolios }) => {
+const LibrarySection = ({ type, portfolios, onDelete }) => {
   const meta = SECTION_META[type];
 
   return (
@@ -42,7 +48,7 @@ const LibrarySection = ({ type, portfolios }) => {
       ) : (
         <div className="library-section__grid">
           {portfolios.map((p, i) => (
-            <PortfolioCard key={p._id || i} portfolio={p} type={type} />
+            <PortfolioCard key={p._id || i} portfolio={p} type={type} onDelete={onDelete} />
           ))}
         </div>
       )}

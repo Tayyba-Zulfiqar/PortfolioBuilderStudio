@@ -160,6 +160,7 @@
 /* ── Actions ── */
 .portfolio-card__actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: auto;
   padding-top: 4px;
@@ -200,6 +201,19 @@
 
 .portfolio-card__btn--secondary:hover {
   background: var(--color-bloom-pink);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.portfolio-card__btn--danger {
+  background: #fff;
+  color: #b84052;
+  border: 1.5px solid rgba(184, 64, 82, 0.34);
+  justify-content: center;
+}
+
+.portfolio-card__btn--danger:hover {
+  background: #b84052;
   color: #fff;
   transform: translateY(-1px);
 }

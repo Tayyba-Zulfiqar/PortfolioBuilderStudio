@@ -85,13 +85,17 @@ const TemplateThumbnail = ({ template, primaryColor, secondaryColor }) => {
   );
 };
 
-const PortfolioCard = ({ portfolio, type }) => {
+const PortfolioCard = ({ portfolio, type, onDelete }) => {
   const navigate = useNavigate();
-  const { completedSections, missingSections, progress } = getPortfolioCompleteness(portfolio);
-  const name = portfolio?.about?.fullName || 'Untitled Portfolio';
-  const template = portfolio?.template || 'modern';
-  const primaryColor = portfolio?.theme?.primaryColor || '#F4A6B5';
-  const secondaryColor = portfolio?.theme?.secondaryColor || '#E8B4B8';
+  const isSaved = type === 'saved';
+  const cardPortfolio = isSaved ? portfolio?.portfolio : portfolio;
+  const { completedSections, missingSections, progress } = getPortfolioCompleteness(cardPortfolio);
+  const name = cardPortfolio?.about?.fullName || cardPortfolio?.name || 'Untitled Portfolio';
+  const template = cardPortfolio?.template || 'modern';
+  const primaryColor = cardPortfolio?.theme?.primaryColor || '#F4A6B5';
+  const secondaryColor = cardPortfolio?.theme?.secondaryColor || '#E8B4B8';
+  const portfolioId = cardPortfolio?._id || portfolio?._id;
+  const badgeText = type === 'completed' ? 'Complete' : isSaved ? 'Saved' : 'Draft';
 
   return (
     <article className={`portfolio-card portfolio-card--${type}`}>
@@ -99,7 +103,7 @@ const PortfolioCard = ({ portfolio, type }) => {
       <div className="portfolio-card__thumb">
         <TemplateThumbnail template={template} primaryColor={primaryColor} secondaryColor={secondaryColor} />
         <div className={`portfolio-card__badge portfolio-card__badge--${type}`}>
-          {type === 'completed' ? '✅ Complete' : '📝 Draft'}
+          {badgeText}
         </div>
       </div>
 
@@ -108,7 +112,7 @@ const PortfolioCard = ({ portfolio, type }) => {
         <h3 className="portfolio-card__name">{name}</h3>
         <p className="portfolio-card__template">
           <span className="portfolio-card__template-dot" style={{ background: primaryColor }} />
-          {getTemplateLabel(template)} Template
+          {getTemplateLabel(template)} Template{isSaved && portfolio?.username ? ` by ${portfolio.username}` : ''}
         </p>
 
         {/* Progress bar — always shown; full green for completed */}
@@ -141,15 +145,15 @@ const PortfolioCard = ({ portfolio, type }) => {
           <button
             type="button"
             className="portfolio-card__btn portfolio-card__btn--primary"
-            onClick={() => navigate(`/settings/${portfolio._id}`)}
+            onClick={() => navigate(isSaved ? `/preview/${portfolioId}` : `/settings/${portfolioId}`)}
           >
-            {type === 'completed' ? 'Edit Portfolio' : 'Continue Editing'}
+            {type === 'completed' ? 'Edit Portfolio' : isSaved ? 'Preview Portfolio' : 'Continue Editing'}
           </button>
           {type === 'completed' && (
             <button
               type="button"
               className="portfolio-card__btn portfolio-card__btn--secondary"
-              onClick={() => navigate(`/preview/${portfolio._id}`)}
+              onClick={() => navigate(`/preview/${portfolioId}`)}
               title="Open full preview"
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -159,6 +163,15 @@ const PortfolioCard = ({ portfolio, type }) => {
               Preview
             </button>
           )}
+          {onDelete && (
+            <button
+              type="button"
+              className="portfolio-card__btn portfolio-card__btn--danger"
+              onClick={() => onDelete(portfolio)}
+            >
+              {isSaved ? 'Remove' : 'Delete'}
+            </button>
+          )}
         </div>
       </div>
     </article>
@@ -166,3 +179,4 @@ const PortfolioCard = ({ portfolio, type }) => {
 };
 
 export default PortfolioCard;
+
