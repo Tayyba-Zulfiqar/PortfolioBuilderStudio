@@ -44,10 +44,10 @@
 .form-label {
     display: block;
     font-family: var(--font-sans);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--color-bloom-text-muted);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     letter-spacing: 0.01em;
 }
 
@@ -82,11 +82,11 @@
 .form-textarea,
 .form-select {
     width: 100%;
-    padding: 13px 16px;
+    padding: 15px 20px;
     border: 1.5px solid var(--color-bloom-border);
-    border-radius: 12px;
+    border-radius: 14px;
     font-family: var(--font-sans);
-    font-size: 15px;
+    font-size: 16px;
     color: var(--color-bloom-text);
     background: #fff;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;

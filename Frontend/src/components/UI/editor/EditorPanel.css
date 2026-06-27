@@ -6,30 +6,42 @@
   overflow-y: auto;
 }
 
-/* Tab Navigation */
-.editor-tabs {
-  display: flex;
-  gap: 4px;
+/* Card Container for Editor */
+.editor-panel {
   background: #fff;
-  border-radius: 16px;
-  padding: 8px 12px;
-  box-shadow: 0 2px 12px rgba(229, 139, 157, 0.10);
-  margin-bottom: 36px;
+  border: 1.5px solid var(--color-bloom-border);
+  border-radius: 24px;
+  padding: 36px 40px;
+  box-shadow: 0 4px 20px rgba(229, 139, 157, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tab Navigation Header inside Card */
+.editor-tabs {
+  display: inline-flex;
+  gap: 6px;
+  background: #FFF5F6;
+  border-radius: 999px;
+  padding: 6px;
+  margin-bottom: 32px;
   overflow-x: auto;
   scrollbar-width: none;
-  border: 1.5px solid var(--color-bloom-border);
+  border: none;
+  align-self: center;
 }
 
 .editor-tabs::-webkit-scrollbar {
   display: none;
 }
 
+/* Tab Button Pills */
 .editor-tab {
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 8px 18px;
-  border-radius: 10px;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
@@ -38,19 +50,19 @@
   white-space: nowrap;
   cursor: pointer;
   border: none;
-  background: none;
+  background: transparent;
   outline: none;
 }
 
 .editor-tab:hover {
   color: var(--color-bloom-pink);
-  background: var(--color-bloom-peach);
 }
 
 .editor-tab--active {
-  background: var(--color-bloom-peach) !important;
+  background: #fff !important;
   color: var(--color-bloom-pink) !important;
   font-weight: 600;
+  box-shadow: 0 2px 8px rgba(229, 139, 157, 0.12);
 }
 
 .editor-tab__icon {
